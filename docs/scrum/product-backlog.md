@@ -15,7 +15,7 @@ Como estudante, quero visualizar os conteúdos disponíveis para identificar os 
 
 **Prioridade:** Alta  
 **Estimativa:** 2 SP
-**Status:** Não iniciado
+**Status:** Concluído
 
 **Critérios de aceitação:**
 - Ao acessar a área de conteúdos, o estudante consegue visualizar os conteúdos disponíveis.
