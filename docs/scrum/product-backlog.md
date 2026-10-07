@@ -26,10 +26,10 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 | Ordem | ID | História | Épico | MoSCoW | Estimativa | Status |
 |---|---|---|---|---|---|---|
 | - | US01 | Visualizar conteúdos | EP01 | Must | 2 SP | Concluído |
-| 1 | US02 | Acessar uma explicação | EP01 | Must | 3 SP | Não iniciado |
-| 2 | US03 | Resolver exercícios e receber correção explicada | EP02 | Must | 5 SP | Não iniciado |
+| - | US02 | Acessar uma explicação | EP01 | Must | 3 SP | Concluído |
+| - | US03 | Resolver exercícios e receber correção explicada | EP02 | Must | 5 SP | Concluído |
 
-A estimativa da US01 é preservada como registro histórico. As estimativas da US02 e da US03 serão revistas após o detalhamento do escopo e das mudanças nos critérios de aceitação.
+US01, US02 e US03 foram concluídas na Sprint 1. Os próximos itens serão detalhados no planejamento da Sprint 2.
 
 ## Itens do Product Backlog
 
@@ -57,7 +57,7 @@ Como estudante, quero acessar uma explicação com exemplo resolvido sobre um co
 **Épico:** EP01 - Revisão dos fundamentos  
 **MoSCoW:** Must  
 **Estimativa:** 3 SP     
-**Status:** Não iniciado
+**Status:** Concluído
 
 **Critérios de aceitação:**
 
@@ -73,7 +73,7 @@ Como estudante, quero responder a exercícios de múltipla escolha e consultar a
 **Épico:** EP02 - Prática com correção explicada  
 **MoSCoW:** Must  
 **Estimativa:** 5 SP     
-**Status:** Não iniciado
+**Status:** Concluído
 
 **Critérios de aceitação:**
 
@@ -83,4 +83,4 @@ Como estudante, quero responder a exercícios de múltipla escolha e consultar a
 - Se tentar enviar sem selecionar uma alternativa, recebe uma orientação para selecionar uma resposta, sem que isso seja considerado um erro matemático.
 - Após o envio, o sistema informa imediatamente se a resposta está correta ou incorreta.
 - Tanto no acerto quanto no erro, o sistema apresenta a alternativa correta e uma resolução explicada.
-- O estudante consegue retornar à explicação do conteúdo.
+- O estudante consegue retornar à explicação do conteúdo.

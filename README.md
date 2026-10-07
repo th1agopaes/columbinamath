@@ -14,17 +14,25 @@ Estudantes do Ensino Médio que desejam revisar ou fortalecer seus conhecimentos
 
 ## Funcionalidades atuais
 
-- Página inicial.
-- Listagem dos conteúdos disponíveis.
-- Navegação entre os conteúdos.
-- Identificação do conteúdo por rota.
-- Tratamento para conteúdos inexistentes.
+- Página inicial com acesso aos conteúdos.
+- Listagem dos conteúdos em trilha de pré-requisitos.
+- Explicação com exemplos resolvidos passo a passo e prova real.
+- Exercícios de múltipla escolha com correção imediata e resolução explicada.
+- Feedback por erro comum: cada alternativa errada explica o erro típico que leva a ela.
+- Página 404 para endereços inexistentes.
+- Layout responsivo com modo claro e escuro.
 
-## Conteúdos iniciais
+## Conteúdos
 
-- Porcentagem.
-- Juros simples e compostos.
-- Potências de 10 e notação científica.
+| Ordem | Conteúdo | Situação |
+|---|---|---|
+| 1 | Operações básicas | Disponível |
+| 2 | Regra de sinais | Em breve |
+| 3 | Ordem das operações | Em breve |
+| 4 | Frações | Em breve |
+| 5 | Porcentagem | Em breve |
+| 6 | Potências de 10 e notação científica | Em breve |
+| 7 | Juros simples e compostos | Em breve |
 
 ## Tecnologias
 
@@ -44,3 +52,18 @@ columbinamath/
 │   └── scrum/
 ├── frontend/
 └── README.md
+```
+
+## Como rodar localmente
+
+Pré-requisito: [Node.js](https://nodejs.org/) instalado.
+
+```bash
+cd frontend
+npm install     # baixa as dependências (só na primeira vez)
+npm run dev     # abre o servidor de desenvolvimento em http://localhost:5173
+```
+
+## Onde editar os conteúdos
+
+Todos os conteúdos, exemplos e exercícios ficam em `frontend/src/data/conteudos.js`.

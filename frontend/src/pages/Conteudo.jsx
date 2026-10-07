@@ -1,35 +1,59 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { buscarConteudo } from '../data/conteudos.js'
+import NaoEncontrado from './NaoEncontrado.jsx'
 
-function Conteudo(){
-    const { id } = useParams()
+function Conteudo() {
+  const { id } = useParams() // pega o pedaço ":id" da URL
+  const conteudo = buscarConteudo(id)
 
-    const conteudos = {
-        porcentagem: {
-            titulo:'Porcentagem',
-        },
-        juros: {
-            titulo: 'Juros simples e compostos',
-        },
-        'notacao-cientifica': {
-            titulo: 'Potências de 10 e notação científica',
-        },
-    }
+  if (!conteudo) {
+    return <NaoEncontrado mensagem="Este conteúdo não existe." />
+  }
 
-    const conteudo = conteudos[id]
-
-    if (!conteudo){
-        return(
-            <main>
-                <h1>Conteúdo não encontrado.</h1>
-            </main>
-        )
-    }
-
-    return(
-        <main>
-            <h1>{conteudo.titulo}</h1>
-        </main>
+  if (!conteudo.disponivel) {
+    return (
+      <main>
+        <h1>{conteudo.titulo}</h1>
+        <p className="subtitulo">Este conteúdo ainda está sendo preparado. Volte em breve!</p>
+        <Link to="/conteudos" className="voltar">← Voltar aos conteúdos</Link>
+      </main>
     )
+  }
+
+  return (
+    <main>
+      <Link to="/conteudos" className="voltar">← Voltar aos conteúdos</Link>
+      <h1>{conteudo.titulo}</h1>
+      <p className="subtitulo">{conteudo.introducao}</p>
+
+      {conteudo.secoes.map((secao) => (
+        <section key={secao.titulo} className="secao">
+          <h2>{secao.titulo}</h2>
+          <p>{secao.explicacao}</p>
+
+          <div className="exemplo">
+            <p className="exemplo-titulo">
+              Exemplo resolvido: <span className="conta">{secao.exemplo.conta}</span>
+            </p>
+            <ol className="passos">
+              {secao.exemplo.passos.map((passo) => (
+                <li key={passo}>{passo}</li>
+              ))}
+            </ol>
+            <p className="conta resultado-exemplo">{secao.exemplo.resultado}</p>
+            <p className="prova-real">Prova real: {secao.exemplo.provaReal}</p>
+          </div>
+        </section>
+      ))}
+
+      <div className="chamada">
+        <p>Entendeu? Agora é hora de praticar!</p>
+        <Link to={`/conteudos/${conteudo.id}/exercicios`} className="botao">
+          Ir para os exercícios
+        </Link>
+      </div>
+    </main>
+  )
 }
 
 export default Conteudo

@@ -41,41 +41,51 @@ Estruturar a proposta do ColumbinaMath e disponibilizar um primeiro percurso de 
 - [x] Criar as páginas iniciais com o título de cada assunto.
 - [x] Implementar a navegação entre a lista de conteúdos e suas respectivas páginas.
 - [x] Verificar o funcionamento dessa navegação.
+- [x] Centralizar os dados dos conteúdos em um único arquivo (`src/data/conteudos.js`).
+- [x] Reorganizar a listagem como trilha de pré-requisitos, com os assuntos sem material marcados como "Em breve".
 
 ### US02 - Acessar uma explicação
 
-- [ ] Preparar a explicação das quatro operações.
-- [ ] Elaborar e conferir um exemplo resolvido por operação.
-- [ ] Adicionar Operações básicas à listagem e criar sua página.
-- [ ] Exibir a explicação e os exemplos na página.
-- [ ] Permitir retornar à listagem de conteúdos.
+- [x] Preparar a explicação das quatro operações.
+- [x] Elaborar e conferir um exemplo resolvido por operação.
+- [x] Adicionar Operações básicas à listagem e criar sua página.
+- [x] Exibir a explicação e os exemplos na página.
+- [x] Permitir retornar à listagem de conteúdos.
 
 ### US03 - Resolver exercícios e receber correção explicada
 
-- [ ] Elaborar quatro exercícios de múltipla escolha, cada um com exatamente uma alternativa correta.
-- [ ] Preparar e conferir a resolução explicada de cada exercício.
-- [ ] Criar o acesso aos exercícios a partir da explicação.
-- [ ] Permitir selecionar uma alternativa por exercício e enviar a resposta.
-- [ ] Orientar o estudante quando tentar enviar sem selecionar uma alternativa, sem considerar isso um erro matemático.
-- [ ] Apresentar acerto ou erro, alternativa correta e resolução explicada após o envio.
-- [ ] Permitir retornar à explicação do conteúdo.
+- [x] Elaborar quatro exercícios de múltipla escolha, cada um com exatamente uma alternativa correta.
+- [x] Preparar e conferir a resolução explicada de cada exercício.
+- [x] Criar o acesso aos exercícios a partir da explicação.
+- [x] Permitir selecionar uma alternativa por exercício e enviar a resposta.
+- [x] Orientar o estudante quando tentar enviar sem selecionar uma alternativa, sem considerar isso um erro matemático.
+- [x] Apresentar acerto ou erro, alternativa correta e resolução explicada após o envio.
+- [x] Permitir retornar à explicação do conteúdo.
 
 ### Navegação e apresentação
 
-- [ ] Adicionar acesso à lista de conteúdos na página inicial.
-- [ ] Distinguir conteúdos disponíveis para estudo dos assuntos ainda sem material.
-- [ ] Verificar legibilidade e uso em telas de celular e computador.
+- [x] Adicionar acesso à lista de conteúdos na página inicial.
+- [x] Distinguir conteúdos disponíveis para estudo dos assuntos ainda sem material.
+- [x] Verificar legibilidade e uso em telas de celular e computador.
 
 ### Verificação da entrega
 
-- [ ] Conferir os critérios de aceitação da US02 e da US03.
-- [ ] Testar respostas corretas, incorretas e envios sem alternativa selecionada.
-- [ ] Verificar o percurso completo de navegação e os caminhos de volta.
-- [ ] Conferir a correção matemática dos exemplos, alternativas e resoluções.
-- [ ] Verificar o tratamento de identificador de conteúdo inexistente.
-- [ ] Executar as verificações de lint e build e corrigir problemas encontrados.
-- [ ] Versionar as alterações e disponibilizá-las no GitHub.
-- [ ] Atualizar os itens concluídos e o roteiro da demonstração conforme o resultado real.
+- [x] Conferir os critérios de aceitação da US02 e da US03.
+- [x] Testar respostas corretas, incorretas e envios sem alternativa selecionada.
+- [x] Verificar o percurso completo de navegação e os caminhos de volta.
+- [x] Conferir a correção matemática dos exemplos, alternativas e resoluções.
+- [x] Verificar o tratamento de identificador de conteúdo inexistente.
+- [x] Executar as verificações de lint e build e corrigir problemas encontrados.
+- [x] Versionar as alterações e disponibilizá-las no GitHub.
+- [x] Atualizar os itens concluídos e o roteiro da demonstração conforme o resultado real.
+
+### Melhorias técnicas incluídas
+
+- [x] Remover arquivos e estilos que sobraram do template do Vite.
+- [x] Adicionar cabeçalho de navegação em todas as páginas.
+- [x] Adicionar página 404 para endereços inexistentes.
+- [x] Ajustar título e idioma da página (`pt-BR`).
+- [x] Aplicar identidade visual com suporte a modo claro e escuro.
 
 ## Definition of Done
 
@@ -89,27 +99,29 @@ Um item será considerado "Pronto" quando:
 
 ## Incremento produzido
 
-Até o momento, foi produzida uma primeira versão navegável do frontend do ColumbinaMath, contendo:
+Primeira versão utilizável do ColumbinaMath, com um percurso completo de estudo em **Operações básicas**:
 
-- Página inicial.
-- Área de conteúdos.
-- Listagem dos três assuntos iniciais.
-- Navegação entre a listagem e as páginas correspondentes.
-- Identificação do conteúdo pela URL.
-- Exibição do título de cada assunto.
-- Tratamento para identificadores de conteúdo inexistentes.
-
-As explicações, os exemplos resolvidos e os exercícios ainda não estão implementados. Esta seção será atualizada conforme as funcionalidades forem concluídas e verificadas.
+- Página inicial com explicação do funcionamento e acesso aos conteúdos.
+- Listagem dos conteúdos organizada como trilha de pré-requisitos (1 disponível e 6 "Em breve").
+- Explicação das quatro operações, com vocabulário, um exemplo resolvido passo a passo por operação e prova real.
+- Quatro exercícios de múltipla escolha, um por operação.
+- Correção imediata, com alternativa correta e resolução explicada.
+- **Feedback por erro comum:** cada alternativa errada corresponde a um erro típico (por exemplo, esquecer o "vai um" ou o zero no quociente) e o feedback explica aquele erro específico.
+- Orientação ao tentar enviar sem selecionar alternativa.
+- Caminhos de volta entre exercícios, explicação e listagem.
+- Página 404 para conteúdos e endereços inexistentes.
+- Layout responsivo (celular e computador) com modo claro e escuro.
 
 ## Itens concluídos
 
 - US01 - Visualizar conteúdos.
+- US02 - Acessar uma explicação.
+- US03 - Resolver exercícios e receber correção explicada.
 
-## Itens não concluídos
+## Mudanças em relação ao planejamento
 
-- US02 - Acessar uma explicação: não iniciado.
-- US03 - Resolver exercícios e receber correção explicada: não iniciado.
-- As tarefas complementares pendentes estão indicadas no Sprint Backlog.
+- Os assuntos Porcentagem, Juros e Notação científica foram mantidos, mas agora aparecem como "Em breve" no fim da trilha, porque dependem de operações básicas, sinais, ordem das operações e frações.
+- Foi incluído o feedback por erro comum, como hipótese de diferencial do produto a ser validada com estudantes.
 
 ## Dificuldades encontradas
 
@@ -129,7 +141,14 @@ As explicações, os exemplos resolvidos e os exercícios ainda não estão impl
 - Responder a exercícios e visualizar a correção explicada.
 - Demonstrar os caminhos de volta e o tratamento de conteúdo inexistente.
 
-O roteiro será ajustado antes da Review para demonstrar somente as funcionalidades concluídas e verificadas.
+Todas as etapas do roteiro foram concluídas e verificadas manualmente no computador e no celular.
+
+### Próximos passos propostos (entrada para a Sprint 2)
+
+- Publicar a aplicação (deploy) para acesso por link.
+- Criar os conteúdos de Regra de sinais e Ordem das operações.
+- Exibir fórmulas com KaTeX.
+- Conversar com estudantes do Ensino Médio para validar dificuldades e o feedback por erro comum.
 
 ## Retrospectiva
 
@@ -151,4 +170,4 @@ Observações registradas até o momento, a revisar ao finalizar a entrega.
 
 ### Ação para a próxima Sprint
 
-- Realizar o planejamento da Sprint 2 antes de iniciar a implementação e acompanhar as tarefas durante toda a Sprint.
+- Realizar o planejamento da Sprint 2 antes de iniciar a implementação e acompanhar as tarefas durante toda a Sprint.
