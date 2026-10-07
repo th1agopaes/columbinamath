@@ -2,6 +2,8 @@
 
 Plataforma web de apoio à revisão e prática de matemática básica para estudantes do Ensino Médio.
 
+🌐 **Acesse online:** https://th1agopaes.github.io/columbinamath/
+
 ## Sobre o projeto
 
 O ColumbinaMath é um projeto desenvolvido na disciplina de Extensão I do Bacharelado em Engenharia da Computação do IFMT.
@@ -67,6 +69,10 @@ cd frontend
 npm install     # baixa as dependências (só na primeira vez)
 npm run dev     # abre o servidor de desenvolvimento em http://localhost:5173
 ```
+
+## Publicação
+
+A cada push na branch `main`, o GitHub Actions verifica o código (lint), gera a versão final e publica o site no GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Onde editar os conteúdos
 
