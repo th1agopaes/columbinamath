@@ -48,9 +48,13 @@ Estudantes do Ensino Médio que desejam revisar ou fortalecer seus conhecimentos
 ```text
 columbinamath/
 ├── docs/
-│   ├── product/
-│   └── scrum/
+│   ├── product/            # visão do produto
+│   └── scrum/              # backlog e sprints
 ├── frontend/
+│   └── src/
+│       ├── components/     # partes reutilizáveis (cabeçalho, exercício)
+│       ├── data/           # conteúdos, exemplos e exercícios
+│       └── pages/          # páginas (início, conteúdos, exercícios, 404)
 └── README.md
 ```
 
