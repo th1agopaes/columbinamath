@@ -1,0 +1,16 @@
+# Dependências
+node_modules/
+
+# Build e testes
+dist/
+coverage/
+
+# Variáveis de ambiente(segredos)
+.env
+.env.*
+!.env.example
+
+# Sistema e editor
+*.log
+.DS_Store
+Thumbs.db
