@@ -1,6 +1,7 @@
 # Hooks que rodam automaticamente no git commit
 # Documentação: https://pre-commit.com
 default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
 
 repos:
   # Higiene geral dos arquivos
