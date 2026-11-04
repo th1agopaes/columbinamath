@@ -6,3 +6,17 @@ dependencies = [
     "django>=6.1.3",
     "python-decouple>=3.8",
 ]
+
+[tool.ruff]
+# Pastas geradas automaticamente pelo Django ficam de fora do lint
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+# Mantém as regras padrão do Ruff e acrescenta:
+extend-select = [
+    "I",   # ordem dos imports (isort)
+    "B",   # bugs prováveis (flake8-bugbear)
+    "UP",  # sintaxe moderna do Python (pyupgrade)
+    "DJ",  # boas práticas de Django (flake8-django)
+    "S",   # problemas de segurança (flake8-bandit)
+]
