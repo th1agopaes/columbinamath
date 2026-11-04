@@ -1,11 +1,23 @@
-# Dependências
-node_modules/
+# Python: cache de bytecode
+__pycache__/
+*.py[cod]
 
-# Build e testes
-dist/
-coverage/
+# Ambiente virtual (criado pelo uv)
+.venv/
 
-# Variáveis de ambiente(segredos)
+# Testes e cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ferramentas de qualidade
+.ruff_cache/
+
+# Django
+db.sqlite3
+staticfiles/
+
+# Variáveis de ambiente (segredos)
 .env
 .env.*
 !.env.example
