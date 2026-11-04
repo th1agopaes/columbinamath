@@ -1,4 +1,4 @@
-# ADR 0001: Trocar a stack Node/React por Pytho/Django
+# ADR 0001: Trocar a stack Node/React por Python/Django
 
 - **Status:** Aceito
 - **Data:** 2026-11-04
@@ -6,7 +6,7 @@
 
 ## Contexto
 
-A primeira versão do ColumbinaMath foi construída com React, Vite e TypeScript, e a Sprint 1 de extensão I foi entregue nela.
+A primeira versão do ColumbinaMath foi construída com React, Vite e TypeScript, e a Sprint 1 de Extensão I foi entregue nela.
 
 O projeto passou a ser usado em três disciplinas do quinto semestre: Engenharia de Software, Programação Web e Extensão I. Programação Web ensina o framework Django (templates, formulários, banco de dados, regras de negócio no back-end e serviços REST), conteúdo que a stack Node/React não cobre.
 
