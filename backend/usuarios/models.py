@@ -7,15 +7,16 @@ class TipoUsuario(models.TextChoices):
 
     ALUNO = "aluno", "Aluno"
     PROFESSOR = "professor", "Professor"
-    ADMINISTRADOR = "administrador", "Administrador"
+    ADMIN = "administrador", "Administrador"
 
 
 class Usuario(AbstractUser):
-    """Usuário do ColumbinMath.
+    """Usuário do ColumbinaMath.
 
     Herda de AbstractUser os dados de acesso (nome, e-mail, senha com hash e situação) e acrescenta o tipo de perfil.
     """
 
+    email = models.EmailField("endereço de e-mail", unique=True)
     tipo = models.CharField(
         "tipo",
         max_length=20,
