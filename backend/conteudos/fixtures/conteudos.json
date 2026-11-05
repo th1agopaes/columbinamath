@@ -1,0 +1,220 @@
+[
+  {
+    "model": "conteudos.conteudo",
+    "pk": 1,
+    "fields": {
+      "nome": "Operações básicas",
+      "slug": "operacoes-basicas",
+      "descricao": "Adição, subtração, multiplicação e divisão com números naturais.",
+      "ordem": 1
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 2,
+    "fields": {
+      "nome": "Regra de sinais",
+      "slug": "regra-de-sinais",
+      "descricao": "Operações com números negativos.",
+      "ordem": 2
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 3,
+    "fields": {
+      "nome": "Ordem das operações",
+      "slug": "ordem-das-operacoes",
+      "descricao": "Expressões numéricas com parênteses, potências e as quatro operações.",
+      "ordem": 3
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 4,
+    "fields": {
+      "nome": "Frações",
+      "slug": "fracoes",
+      "descricao": "Simplificação e operações com frações.",
+      "ordem": 4
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 5,
+    "fields": {
+      "nome": "Porcentagem",
+      "slug": "porcentagem",
+      "descricao": "Cálculo de porcentagens, aumentos e descontos.",
+      "ordem": 5
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 6,
+    "fields": {
+      "nome": "Potências de 10 e notação científica",
+      "slug": "notacao-cientifica",
+      "descricao": "Como escrever números muito grandes ou muito pequenos.",
+      "ordem": 6
+    }
+  },
+  {
+    "model": "conteudos.conteudo",
+    "pk": 7,
+    "fields": {
+      "nome": "Juros simples e compostos",
+      "slug": "juros",
+      "descricao": "Como o dinheiro cresce ao longo do tempo.",
+      "ordem": 7
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 1,
+    "fields": {
+      "conteudo": 1,
+      "enunciado": "Quanto é 247 + 185?",
+      "resposta_correta": "432",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 2,
+    "fields": {
+      "conteudo": 1,
+      "enunciado": "Quanto é 503 − 268?",
+      "resposta_correta": "235",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 3,
+    "fields": {
+      "conteudo": 1,
+      "enunciado": "Quanto é 23 × 14?",
+      "resposta_correta": "322",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 4,
+    "fields": {
+      "conteudo": 1,
+      "enunciado": "Quanto é 612 ÷ 6?",
+      "resposta_correta": "102",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 1,
+    "fields": {
+      "exercicio": 1,
+      "resposta_errada": "322",
+      "explicacao": "Você esqueceu de levar o \"vai um\" nas duas colunas. 7 + 5 = 12 e 4 + 8 = 12: nos dois casos, o 1 precisa ir para a coluna seguinte."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 2,
+    "fields": {
+      "exercicio": 1,
+      "resposta_errada": "422",
+      "explicacao": "Você esqueceu o \"vai um\" das unidades. 7 + 5 = 12: escrevemos 2 e o 1 vai para as dezenas, que ficam 4 + 8 + 1 = 13."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 3,
+    "fields": {
+      "exercicio": 1,
+      "resposta_errada": "332",
+      "explicacao": "Você esqueceu o \"vai um\" das dezenas. 4 + 8 + 1 = 13: escrevemos 3 e o 1 vai para as centenas, que ficam 2 + 1 + 1 = 4."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 4,
+    "fields": {
+      "exercicio": 2,
+      "resposta_errada": "365",
+      "explicacao": "Você subtraiu o menor do maior em cada coluna (8 − 3 e 6 − 0). Quando o algarismo de cima é menor, é preciso pegar emprestado da coluna da esquerda."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 5,
+    "fields": {
+      "exercicio": 2,
+      "resposta_errada": "335",
+      "explicacao": "Você pegou emprestado, mas esqueceu de diminuir as centenas. Depois do empréstimo, o 5 vira 4, e 4 − 2 = 2."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 6,
+    "fields": {
+      "exercicio": 2,
+      "resposta_errada": "245",
+      "explicacao": "Quase! Ao emprestar através do zero, as dezenas ficam com 9 (e não 10), porque 1 delas foi para as unidades. Então 9 − 6 = 3."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 7,
+    "fields": {
+      "exercicio": 3,
+      "resposta_errada": "115",
+      "explicacao": "Você não deslocou a segunda linha da conta armada. O 1 do 14 vale 10, então a segunda parte é 23 × 10 = 230 (e não 23)."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 8,
+    "fields": {
+      "exercicio": 3,
+      "resposta_errada": "212",
+      "explicacao": "Você multiplicou algarismo por algarismo (2 × 1 e 3 × 4). É preciso multiplicar o número 23 inteiro por cada parte do 14."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 9,
+    "fields": {
+      "exercicio": 3,
+      "resposta_errada": "37",
+      "explicacao": "Você somou em vez de multiplicar (23 + 14 = 37). Leia o sinal com atenção: × é multiplicação."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 10,
+    "fields": {
+      "exercicio": 4,
+      "resposta_errada": "12",
+      "explicacao": "Você esqueceu o zero no quociente. Depois de 6 ÷ 6 = 1, baixamos o 1, que é menor que 6: nesse caso escrevemos 0 antes de continuar. Prova real: 12 × 6 = 72, não 612."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 11,
+    "fields": {
+      "exercicio": 4,
+      "resposta_errada": "120",
+      "explicacao": "O zero foi para o lugar errado. Prova real: 120 × 6 = 720, não 612. O zero entra quando baixamos o 1 (que é menor que 6)."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 12,
+    "fields": {
+      "exercicio": 4,
+      "resposta_errada": "606",
+      "explicacao": "Você subtraiu em vez de dividir (612 − 6 = 606). Leia o sinal com atenção: ÷ é divisão."
+    }
+  }
+]
