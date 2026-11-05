@@ -16,6 +16,7 @@ class Usuario(AbstractUser):
     Herda de AbstractUser os dados de acesso (nome, e-mail, senha com hash e situação) e acrescenta o tipo de perfil.
     """
 
+    email = models.EmailField("endereço de e-mail", unique=True)
     tipo = models.CharField(
         "tipo",
         max_length=20,
