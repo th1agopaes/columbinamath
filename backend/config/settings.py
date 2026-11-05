@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Apps do ColumbinaMath
+    "usuarios",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,6 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+# Modelo de usuário personalizado (definido antes da primeira migração)
+AUTH_USER_MODEL = "usuarios.Usuario"
