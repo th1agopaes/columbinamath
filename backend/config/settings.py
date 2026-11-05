@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Apps do ColumbinaMath
     "usuarios",
+    "conteudos",
 ]
 
 MIDDLEWARE = [

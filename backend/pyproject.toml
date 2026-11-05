@@ -20,3 +20,8 @@ extend-select = [
     "DJ",  # boas práticas de Django (flake8-django)
     "S",   # problemas de segurança (flake8-bandit)
 ]
+ignore = [
+    # Falso positivo no Django: Meta, ModelAdmin e afins são configuração
+    # declarativa da classe, não estado compartilhado entre instâncias.
+    "RUF012",
+]
