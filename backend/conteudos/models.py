@@ -2,7 +2,7 @@ from django.db import models
 
 
 class NivelDificuldade(models.TextChoices):
-    """Níveis de dificuldade (enumeração, NivelDificuldade do diagrama de classes)."""
+    """Níveis de dificuldade (enumeração NivelDificuldade do diagrama de classes)."""
 
     FACIL = "facil", "Fácil"
     MEDIO = "medio", "Médio"
