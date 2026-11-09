@@ -38,13 +38,12 @@ US01, US02 e US03 foram concluídas na Sprint 1 e reimplementadas em Django na S
 
 ### US01 - Visualizar conteúdos
 
-**User Story:**
-Como estudante, quero visualizar os conteúdos disponíveis para identificar os assuntos que posso estudar e reforçar.
+**User Story:** Como estudante, quero visualizar os conteúdos disponíveis para identificar os assuntos que posso estudar e reforçar.
 
-**Épico:** EP01 — Revisão dos fundamentos
-**MoSCoW:** Must
-**Estimativa:** 2 SP
-**Status:** Concluído
+- **Épico:** EP01 — Revisão dos fundamentos
+- **MoSCoW:** Must
+- **Estimativa:** 2 SP
+- **Status:** Concluído
 
 **Critérios de aceitação:**
 - Ao acessar a área de conteúdos, o estudante consegue visualizar os conteúdos disponíveis.
@@ -54,13 +53,12 @@ Como estudante, quero visualizar os conteúdos disponíveis para identificar os 
 
 ### US02 - Acessar uma explicação
 
-**User Story:**
-Como estudante, quero acessar uma explicação com exemplo resolvido sobre um conteúdo para compreender seus conceitos antes de praticá-los.
+**User Story:** Como estudante, quero acessar uma explicação com exemplo resolvido sobre um conteúdo para compreender seus conceitos antes de praticá-los.
 
-**Épico:** EP01 - Revisão dos fundamentos
-**MoSCoW:** Must
-**Estimativa:** 3 SP
-**Status:** Concluído
+- **Épico:** EP01 - Revisão dos fundamentos
+- **MoSCoW:** Must
+- **Estimativa:** 3 SP
+- **Status:** Concluído
 
 **Critérios de aceitação:**
 
@@ -70,13 +68,12 @@ Como estudante, quero acessar uma explicação com exemplo resolvido sobre um co
 
 ### US03 - Resolver exercícios e receber correção explicada
 
-**User Story:**
-Como estudante, quero responder a exercícios de múltipla escolha e consultar a correção explicada para verificar minha compreensão e entender a resolução.
+**User Story:** Como estudante, quero responder a exercícios de múltipla escolha e consultar a correção explicada para verificar minha compreensão e entender a resolução.
 
-**Épico:** EP02 - Prática com correção explicada
-**MoSCoW:** Must
-**Estimativa:** 5 SP
-**Status:** Concluído
+- **Épico:** EP02 - Prática com correção explicada
+- **MoSCoW:** Must
+- **Estimativa:** 5 SP
+- **Status:** Concluído
 
 **Critérios de aceitação:**
 
@@ -90,13 +87,12 @@ Como estudante, quero responder a exercícios de múltipla escolha e consultar a
 
 ### US04 - Estudar e praticar a regra de sinais
 
-**User Story:**
-Como estudante, quero estudar e praticar a regra de sinais para fazer contas com números negativos sem errar o sinal do resultado.
+**User Story:** Como estudante, quero estudar e praticar a regra de sinais para fazer contas com números negativos sem errar o sinal do resultado.
 
-**Épico:** EP01 - Revisão dos fundamentos e EP02 - Prática com correção explicada
-**MoSCoW:** Must
-**Estimativa:** 5 SP
-**Status:** Concluído
+- **Épico:** EP01 - Revisão dos fundamentos e EP02 - Prática com correção explicada
+- **MoSCoW:** Must
+- **Estimativa:** 5 SP
+- **Status:** Concluído
 
 **Critérios de aceitação:**
 
@@ -108,13 +104,12 @@ Como estudante, quero estudar e praticar a regra de sinais para fazer contas com
 
 ### US05 - Estudar e praticar a ordem das operações
 
-**User Story:**
-Como estudante, quero estudar e praticar a ordem das operações para resolver expressões numéricas na sequência correta.
+**User Story:** Como estudante, quero estudar e praticar a ordem das operações para resolver expressões numéricas na sequência correta.
 
-**Épico:** EP01 - Revisão dos fundamentos e EP02 - Prática com correção explicada
-**MoSCoW:** Should
-**Estimativa:** 5 SP
-**Status:** Não iniciado
+- **Épico:** EP01 - Revisão dos fundamentos e EP02 - Prática com correção explicada
+- **MoSCoW:** Should
+- **Estimativa:** 5 SP
+- **Status:** Não iniciado
 
 **Critérios de aceitação:**
 
@@ -125,13 +120,12 @@ Como estudante, quero estudar e praticar a ordem das operações para resolver e
 
 ### US06 - Visualizar expressões em notação matemática
 
-**User Story:**
-Como estudante, quero ver as expressões escritas em notação matemática para lê-las como no caderno e nos livros.
+**User Story:** Como estudante, quero ver as expressões escritas em notação matemática para lê-las como no caderno e nos livros.
 
-**Épico:** EP01 - Revisão dos fundamentos
-**MoSCoW:** Could
-**Estimativa:** 3 SP
-**Status:** Não iniciado
+- **Épico:** EP01 - Revisão dos fundamentos
+- **MoSCoW:** Could
+- **Estimativa:** 3 SP
+- **Status:** Não iniciado
 
 **Critérios de aceitação:**
 
