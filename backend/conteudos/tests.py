@@ -3,7 +3,14 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from pytest_django.asserts import assertContains, assertNotContains
 
-from .models import Conteudo, ErroComum, Exercicio, normalizar_resposta
+from .models import (
+    Conteudo,
+    ErroComum,
+    Exercicio,
+    Secao,
+    normalizar_resposta,
+    separar_linhas,
+)
 
 
 @pytest.fixture
@@ -106,3 +113,32 @@ class TestPaginas:
         resposta = client.post(url_exercicio, {"resposta": "999"})
         assertNotContains(resposta, "Resposta correta")
         assertNotContains(resposta, "Resposta incorreta")
+
+
+class TestTeoriaEResolucao:
+    def test_separar_linhas_ignora_linhas_vazias(self):
+        assert separar_linhas("Passo 1\n\n  Passo 2  \n") == ["Passo 1", "Passo 2"]
+
+    def test_detalhe_mostra_a_explicacao_e_o_exemplo(self, client, exercicio):
+        Secao.objects.create(
+            conteudo=exercicio.conteudo,
+            ordem=1,
+            titulo="Adição",
+            explicacao="Adicionar é juntar quantidades.",
+            exemplo="158 + 276",
+            passos="Unidades: 8 + 6 = 14.\nDezenas: 5 + 7 + 1 = 13.",
+            resultado="158 + 276 = 434",
+        )
+        url = reverse("conteudos:detalhe", args=[exercicio.conteudo.slug])
+        resposta = client.get(url)
+        assertContains(resposta, "Adicionar é juntar quantidades.")
+        assertContains(resposta, "<li>Dezenas: 5 + 7 + 1 = 13.</li>", html=True)
+
+    def test_resultado_mostra_a_resolucao_mesmo_no_acerto(
+        self, client, exercicio, url_exercicio
+    ):
+        exercicio.resolucao = "Unidades: 7 + 5 = 12.\nResultado: 432."
+        exercicio.save()
+        resposta = client.post(url_exercicio, {"resposta": "432"})
+        assertContains(resposta, "Alternativa correta")
+        assertContains(resposta, "<li>Resultado: 432.</li>", html=True)
