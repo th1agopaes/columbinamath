@@ -158,3 +158,20 @@ fieldset label {
   align-items: center;
   justify-content: space-between;
 }
+
+.secao {
+  margin: 2rem 0;
+}
+
+.exemplo {
+  padding: 1rem 1.25rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--destaque);
+  border-radius: 0.5rem;
+}
+
+.exemplo-titulo {
+  margin-top: 0;
+  font-weight: 600;
+}

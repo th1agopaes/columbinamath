@@ -6,6 +6,30 @@
   <a class="voltar" href="{% url 'conteudos:lista' %}">← Trilha</a>
   <h1>{{ conteudo.nome }}</h1>
   <p class="subtitulo">{{ conteudo.descricao }}</p>
+    {{ conteudo.introducao|linebreaks }}
+
+  {% for secao in conteudo.secoes.all %}
+    <section class="secao">
+      <h2>{{ secao.titulo }}</h2>
+      {{ secao.explicacao|linebreaks }}
+      {% if secao.exemplo %}
+        <div class="exemplo">
+          <p class="exemplo-titulo">Exemplo: {{ secao.exemplo }}</p>
+          <ol>
+            {% for passo in secao.lista_de_passos %}
+              <li>{{ passo }}</li>
+            {% endfor %}
+          </ol>
+          <p><strong>{{ secao.resultado }}</strong></p>
+          {% if secao.prova_real %}
+            <p>Prova real: {{ secao.prova_real }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </section>
+  {% endfor %}
+
+  <h2>Exercícios</h2>
 
   <ol class="lista">
     {% for exercicio in exercicios %}

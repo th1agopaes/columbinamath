@@ -26,7 +26,15 @@
         {% if resultado.erro %}
           <p>{{ resultado.erro.explicacao }}</p>
         {% endif %}
-        <p>Alternativa correta: <strong>{{ exercicio.resposta_correta }}</strong></p>
+      {% endif %}
+      <p>Alternativa correta: <strong>{{ exercicio.resposta_correta }}</strong></p>
+      {% if exercicio.resolucao %}
+        <h3>Resolução</h3>
+        <ol>
+          {% for passo in exercicio.passos_da_resolucao %}
+            <li>{{ passo }}</li>
+          {% endfor %}
+        </ol>
       {% endif %}
     </section>
   {% endif %}
