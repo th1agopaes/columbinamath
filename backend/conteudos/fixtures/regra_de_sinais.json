@@ -1,5 +1,61 @@
 [
   {
+    "model": "conteudos.secao",
+    "pk": 5,
+    "fields": {
+      "conteudo": 2,
+      "ordem": 1,
+      "titulo": "Adição",
+      "explicacao": "O valor absoluto de um número é a sua distância até o zero, sem o sinal: o valor absoluto de −7 é 7. Na adição, com sinais iguais, somamos os valores absolutos e mantemos o sinal. Com sinais diferentes, subtraímos os valores absolutos (o maior menos o menor), e o resultado fica com o sinal do número de maior valor absoluto.",
+      "exemplo": "(−9) + (+4)",
+      "passos": "Os sinais são diferentes: subtraímos os valores absolutos, 9 − 4 = 5.\nO número de maior valor absoluto é o −9, então o resultado é negativo.",
+      "resultado": "(−9) + (+4) = −5",
+      "prova_real": "−5 − (+4) = −9 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 6,
+    "fields": {
+      "conteudo": 2,
+      "ordem": 2,
+      "titulo": "Subtração",
+      "explicacao": "Subtrair é somar o oposto: trocamos a subtração por uma adição e invertemos o sinal do segundo número. Depois, aplicamos a regra da adição.",
+      "exemplo": "(+2) − (−6)",
+      "passos": "Trocamos a subtração por adição e invertemos o sinal do −6: (+2) + (+6).\nOs sinais são iguais: somamos 2 + 6 = 8 e mantemos o sinal positivo.",
+      "resultado": "(+2) − (−6) = 8",
+      "prova_real": "8 + (−6) = 2 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 7,
+    "fields": {
+      "conteudo": 2,
+      "ordem": 3,
+      "titulo": "Multiplicação",
+      "explicacao": "Multiplicamos os valores absolutos e depois decidimos o sinal: sinais iguais dão resultado positivo, e sinais diferentes dão resultado negativo. Atenção: essa regra é diferente da adição. Na multiplicação, (−) × (−) dá (+).",
+      "exemplo": "(−3) × (+5)",
+      "passos": "Multiplicamos os valores absolutos: 3 × 5 = 15.\nOs sinais são diferentes, então o resultado é negativo.",
+      "resultado": "(−3) × (+5) = −15",
+      "prova_real": "(−15) ÷ (+5) = −3 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 8,
+    "fields": {
+      "conteudo": 2,
+      "ordem": 4,
+      "titulo": "Divisão",
+      "explicacao": "A divisão segue a mesma regra de sinais da multiplicação: sinais iguais dão resultado positivo, e sinais diferentes dão resultado negativo.",
+      "exemplo": "(−20) ÷ (−4)",
+      "passos": "Dividimos os valores absolutos: 20 ÷ 4 = 5.\nOs sinais são iguais, então o resultado é positivo.",
+      "resultado": "(−20) ÷ (−4) = 5",
+      "prova_real": "5 × (−4) = −20 ✔"
+    }
+  },
+  {
     "model": "conteudos.exercicio",
     "pk": 5,
     "fields": {
