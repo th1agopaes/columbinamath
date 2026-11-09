@@ -15,7 +15,7 @@ def exercicio(db):
     )
     exercicio = Exercicio.objects.create(
         conteudo=conteudo,
-        enunciado="Quantos é 247 + 185?",
+        enunciado="Quanto é 247 + 185?",
         resposta_correta="432",
     )
     ErroComum.objects.create(
@@ -31,7 +31,7 @@ class TestNormalizarResposta:
         assert normalizar_resposta(" 4 32 ") == "432"
 
     def test_troca_o_menos_tipografico_pelo_do_teclado(self):
-        assert normalizar_resposta("\u222128") == "-8"
+        assert normalizar_resposta("\u22128") == "-8"
 
 
 class TestVerificarResposta:
@@ -63,7 +63,7 @@ class TestValidacaoDoErroComum:
 
     def test_valida_mesmo_com_o_exercicio_ainda_nao_salvo(self):
         # Cenário do painel: exercício e erros comuns são cadastrados juntos.
-        novo = Exercicio(enunciado="Quantos é 2 + 2?", resposta_correta="4")
+        novo = Exercicio(enunciado="Quanto é 2 + 2?", resposta_correta="4")
         erro = ErroComum(exercicio=novo, resposta_errada="4", explicacao="x")
         with pytest.raises(ValidationError):
             erro.clean()
