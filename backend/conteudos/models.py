@@ -1,4 +1,12 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+
+SINAL_DE_MENOS = "\u2212"  # "-", o sinal de menos tipográfico
+
+
+def normalizar_resposta(resposta: str) -> str:
+    """Padroniza uma resposta para comparação: sem espaços e com o menos do teclado."""
+    return "".join(resposta.split()).replace(SINAL_DE_MENOS, "-")
 
 
 class NivelDificuldade(models.TextChoices):
@@ -51,6 +59,16 @@ class Exercicio(models.Model):
     def __str__(self):
         return self.enunciado
 
+    def verificar_resposta(self, resposta: str) -> bool:
+        """Diz se a resposta do aluno está correta (RF005)."""
+        return normalizar_resposta(resposta) == normalizar_resposta(
+            self.resposta_correta
+        )
+
+    def identificar_erro(self, resposta: str) -> ErroComum | None:
+        """Procura o erro comum que corresponde à resposta errada (RF005)."""
+        return ErroComum.buscar(self, resposta)
+
 
 class ErroComum(models.Model):
     """Resposta errada esperada e a explicação mostrada como feedback."""
@@ -76,3 +94,24 @@ class ErroComum(models.Model):
 
     def __str__(self):
         return self.resposta_errada
+
+    def clean(self):
+        """Extensão 6a do caso de uso 3: o erro não pode ser a resposta correta."""
+        super().clean()
+        exercicio = getattr(self, "exercicio", None)
+        if exercicio is None:
+            return
+        if normalizar_resposta(self.resposta_errada) == normalizar_resposta(
+            exercicio.resposta_correta
+        ):
+            mensagem = "O erro comum não pode ser igual à resposta correta."
+            raise ValidationError({"resposta_errada": mensagem})
+
+    @classmethod
+    def buscar(cls, exercicio: Exercicio, resposta: str) -> ErroComum | None:
+        """Devolve o erro comum do exercício que corresponde à resposta, se houver."""
+        alvo = normalizar_resposta(resposta)
+        for erro in exercicio.erros_comuns.all():
+            if normalizar_resposta(erro.resposta_errada) == alvo:
+                return erro
+        return None
