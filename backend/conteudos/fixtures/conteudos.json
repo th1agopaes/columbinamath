@@ -6,7 +6,8 @@
       "nome": "Operações básicas",
       "slug": "operacoes-basicas",
       "descricao": "Adição, subtração, multiplicação e divisão com números naturais.",
-      "ordem": 1
+      "ordem": 1,
+      "introducao": "As quatro operações são a base de toda a matemática. Quase todo erro em conteúdos mais avançados começa com um tropeço aqui. Vamos revisar cada uma com calma, sempre conferindo o resultado com a operação inversa (a \"prova real\")."
     }
   },
   {
@@ -16,7 +17,8 @@
       "nome": "Regra de sinais",
       "slug": "regra-de-sinais",
       "descricao": "Operações com números negativos.",
-      "ordem": 2
+      "ordem": 2,
+      "introducao": ""
     }
   },
   {
@@ -26,7 +28,8 @@
       "nome": "Ordem das operações",
       "slug": "ordem-das-operacoes",
       "descricao": "Expressões numéricas com parênteses, potências e as quatro operações.",
-      "ordem": 3
+      "ordem": 3,
+      "introducao": ""
     }
   },
   {
@@ -36,7 +39,8 @@
       "nome": "Frações",
       "slug": "fracoes",
       "descricao": "Simplificação e operações com frações.",
-      "ordem": 4
+      "ordem": 4,
+      "introducao": ""
     }
   },
   {
@@ -46,7 +50,8 @@
       "nome": "Porcentagem",
       "slug": "porcentagem",
       "descricao": "Cálculo de porcentagens, aumentos e descontos.",
-      "ordem": 5
+      "ordem": 5,
+      "introducao": ""
     }
   },
   {
@@ -56,7 +61,8 @@
       "nome": "Potências de 10 e notação científica",
       "slug": "notacao-cientifica",
       "descricao": "Como escrever números muito grandes ou muito pequenos.",
-      "ordem": 6
+      "ordem": 6,
+      "introducao": ""
     }
   },
   {
@@ -66,7 +72,64 @@
       "nome": "Juros simples e compostos",
       "slug": "juros",
       "descricao": "Como o dinheiro cresce ao longo do tempo.",
-      "ordem": 7
+      "ordem": 7,
+      "introducao": ""
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 1,
+    "fields": {
+      "conteudo": 1,
+      "ordem": 1,
+      "titulo": "Adição",
+      "explicacao": "Adicionar é juntar quantidades. Os números somados são as parcelas e o resultado é a soma. Na conta armada, somamos coluna por coluna, da direita para a esquerda. Quando uma coluna passa de 9, escrevemos só a unidade e levamos o resto para a próxima coluna (o famoso \"vai um\").",
+      "exemplo": "158 + 276",
+      "passos": "Unidades: 8 + 6 = 14. Escrevemos 4 e vai 1 para as dezenas.\nDezenas: 5 + 7 + 1 (que veio) = 13. Escrevemos 3 e vai 1 para as centenas.\nCentenas: 1 + 2 + 1 (que veio) = 4. Escrevemos 4.",
+      "resultado": "158 + 276 = 434",
+      "prova_real": "434 − 276 = 158 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 2,
+    "fields": {
+      "conteudo": 1,
+      "ordem": 2,
+      "titulo": "Subtração",
+      "explicacao": "Subtrair é tirar uma quantidade de outra. O número de cima é o minuendo, o que tiramos é o subtraendo e o resultado é a diferença. Se o algarismo de cima for menor que o de baixo, pegamos emprestado 1 da coluna da esquerda, que vale 10 na coluna atual.",
+      "exemplo": "432 − 157",
+      "passos": "Unidades: 2 é menor que 7. Pegamos 1 emprestado das dezenas: 12 − 7 = 5.\nDezenas: o 3 virou 2. Como 2 é menor que 5, pegamos 1 das centenas: 12 − 5 = 7.\nCentenas: o 4 virou 3. Então 3 − 1 = 2.",
+      "resultado": "432 − 157 = 275",
+      "prova_real": "275 + 157 = 432 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 3,
+    "fields": {
+      "conteudo": 1,
+      "ordem": 3,
+      "titulo": "Multiplicação",
+      "explicacao": "Multiplicar é somar parcelas iguais repetidas vezes: 3 × 4 = 4 + 4 + 4. Os números multiplicados são os fatores e o resultado é o produto. Com dois algarismos no segundo fator, multiplicamos por partes (unidades e dezenas) e depois somamos.",
+      "exemplo": "34 × 12",
+      "passos": "Separamos o 12 em 10 + 2.\nMultiplicamos pelas unidades: 34 × 2 = 68.\nMultiplicamos pelas dezenas: 34 × 10 = 340 (por isso a segunda linha da conta armada começa uma casa à esquerda).\nSomamos as partes: 68 + 340 = 408.",
+      "resultado": "34 × 12 = 408",
+      "prova_real": "408 ÷ 12 = 34 ✔"
+    }
+  },
+  {
+    "model": "conteudos.secao",
+    "pk": 4,
+    "fields": {
+      "conteudo": 1,
+      "ordem": 4,
+      "titulo": "Divisão",
+      "explicacao": "Dividir é repartir em partes iguais. O número dividido é o dividendo, o que divide é o divisor, o resultado é o quociente e o que sobra é o resto. Dividimos da esquerda para a direita, \"baixando\" um algarismo por vez. Atenção: se depois de baixar um algarismo o número ainda for menor que o divisor, escrevemos 0 no quociente.",
+      "exemplo": "156 ÷ 4",
+      "passos": "1 é menor que 4, então pegamos 15.\n15 ÷ 4 = 3 (pois 3 × 4 = 12). Sobra 15 − 12 = 3.\nBaixamos o 6, formando 36.\n36 ÷ 4 = 9 (pois 9 × 4 = 36). Sobra 0.",
+      "resultado": "156 ÷ 4 = 39",
+      "prova_real": "39 × 4 = 156 ✔"
     }
   },
   {
@@ -76,7 +139,8 @@
       "conteudo": 1,
       "enunciado": "Quanto é 247 + 185?",
       "resposta_correta": "432",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Unidades: 7 + 5 = 12. Escrevemos 2 e vai 1.\nDezenas: 4 + 8 + 1 = 13. Escrevemos 3 e vai 1.\nCentenas: 2 + 1 + 1 = 4.\nResultado: 432. Prova real: 432 − 185 = 247 ✔"
     }
   },
   {
@@ -86,7 +150,8 @@
       "conteudo": 1,
       "enunciado": "Quanto é 503 − 268?",
       "resposta_correta": "235",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Unidades: 3 é menor que 8 e as dezenas são 0. Pegamos 1 das centenas: o 5 vira 4 e o 0 das dezenas vira 10.\nDas 10 dezenas, passamos 1 para as unidades: as dezenas ficam 9 e as unidades ficam 13.\nUnidades: 13 − 8 = 5. Dezenas: 9 − 6 = 3. Centenas: 4 − 2 = 2.\nResultado: 235. Prova real: 235 + 268 = 503 ✔"
     }
   },
   {
@@ -96,7 +161,8 @@
       "conteudo": 1,
       "enunciado": "Quanto é 23 × 14?",
       "resposta_correta": "322",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Separamos o 14 em 10 + 4.\n23 × 4 = 92.\n23 × 10 = 230.\n92 + 230 = 322. Prova real: 322 ÷ 14 = 23 ✔"
     }
   },
   {
@@ -106,7 +172,8 @@
       "conteudo": 1,
       "enunciado": "Quanto é 612 ÷ 6?",
       "resposta_correta": "102",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "6 ÷ 6 = 1. Sobra 0.\nBaixamos o 1. Como 1 é menor que 6, escrevemos 0 no quociente.\nBaixamos o 2, formando 12. 12 ÷ 6 = 2. Sobra 0.\nResultado: 102. Prova real: 102 × 6 = 612 ✔"
     }
   },
   {

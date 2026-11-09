@@ -1,12 +1,20 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-SINAL_DE_MENOS = "\u2212"  # "-", o sinal de menos tipográfico
+SINAL_DE_MENOS = "\u2212"  # "U+2212", o sinal de menos tipográfico
 
 
 def normalizar_resposta(resposta: str) -> str:
     """Padroniza uma resposta para comparação: sem espaços e com o menos do teclado."""
     return "".join(resposta.split()).replace(SINAL_DE_MENOS, "-")
+
+
+UM_POR_LINHA = "Escreva um passo por linha."
+
+
+def separar_linhas(texto: str) -> list[str]:
+    """Transforma um texto com um passo por linha em uma lista, sem linhas vazias."""
+    return [linha.strip() for linha in texto.splitlines() if linha.strip()]
 
 
 class NivelDificuldade(models.TextChoices):
@@ -24,6 +32,7 @@ class Conteudo(models.Model):
     slug = models.SlugField("slug", unique=True)
     descricao = models.CharField("descrição", max_length=200)
     ordem = models.PositiveSmallIntegerField("ordem")
+    introducao = models.TextField("introdução", blank=True)
 
     class Meta:
         ordering = ["ordem"]
@@ -32,6 +41,35 @@ class Conteudo(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Secao(models.Model):
+    """Parte da explicação de um conteúdo, com um exemplo resolvido (US02)."""
+
+    conteudo = models.ForeignKey(
+        Conteudo,
+        on_delete=models.CASCADE,
+        related_name="secoes",
+        verbose_name="conteúdo",
+    )
+    ordem = models.PositiveSmallIntegerField("ordem")
+    titulo = models.CharField("título", max_length=100)
+    explicacao = models.TextField("explicação")
+    exemplo = models.CharField("exemplo", max_length=100, blank=True)
+    passos = models.TextField("passos do exemplo", blank=True, help_text=UM_POR_LINHA)
+    resultado = models.CharField("resultado", max_length=100, blank=True)
+    prova_real = models.CharField("prova real", max_length=100, blank=True)
+
+    class Meta:
+        ordering = ["ordem"]
+        verbose_name = "seção"
+        verbose_name_plural = "seções"
+
+    def __str__(self):
+        return self.titulo
+
+    def lista_de_passos(self) -> list[str]:
+        return separar_linhas(self.passos)
 
 
 class Exercicio(models.Model):
@@ -51,6 +89,7 @@ class Exercicio(models.Model):
         choices=NivelDificuldade.choices,
         default=NivelDificuldade.FACIL,
     )
+    resolucao = models.TextField("resolução", blank=True, help_text=UM_POR_LINHA)
 
     class Meta:
         verbose_name = "exercício"
@@ -68,6 +107,9 @@ class Exercicio(models.Model):
     def identificar_erro(self, resposta: str) -> ErroComum | None:
         """Procura o erro comum que corresponde à resposta errada (RF005)."""
         return ErroComum.buscar(self, resposta)
+
+    def passos_da_resolucao(self) -> list[str]:
+        return separar_linhas(self.resolucao)
 
 
 class ErroComum(models.Model):
