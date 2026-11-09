@@ -1,0 +1,160 @@
+/* ColumbinaMath: estilo base com modo claro e escuro */
+
+:root {
+  --fundo: #f6f5fb;
+  --superficie: #ffffff;
+  --texto: #1f1d2b;
+  --texto-suave: #5b5870;
+  --borda: #dcd8ea;
+  --destaque: #5b3fc4;
+  --destaque-texto: #ffffff;
+  --acerto: #1e7a46;
+  --acerto-fundo: #e5f5ec;
+  --erro: #b3261e;
+  --erro-fundo: #fdeceb;
+}
+
+/* O navegador avisa se o sistema está no modo escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #15141c;
+    --superficie: #1f1d2b;
+    --texto: #eceaf5;
+    --texto-suave: #aaa6c0;
+    --borda: #34314a;
+    --destaque: #a996ff;
+    --destaque-texto: #15141c;
+    --acerto: #6fd39b;
+    --acerto-fundo: #173526;
+    --erro: #ff8f87;
+    --erro-fundo: #3d1d1b;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+a {
+  color: var(--destaque);
+}
+
+.cabecalho,
+.rodape {
+  padding: 1rem;
+  text-align: center;
+}
+
+.marca {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rodape {
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+.pagina {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.subtitulo,
+.contador {
+  color: var(--texto-suave);
+}
+
+.lista {
+  padding: 0;
+  list-style: none;
+}
+
+.cartao {
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 0.75rem;
+}
+
+.titulo-cartao {
+  font-weight: 600;
+}
+
+.selo {
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--borda);
+  border-radius: 1rem;
+  color: var(--texto-suave);
+  font-size: 0.75rem;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+fieldset label {
+  display: block;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.errorlist {
+  color: var(--erro);
+}
+
+.botao {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--destaque);
+  color: var(--destaque-texto);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.resultado {
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid;
+  border-radius: 0.5rem;
+}
+
+.resultado h2 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}
+
+.acerto {
+  border-color: var(--acerto);
+  background: var(--acerto-fundo);
+}
+
+.erro {
+  border-color: var(--erro);
+  background: var(--erro-fundo);
+}
+
+.navegacao {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
