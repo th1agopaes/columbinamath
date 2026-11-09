@@ -1,5 +1,7 @@
 import pytest
 from django.core.exceptions import ValidationError
+from django.urls import reverse
+from pytest_django.asserts import assertContains, assertNotContains
 
 from .models import Conteudo, ErroComum, Exercicio, normalizar_resposta
 
@@ -71,3 +73,36 @@ class TestValidacaoDoErroComum:
     def test_aceita_erro_diferente_da_resposta_correta(self, exercicio):
         erro = ErroComum(exercicio=exercicio, resposta_errada="322", explicacao="x")
         erro.clean()  # não deve levantar exceção
+
+
+@pytest.fixture
+def url_exercicio(exercicio):
+    return reverse("conteudos:exercicio", args=[exercicio.conteudo.slug, exercicio.pk])
+
+
+class TestPaginas:
+    def test_lista_mostra_os_conteudos(self, client, exercicio):
+        resposta = client.get(reverse("conteudos:lista"))
+        assertContains(resposta, "Operações básicas")
+
+    def test_lista_segue_a_ordem_da_trilha(self, client, exercicio):
+        Conteudo.objects.create(nome="Frações", slug="fracoes", descricao="-", ordem=2)
+        html = client.get(reverse("conteudos:lista")).content.decode()
+        assert html.index("Operações básicas") < html.index("Frações")
+
+    def test_conteudo_inexistente_retorna_404(self, client, db):
+        resposta = client.get(reverse("conteudos:detalhe", args=["nao-existe"]))
+        assert resposta.status_code == 404
+
+    def test_resposta_correta_mostra_acerto(self, client, url_exercicio):
+        resposta = client.post(url_exercicio, {"resposta": "432"})
+        assertContains(resposta, "Resposta correta")
+
+    def test_erro_comum_mostra_a_explicacao(self, client, url_exercicio):
+        resposta = client.post(url_exercicio, {"resposta": "422"})
+        assertContains(resposta, "Você esqueceu o vai um das unidades.")
+
+    def test_recusa_alternativa_que_nao_existe(self, client, url_exercicio):
+        resposta = client.post(url_exercicio, {"resposta": "999"})
+        assertNotContains(resposta, "Resposta correta")
+        assertNotContains(resposta, "Resposta incorreta")
