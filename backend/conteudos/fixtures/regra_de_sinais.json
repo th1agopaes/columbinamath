@@ -6,7 +6,8 @@
       "conteudo": 2,
       "enunciado": "Quanto é (−7) + (+3)?",
       "resposta_correta": "−4",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Os sinais são diferentes: subtraímos os valores absolutos, 7 − 3 = 4.\nO resultado fica com o sinal do número de maior valor absoluto, o −7.\nResultado: (−7) + (+3) = −4. Prova real: −4 − (+3) = −7 ✔"
     }
   },
   {
@@ -43,7 +44,8 @@
       "conteudo": 2,
       "enunciado": "Quanto é (−5) − (−8)?",
       "resposta_correta": "3",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Subtrair um número negativo é somar o seu oposto: − (−8) = +8.\nA conta fica (−5) + (+8). Os sinais são diferentes: 8 − 5 = 3.\nO resultado fica com o sinal do +8, que tem o maior valor absoluto.\nResultado: (−5) − (−8) = 3. Prova real: 3 + (−8) = −5 ✔"
     }
   },
   {
@@ -80,7 +82,8 @@
       "conteudo": 2,
       "enunciado": "Quanto é (−6) × (−4)?",
       "resposta_correta": "24",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Multiplicamos os valores absolutos: 6 × 4 = 24.\nNa multiplicação, sinais iguais dão resultado positivo: (−) × (−) = (+).\nResultado: (−6) × (−4) = 24. Prova real: 24 ÷ (−4) = −6 ✔"
     }
   },
   {
@@ -117,7 +120,8 @@
       "conteudo": 2,
       "enunciado": "Quanto é (+36) ÷ (−9)?",
       "resposta_correta": "−4",
-      "nivel": "facil"
+      "nivel": "facil",
+      "resolucao": "Dividimos os valores absolutos: 36 ÷ 9 = 4.\nNa divisão, sinais diferentes dão resultado negativo: (+) ÷ (−) = (−).\nResultado: (+36) ÷ (−9) = −4. Prova real: (−4) × (−9) = 36 ✔"
     }
   },
   {
