@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}ColumbinaMath{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+  <header class="cabecalho">
+    <a class="marca" href="{% url 'conteudos:lista' %}">ColumbinaMath</a>
+  </header>
+
+  <main class="pagina">
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer class="rodape">
+    ColumbinaMath · Projeto de extensão do IFMT
+  </footer>
+</body>
+</html>

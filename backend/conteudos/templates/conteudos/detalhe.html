@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ conteudo.nome }} · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <a class="voltar" href="{% url 'conteudos:lista' %}">← Trilha</a>
+  <h1>{{ conteudo.nome }}</h1>
+  <p class="subtitulo">{{ conteudo.descricao }}</p>
+
+  <ol class="lista">
+    {% for exercicio in exercicios %}
+      <li class="cartao">
+        <a class="titulo-cartao" href="{% url 'conteudos:exercicio' conteudo.slug exercicio.pk %}">Exercício {{ forloop.counter }}</a>
+        <p>{{ exercicio.enunciado }}</p>
+      </li>
+    {% empty %}
+      <li class="cartao">Os exercícios deste conteúdo estão a caminho.</li>
+    {% endfor %}
+  </ol>
+{% endblock %}

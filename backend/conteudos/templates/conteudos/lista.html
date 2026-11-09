@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block titulo %}Trilha de conteúdos · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <h1>Trilha de matemática básica</h1>
+  <p class="subtitulo">Siga a ordem: cada conteúdo usa o que veio antes.</p>
+
+  <ol class="lista">
+    {% for conteudo in conteudos %}
+      <li class="cartao">
+        {% if conteudo.total_exercicios %}
+          <a class="titulo-cartao" href="{% url 'conteudos:detalhe' conteudo.slug %}">{{ conteudo.nome }}</a>
+        {% else %}
+          <span class="titulo-cartao">{{ conteudo.nome }}</span>
+          <span class="selo">Em breve</span>
+        {% endif %}
+        <p>{{ conteudo.descricao }}</p>
+      </li>
+    {% endfor %}
+  </ol>
+{% endblock %}
