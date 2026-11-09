@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %}Exercício {{ posicao }} · {{ conteudo.nome }}{% endblock %}
+
+{% block conteudo %}
+  <a class="voltar" href="{% url 'conteudos:detalhe' conteudo.slug %}">← {{ conteudo.nome }}</a>
+  <p class="contador">Exercício {{ posicao }} de {{ total }}</p>
+  <h1>{{ exercicio.enunciado }}</h1>
+
+  <form method="post" class="cartao">
+    {% csrf_token %}
+    <fieldset {% if resultado %}disabled{% endif %}>
+      {{ form.as_div }}
+    </fieldset>
+    {% if not resultado %}
+      <button class="botao" type="submit">Enviar resposta</button>
+    {% endif %}
+  </form>
+
+  {% if resultado %}
+    <section class="resultado {% if resultado.acertou %}acerto{% else %}erro{% endif %}" aria-live="polite">
+      {% if resultado.acertou %}
+        <h2>Resposta correta! 🎉</h2>
+      {% else %}
+        <h2>Resposta incorreta.</h2>
+        {% if resultado.erro %}
+          <p>{{ resultado.erro.explicacao }}</p>
+        {% endif %}
+        <p>Alternativa correta: <strong>{{ exercicio.resposta_correta }}</strong></p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  <nav class="navegacao">
+    {% if resultado %}
+      <a href="{{ request.path }}">Tentar novamente</a>
+    {% endif %}
+    {% if proximo %}
+      <a class="botao" href="{% url 'conteudos:exercicio' conteudo.slug proximo.pk %}">Próximo exercício →</a>
+    {% else %}
+      <a class="botao" href="{% url 'conteudos:lista' %}">Voltar à trilha</a>
+    {% endif %}
+  </nav>
+{% endblock %}
