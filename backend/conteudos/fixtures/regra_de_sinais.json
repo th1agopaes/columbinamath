@@ -1,0 +1,150 @@
+[
+  {
+    "model": "conteudos.exercicio",
+    "pk": 5,
+    "fields": {
+      "conteudo": 2,
+      "enunciado": "Quanto é (−7) + (+3)?",
+      "resposta_correta": "−4",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 13,
+    "fields": {
+      "exercicio": 5,
+      "resposta_errada": "−10",
+      "explicacao": "Você somou 7 + 3 e manteve o sinal de menos, mas essa regra vale só para sinais iguais. Com sinais diferentes, subtraímos os valores absolutos (7 − 3 = 4) e mantemos o sinal do número de maior valor absoluto, que é o −7."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 14,
+    "fields": {
+      "exercicio": 5,
+      "resposta_errada": "10",
+      "explicacao": "Você somou os valores absolutos e ignorou os sinais. Com sinais diferentes, subtraímos: 7 − 3 = 4. O resultado fica com o sinal do −7, que tem o maior valor absoluto."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 15,
+    "fields": {
+      "exercicio": 5,
+      "resposta_errada": "4",
+      "explicacao": "A conta 7 − 3 = 4 está certa, mas faltou o sinal. O resultado fica com o sinal do número de maior valor absoluto: o −7. Então a resposta é −4."
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 6,
+    "fields": {
+      "conteudo": 2,
+      "enunciado": "Quanto é (−5) − (−8)?",
+      "resposta_correta": "3",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 16,
+    "fields": {
+      "exercicio": 6,
+      "resposta_errada": "−13",
+      "explicacao": "Você tratou − (−8) como −8. Subtrair um número negativo é somar o seu oposto: − (−8) = +8. A conta fica −5 + 8."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 17,
+    "fields": {
+      "exercicio": 6,
+      "resposta_errada": "−3",
+      "explicacao": "Você trocou − (−8) por +8 corretamente, mas errou o sinal no final. Em −5 + 8, subtraímos 8 − 5 = 3 e mantemos o sinal do 8, que tem o maior valor absoluto e é positivo."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 18,
+    "fields": {
+      "exercicio": 6,
+      "resposta_errada": "13",
+      "explicacao": "Você somou 5 + 8. Depois de trocar − (−8) por +8, a conta fica −5 + 8: com sinais diferentes, subtraímos os valores absolutos (8 − 5 = 3)."
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 7,
+    "fields": {
+      "conteudo": 2,
+      "enunciado": "Quanto é (−6) × (−4)?",
+      "resposta_correta": "24",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 19,
+    "fields": {
+      "exercicio": 7,
+      "resposta_errada": "−24",
+      "explicacao": "Na multiplicação, sinais iguais dão resultado positivo: (−) × (−) = (+). Você usou a regra da adição, em que dois negativos somados continuam negativos."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 20,
+    "fields": {
+      "exercicio": 7,
+      "resposta_errada": "−10",
+      "explicacao": "Você somou em vez de multiplicar: (−6) + (−4) = −10. A operação pedida é a multiplicação: 6 × 4 = 24, com sinal positivo porque os sinais são iguais."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 21,
+    "fields": {
+      "exercicio": 7,
+      "resposta_errada": "10",
+      "explicacao": "Você somou os valores absolutos (6 + 4) em vez de multiplicar. Multiplicando: 6 × 4 = 24, e sinais iguais dão resultado positivo."
+    }
+  },
+  {
+    "model": "conteudos.exercicio",
+    "pk": 8,
+    "fields": {
+      "conteudo": 2,
+      "enunciado": "Quanto é (+36) ÷ (−9)?",
+      "resposta_correta": "−4",
+      "nivel": "facil"
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 22,
+    "fields": {
+      "exercicio": 8,
+      "resposta_errada": "4",
+      "explicacao": "A divisão 36 ÷ 9 = 4 está certa, mas faltou o sinal. Na divisão, sinais diferentes dão resultado negativo: (+) ÷ (−) = (−)."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 23,
+    "fields": {
+      "exercicio": 8,
+      "resposta_errada": "−324",
+      "explicacao": "Você multiplicou em vez de dividir: 36 × 9 = 324. A operação pedida é a divisão: 36 ÷ 9 = 4, com sinal negativo porque os sinais são diferentes."
+    }
+  },
+  {
+    "model": "conteudos.errocomum",
+    "pk": 24,
+    "fields": {
+      "exercicio": 8,
+      "resposta_errada": "27",
+      "explicacao": "Você calculou (+36) + (−9) = 27, uma adição. A operação pedida é a divisão: 36 ÷ 9 = 4, e o resultado é negativo porque os sinais são diferentes."
+    }
+  }
+]
