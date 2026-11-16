@@ -90,6 +90,9 @@ columbinamath/
 ## Documentação
 
 - [Visão do produto](docs/produto/visao.md)
+- [Requisitos](docs/requisitos/requisitos.md)
+- [Casos de uso](docs/requisitos/especificacao-casos-de-uso.md)
+- [Matriz de rastreabilidade](docs/requisitos/matriz-rastreabilidade.md)
 - [Product Backlog](docs/scrum/product-backlog.md)
 - [Sprint 2](docs/scrum/sprints/sprint-02.md)
 - [Sprint 3](docs/scrum/sprints/sprint-03.md)
