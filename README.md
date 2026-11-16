@@ -87,6 +87,7 @@ columbinamath/
 - [Visão do produto](docs/produto/visao.md)
 - [Product Backlog](docs/scrum/product-backlog.md)
 - [Sprint 2](docs/scrum/sprints/sprint-02.md)
+- [Sprint 3](docs/scrum/sprints/sprint-03.md)
 - [ADR 0001: troca da stack para Django](docs/arquitetura/adr/0001-troca-de-stack-para-django.md)
 
 ## Contexto acadêmico
