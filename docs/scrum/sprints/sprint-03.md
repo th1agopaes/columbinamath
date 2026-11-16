@@ -5,7 +5,7 @@
 - Início: 10/11/2026.
 - Planejamento: 16/11/2026.
 - Entrega de Engenharia de Software: 01/12/2026 (vídeo da apresentação final).
-- Entrega de Programação Web: ~05/12/2026.
+- Entrega de Programação Web: prevista para 05/12/2026.
 - Sprint Review: 07/12/2026.
 
 ## Contexto
@@ -35,8 +35,8 @@ Entregar a versão 1.0 do ColumbinaMath: o estudante cria uma conta, resolve exe
 
 | Ordem | Issue | Item | MoSCoW | Estimativa | Resultado |
 |---|---|---|---|---|---|
-| 1 | #41 | Planejar a Sprint 3 e atualizar o Product Backlog | Must | 2 SP | |
-| 2 | #7 | Verificar a aplicação no GitHub Actions (CI) | Must | 2 SP | |
+| 1 | #41 | Planejar a Sprint 3 e atualizar o Product Backlog | Must | 2 SP | Concluído |
+| 2 | #7 | Verificar a aplicação no GitHub Actions (CI) | Must | 2 SP | Concluído |
 | 3 | #42 | Registrar requisitos, casos de uso e priorização | Must | 2 SP | |
 | 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | |
 | 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | |
@@ -67,10 +67,10 @@ Entregar a versão 1.0 do ColumbinaMath: o estudante cria uma conta, resolve exe
 
 A issue foi reescrita: fica só a verificação automática. A publicação online saiu da sprint.
 
-- [ ] Criar o workflow com os hooks do pre-commit e os testes com cobertura.
-- [ ] Executar o workflow nos Pull Requests e na `main`.
-- [ ] Adicionar o selo do CI ao README.
-- [ ] Configurar o Dependabot.
+- [x] Criar o workflow com os hooks do pre-commit e os testes com cobertura.
+- [x] Executar o workflow nos Pull Requests e na `main`.
+- [x] Adicionar o selo do CI ao README.
+- [x] Configurar o Dependabot.
 
 ### #42 - Requisitos e casos de uso
 
