@@ -1,0 +1,55 @@
+# Integração contínua: verifica cada Pull Request e cada mudança na main
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# O workflow só precisa ler o código do repo
+permissions:
+  contents: read
+
+jobs:
+  qualidade:
+    name: Qualidade (pre-commit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Instalar o uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Rodar os hooks do pre-commit
+        run: uvx pre-commit run --all-files --show-diff-on-failure
+        env:
+          # Este hook protege a main nos commits locais; no CI ele não se aplica
+          SKIP: no-commit-to-branch
+
+  testes:
+    name: Testes (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      # Valor usado só no CI; a chave de verdade fica no .env, fora do Git
+      SECRET_KEY: valor-usado-somente-no-ci
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Instalar o uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Instalar as dependências
+        run: uv sync --locked
+
+      - name: Verificar o projeto e as migrações
+        run: |
+          uv run python manage.py check
+          uv run python manage.py makemigrations --check --dry-run
+
+      - name: Rodar os testes com cobertura
+        run: uv run pytest --cov
