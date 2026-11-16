@@ -137,3 +137,30 @@ Itens técnicos criados a partir da troca de stack, sem estimativa em Story Poin
 - A capacidade planejada ficou acima da entregue, como previsto nos riscos.
 - A troca de stack no meio da sprint exigiu refazer a migração e adicionou itens técnicos.
 - Plano de contingência aplicado: US06 e US05 voltaram ao Product Backlog, assim como a #7.
+
+## Retrospectiva
+
+Realizada em 12/11/2026, depois da Sprint Review.
+
+### O que foi bem
+
+- Fluxo de trabalho com issue, branch, Pull Request e squash merge: 19 PRs integrados à `main`.
+- Qualidade automatizada desde o início do projeto Django: 19 testes, Ruff e hooks de pre-commit.
+- Troca de stack registrada em ADR, o que facilitou explicar a mudança na review.
+- Plano de contingência definido no planejamento e aplicado como previsto: US05 e US06 voltaram ao Product Backlog.
+
+### O que pode melhorar
+
+- Início tardio: a sprint começou em 10/10, mas o primeiro commit foi em 03/11, e 10 dos 23 commits ficaram no dia da review. Causa: não havia uma rotina de trabalho no projeto desde o início da sprint.
+- Capacidade superestimada: foram planejados 24 SP, contra 10 SP entregues na Sprint 1; 14 SP foram concluídos.
+- Item planejado sem verificar a viabilidade técnica: a #7 previa o GitHub Pages, que não executa Django.
+- Trabalho técnico sem estimativa: 8 itens entraram durante a sprint sem Story Points, o que escondeu o esforço real.
+- Definition of Done não cumprida no item "GitHub Actions", pois o CI ainda não existia.
+
+### Ações para a Sprint 3
+
+| Ação | Como verificar |
+|---|---|
+| Trabalhar no projeto todos os dias úteis, com pelo menos um commit por dia, até o code freeze | `git log` por dia, conferido toda sexta-feira |
+| Planejar a sprint a partir da velocidade real (10 e 14 SP) e estimar também os itens técnicos | Total de SP no `sprint-03.md`; nenhum item sem estimativa |
+| Configurar o CI no GitHub Actions como primeiro item da sprint, para a Definition of Done valer do início ao fim | Workflow passando na `main` e em todos os PRs da sprint |
