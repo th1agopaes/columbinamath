@@ -29,6 +29,7 @@ ignore = [
 [dependency-groups]
 dev = [
     "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
     "pytest-django>=4.14.0",
 ]
 
@@ -41,3 +42,20 @@ dev = [
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
 python_files = ["tests.py", "test_*.py"]
+
+[tool.coverage.run]
+# Mede todo o código do projeto, não só os arquivos que os testes importam
+source = ["."]
+omit = [
+  "*/migrations/*", # geradas pelo Django
+  "*/tests.py",     # os próprios testes
+  "manage.py",      # pontos de entrada, sem lógica nossa
+  "config/asgi.py",
+  "config/wsgi.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+# o CI falha se a cobertura cair abaixo deste percentual
+fail_under = 90
