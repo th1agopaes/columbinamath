@@ -1,0 +1,40 @@
+# Dependabot: abre Pull Requests com atualizações de dependências
+# Referência: https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+version: 2
+
+updates:
+  # Dependências Python do backend (pyproject.toml e uv.lock)
+  - package-ecosystem: "uv"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    groups:
+      python:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Actions usadas nos workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Hooks do pre-commit
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      hooks:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
