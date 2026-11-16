@@ -20,7 +20,7 @@ repos:
 
   # Python: lint com correção automática + formatação
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.3
+    rev: v0.17.5
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -28,7 +28,7 @@ repos:
 
   # Segurança: bloqueia segredos (chaves, tokens) antes do commit
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
 
