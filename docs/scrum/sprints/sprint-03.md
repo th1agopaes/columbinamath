@@ -49,8 +49,8 @@ A meta da sprint não muda. O que muda é o Sprint Backlog:
 |---|---|---|---|---|---|
 | 1 | #41 | Planejar a Sprint 3 e atualizar o Product Backlog | Must | 2 SP | Concluído |
 | 2 | #7 | Verificar a aplicação no GitHub Actions (CI) | Must | 2 SP | Concluído |
-| 3 | #42 | Registrar requisitos, casos de uso e priorização | Must | 2 SP | |
-| 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | Concluído |
+| 3 | #42 | Registrar requisitos, casos de uso e priorização | Must | 2 SP | Concluído |
+| 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | |
 | 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | |
 | 6 | #45 | US09 - Acompanhar o progresso | Must | 3 SP | |
 | 7 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | |
