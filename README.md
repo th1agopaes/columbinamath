@@ -1,5 +1,7 @@
 # ColumbinaMath
 
+[![CI](https://github.com/th1agopaes/columbinamath/actions/workflows/ci.yml/badge.svg)](https://github.com/th1agopaes/columbinamath/actions/workflows/ci.yml)
+
 Aplicação web para estudantes do Ensino Médio revisarem matemática básica, com explicações, exemplos resolvidos e exercícios com **feedback por erro comum**: cada alternativa errada explica o raciocínio que levou até ela.
 
 ![Exercício de regra de sinais com o feedback do erro comum e a resolução passo a passo](docs/img/columbinamath-exercicio.png)
@@ -52,7 +54,7 @@ Acesse <http://127.0.0.1:8000>. Para usar o painel administrativo em `/admin`, c
 ## Testes e qualidade
 
 ```bash
-uv run pytest
+uv run pytest --cov
 ```
 
 Os hooks de qualidade rodam a cada commit. Para ativá-los:
@@ -61,6 +63,7 @@ Os hooks de qualidade rodam a cada commit. Para ativá-los:
 uv tool install pre-commit
 pre-commit install
 ```
+Os mesmos hooks e os testes com cobertura rodam no GitHub Actions a cada Pull Request e a cada mudança na `main`.
 
 ## Estrutura
 
