@@ -24,12 +24,24 @@ Ações da [retrospectiva da Sprint 2](sprint-02.md#retrospectiva) aplicadas nes
 
 Entregar a versão 1.0 do ColumbinaMath: o estudante cria uma conta, resolve exercícios com as tentativas registradas e acompanha o próprio progresso, em um projeto verificado automaticamente a cada mudança, executável por container e documentado para a apresentação final.
 
+## Replanejamento de 16/11
+
+No mesmo dia do planejamento, o escopo técnico foi revisto. O conteúdo programático de Programação Web inclui containers, banco de dados e serviços REST, e os critérios da entrega ainda não foram confirmados pelo professor. Por prudência, PostgreSQL, API REST e containers passam a ser tratados como exigidos.
+
+A meta da sprint não muda. O que muda é o Sprint Backlog:
+
+- A #46 (containers com PostgreSQL) passa de Should para Must.
+- Entra a #55 (API REST), Must, com 3 SP. Ela é feita de 02 a 04/12, depois do vídeo de Engenharia de Software, porque só é avaliada em Programação Web.
+- Os itens Must passam de 27 para 35 SP, e o total da sprint, de 37 para 40 SP.
+- O plano de contingência foi refeito: PostgreSQL e containers deixam de ser cortes possíveis.
+
 ## Capacidade
 
 - Velocidade medida: 10 SP na Sprint 1 e 14 SP na Sprint 2.
-- Os itens Must desta sprint somam 27 SP, quase o dobro da velocidade medida.
-- Por que o plano foi mantido: as datas das três disciplinas são fixas; os 14 SP da Sprint 2 foram entregues em 4 dias de trabalho e não contavam os 8 itens técnicos sem estimativa; esta sprint tem 15 dias de trabalho até 30/11, com avanço diário.
-- O risco é reconhecido e tratado pelos marcos e pelo plano de contingência abaixo.
+- Os itens Must desta sprint somam 35 SP, duas vezes e meia a maior velocidade medida.
+- Situação em 16/11: 4 SP concluídos (#41 e #7). Restam 28 SP até 01/12 e 3 SP (API REST) de 02 a 04/12.
+- Por que o plano foi mantido: as datas das três disciplinas são fixas; os 14 SP da Sprint 2 foram entregues em 4 dias de trabalho e não contavam os 8 itens técnicos sem estimativa; de 17 a 30/11 são 14 dias de trabalho, o que pede uma média de 2 SP por dia.
+- O risco aumentou com o replanejamento. Ele é reconhecido e tratado pelos marcos e pelo plano de contingência abaixo.
 
 ## Itens selecionados
 
@@ -41,13 +53,14 @@ Entregar a versão 1.0 do ColumbinaMath: o estudante cria uma conta, resolve exe
 | 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | |
 | 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | |
 | 6 | #45 | US09 - Acompanhar o progresso | Must | 3 SP | |
-| 7 | #46 | Executar a aplicação em containers com PostgreSQL | Should | 5 SP | |
+| 7 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | |
 | 8 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
 | 9 | #48 | Métricas do projeto e ADRs pendentes | Must | 2 SP | |
 | 10 | #49 | Apresentação final: slides, vídeo e versão 1.0 | Must | 5 SP | |
-| 11 | #9 | US05 - Ordem das operações | Should | 5 SP | |
+| 11 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | |
+| 12 | #9 | US05 - Ordem das operações | Should | 5 SP | |
 
-**Total:** 37 SP (27 SP Must e 10 SP Should).
+**Total:** 40 SP (35 SP Must e 5 SP Should).
 
 ## Marcos
 
@@ -55,9 +68,10 @@ Entregar a versão 1.0 do ColumbinaMath: o estudante cria uma conta, resolve exe
 |---|---|
 | 18/11 | CI ativo e requisitos registrados em `docs/requisitos/` |
 | 23/11 | Conta, tentativas e progresso funcionando |
-| 25/11 | Aplicação executando por container |
+| 25/11 | Aplicação executando por container com PostgreSQL |
 | 27/11 | Diagramas e métricas prontos; congelamento do código (code freeze) |
 | 01/12 | Vídeo entregue em Engenharia de Software |
+| 04/12 | API REST disponível |
 | 05/12 | Entrega de Programação Web |
 | 07/12 | Sprint Review 3 |
 
@@ -128,6 +142,15 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 - [ ] Adicionar ao README o link do vídeo e a licença; criar a tag `v1.0.0`.
 - [ ] Migrar o registro da Sprint 1 do repositório v1.
 
+### #55 - API REST
+
+Feita de 02 a 04/12, depois da entrega de Engenharia de Software. Como chega depois da tag `v1.0.0`, é publicada como versão `v1.1.0`.
+
+- [ ] Adicionar o Django REST Framework ao projeto.
+- [ ] Expor conteúdos e exercícios em JSON, somente para leitura e sem a resposta correta.
+- [ ] Testar os endpoints.
+- [ ] Documentar a API no README.
+
 ### #9 - US05 Ordem das operações
 
 Último item da ordem: só começa depois da entrega de 01/12.
@@ -143,7 +166,6 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 - Turmas e desempenho da turma (RF007 e RF008): Won't have this time.
 - Publicação online da aplicação: a demonstração usa a execução local ou por container.
 - Monitoramento com Prometheus e Grafana, microsserviços e servidor de front-end separado: não são exigidos; a decisão será registrada em ADR e em trabalhos futuros.
-- API REST: fora da sprint, a confirmar com o professor de Programação Web.
 
 ## Definition of Done
 
@@ -157,14 +179,14 @@ Um item será considerado "Pronto" quando:
 
 ## Riscos
 
-- Os itens Must (27 SP) estão acima da velocidade medida (10 e 14 SP).
+- Os itens Must (35 SP) estão muito acima da velocidade medida (10 e 14 SP).
 - Três entregas em sete dias (01/12, 05/12 e 07/12).
-- Os critérios da entrega de Programação Web ainda não foram confirmados.
-- GitHub Actions, containers, PostgreSQL e autenticação são tecnologias novas no projeto. Antes de cada um desses itens, a viabilidade é verificada na documentação oficial, para não repetir o problema da #7 na Sprint 2.
+- Os critérios da entrega de Programação Web ainda não foram confirmados. Se o professor dispensar PostgreSQL, API REST ou containers, o item dispensado volta a ser Should.
+- GitHub Actions, containers, PostgreSQL, autenticação e Django REST Framework são tecnologias novas no projeto. Antes de cada um desses itens, a viabilidade é verificada na documentação oficial, para não repetir o problema da #7 na Sprint 2.
 
 **Plano de contingência**, aplicado se um marco atrasar mais de um dia, nesta ordem:
 
 1. US05 (#9) volta ao Product Backlog.
-2. O PostgreSQL sai da #46: o container executa com SQLite.
-3. A #46 inteira volta ao Product Backlog, e a apresentação mostra a execução local documentada no README.
-4. A US09 (#45) entrega só o resumo por conteúdo, sem os erros comuns mais frequentes.
+2. A US09 (#45) entrega só o resumo por conteúdo, sem os erros comuns mais frequentes.
+3. A API REST (#55) é reduzida a um único recurso somente para leitura (a lista de conteúdos).
+4. Os diagramas (#47) e as métricas (#48) passam para 28 e 29/11, em paralelo com os slides.
