@@ -7,6 +7,7 @@ Os requisitos RF001 a RF008 e RNF001 a RNF004 vêm do Documento de Visão da Mod
 Documentos relacionados:
 
 - [Especificação dos casos de uso](especificacao-casos-de-uso.md)
+- [Matriz de rastreabilidade](matriz-rastreabilidade.md)
 - [Product Backlog](../scrum/product-backlog.md)
 - [Sprint 3](../scrum/sprints/sprint-03.md)
 
