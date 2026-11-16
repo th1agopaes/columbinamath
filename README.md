@@ -63,6 +63,7 @@ Os hooks de qualidade rodam a cada commit. Para ativá-los:
 uv tool install pre-commit
 pre-commit install
 ```
+
 Os mesmos hooks e os testes com cobertura rodam no GitHub Actions a cada Pull Request e a cada mudança na `main`.
 
 ## Estrutura
@@ -83,6 +84,7 @@ columbinamath/
 - **Scrum:** backlog e sprints em [`docs/scrum/`](docs/scrum/), com o quadro no [GitHub Projects](https://github.com/users/th1agopaes/projects/2).
 - **GitHub Flow:** cada mudança nasce de uma issue, é feita numa branch e entra na `main` por Pull Request.
 - **Conventional Commits:** mensagens de commit padronizadas e verificadas pelo pre-commit.
+- **Integração contínua:** o [GitHub Actions](.github/workflows/ci.yml) roda os hooks e os testes com cobertura em cada Pull Request, e o Dependabot propõe as atualizações de dependências.
 - **ADRs:** decisões de arquitetura registradas em [`docs/arquitetura/adr/`](docs/arquitetura/adr/).
 
 ## Documentação
