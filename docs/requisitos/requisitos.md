@@ -10,6 +10,8 @@ Documentos relacionados:
 - [Matriz de rastreabilidade](matriz-rastreabilidade.md)
 - [Product Backlog](../scrum/product-backlog.md)
 - [Sprint 3](../scrum/sprints/sprint-03.md)
+- [Modelagem - Parte I](modelagem/modelagem-parte-1.pdf): cenário, documento de visão, modelo conceitual e casos de uso.
+- [Modelagem - Parte II](modelagem/modelagem-parte-2.pdf): diagramas de sequência e diagrama de classes.
 
 ## Histórico de revisão
 
