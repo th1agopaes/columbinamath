@@ -20,6 +20,7 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 |---|---|---|
 | EP01 | Revisão dos fundamentos | Permitir que o estudante encontre os conteúdos e consulte explicações e exemplos. |
 | EP02 | Prática com correção explicada | Permitir que o estudante aplique seus conhecimentos e consulte a resolução após responder. |
+| EP03 | Acompanhamento do aprendizado | Permitir que o estudante tenha uma conta, registre suas respostas e acompanhe o próprio progresso. |
 
 ## Visão geral das histórias
 
@@ -29,10 +30,15 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 | - | US02 | Acessar uma explicação | EP01 | Must | 3 SP | Concluído |
 | - | US03 | Resolver exercícios e receber correção explicada | EP02 | Must | 5 SP | Concluído |
 | - | US04 | Estudar e praticar a regra de sinais | EP01, EP02 | Must | 5 SP | Concluído |
-| 1 | US05 | Estudar e praticar a ordem das operações | EP01, EP02 | Should | 5 SP | Não iniciado |
-| 2 | US06 | Visualizar expressões em notação matemática | EP01 | Could | 3 SP | Não iniciado |
+| 1 | US07 | Criar conta e entrar | EP03 | Must | 5 SP | Não iniciado |
+| 2 | US08 | Registrar tentativas | EP03 | Must | 3 SP | Não iniciado |
+| 3 | US09 | Acompanhar o progresso | EP03 | Must | 3 SP | Não iniciado |
+| 4 | US05 | Estudar e praticar a ordem das operações | EP01, EP02 | Should | 5 SP | Não iniciado |
+| 5 | US06 | Visualizar expressões em notação matemática | EP01 | Could | 3 SP | Não iniciado |
 
 US01, US02 e US03 foram concluídas na Sprint 1 e reimplementadas em Django na Sprint 2 ([ADR 0001](../arquitetura/adr/0001-troca-de-stack-para-django.md)). A US04 foi concluída na Sprint 2.
+
+US07, US08 e US09 entraram no planejamento da [Sprint 3](sprints/sprint-03.md). Elas vêm dos requisitos RF001, RF005 e RF006 da modelagem do sistema e, por isso, passaram à frente da US05 na ordem.
 
 ## Itens do Product Backlog
 
@@ -132,3 +138,58 @@ US01, US02 e US03 foram concluídas na Sprint 1 e reimplementadas em Django na S
 - As expressões dos conteúdos disponíveis são exibidas em notação matemática.
 - Se a notação não puder ser exibida, o texto original da expressão continua visível.
 - A leitura funciona em computador e celular, nos modos claro e escuro.
+
+### US07 - Criar conta e entrar
+
+**User Story:** Como estudante, quero criar uma conta e entrar no ColumbinaMath para que minhas respostas fiquem guardadas no meu nome.
+
+- **Épico:** EP03 - Acompanhamento do aprendizado
+- **Requisitos:** RF001, RNF002 e RNF003
+- **MoSCoW:** Must
+- **Estimativa:** 5 SP
+- **Status:** Não iniciado
+
+**Critérios de aceitação:**
+
+- O estudante cria uma conta informando nome, e-mail e senha; nenhum outro dado pessoal é pedido.
+- Não é possível criar duas contas com o mesmo e-mail.
+- A senha é guardada apenas com hash, nunca em texto puro.
+- O estudante entra com e-mail e senha e consegue sair.
+- Com e-mail ou senha incorretos, o sistema avisa do erro sem dizer qual dos dois está errado.
+- A navegação mostra se o estudante está conectado.
+
+### US08 - Registrar tentativas
+
+**User Story:** Como estudante, quero que cada resposta que eu enviar fique registrada para acompanhar depois o que acertei e o que errei.
+
+- **Épico:** EP03 - Acompanhamento do aprendizado
+- **Requisitos:** RF005
+- **MoSCoW:** Must
+- **Estimativa:** 3 SP
+- **Status:** Não iniciado
+
+**Critérios de aceitação:**
+
+- Para responder a um exercício, o estudante precisa estar conectado; a explicação do conteúdo continua aberta a todos.
+- Cada resposta enviada gera uma tentativa com o estudante, o exercício, a resposta, o resultado e a data e hora.
+- Quando a resposta errada corresponde a um erro comum, ele fica associado à tentativa.
+- O envio sem alternativa selecionada não gera tentativa.
+- O estudante pode responder ao mesmo exercício mais de uma vez, e cada resposta gera uma nova tentativa.
+
+### US09 - Acompanhar o progresso
+
+**User Story:** Como estudante, quero ver meus acertos e erros por conteúdo para saber onde preciso praticar mais.
+
+- **Épico:** EP03 - Acompanhamento do aprendizado
+- **Requisitos:** RF006
+- **MoSCoW:** Must
+- **Estimativa:** 3 SP
+- **Status:** Não iniciado
+
+**Critérios de aceitação:**
+
+- A página "Meu progresso" mostra, para cada conteúdo, os acertos, os erros e o percentual de acerto.
+- A página mostra os erros comuns mais frequentes do estudante.
+- O progresso é calculado a partir das tentativas, sem ser armazenado.
+- Quem ainda não tem tentativas recebe a orientação de resolver exercícios.
+- Cada estudante vê apenas o próprio progresso.
