@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.sh text eol=lf
+# Arquivos binários: o Git não converte o fim de linha nem tenta mostrar o diff
+*.pdf binary
+*.png binary

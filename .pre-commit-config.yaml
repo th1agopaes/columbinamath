@@ -14,6 +14,8 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-added-large-files
+        # Exceção: PDFs da modelagem, documentos de origem dos requisitos
+        exclude: ^docs/requisitos/modelagem/
       - id: check-merge-conflict
       - id: detect-private-key
       - id: no-commit-to-branch
