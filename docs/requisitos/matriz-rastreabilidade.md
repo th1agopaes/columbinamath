@@ -23,7 +23,7 @@ Documentos relacionados:
 | RF007 - Vincular aluno a professor | UC4 | US10 | #62 | `TestTurma`, `TestPaginasDoProfessor`, `TestPaginasDoAluno` | Atendido |
 | RF008 - Acompanhar desempenho da turma | UC4 | US11 | #63 | `TestDesempenho`, `TestPaginaDaTurma` | Atendido |
 | RF009 - Consultar conteúdos e explicações | UC1 | US01, US02, US04, US05 | #6, #8, #30, #9 | `TestPaginas`, `TestTeoriaEResolucao`, `TestTrilha` | Atendido |
-| RF010 - Disponibilizar conteúdos por API REST | - | - | #55 | Testes previstos na #55 | Planejado |
+| RF010 - Disponibilizar conteúdos por API REST | - | - | #55 | `TestConteudos`, `TestExercicios` (app `api`) | Atendido |
 
 ## Requisitos não funcionais
 
@@ -45,13 +45,14 @@ Os testes ficam em `backend/<app>/tests.py`, e as fixtures compartilhadas, em `b
 | `usuarios` | `TestCadastro`, `TestEntrarESair`, `TestUsuario` | RF001, RNF002 e RNF003 | 15 |
 | `progresso` | `TestRegistroDaTentativa`, `TestPainel`, `TestCalculoDoProgresso`, `TestPaginaMeuProgresso` | RF005 e RF006 | 17 |
 | `turmas` | `TestTurma`, `TestPaginasDoProfessor`, `TestPaginasDoAluno`, `TestDesempenho`, `TestPaginaDaTurma` | RF007 e RF008 | 25 |
+| `api` | `TestConteudos`, `TestExercicios` | RF010 | 8 |
 
-**Total:** 82 testes, com 99% de cobertura de código (mínimo exigido no CI: 90%).
+**Total:** 90 testes, com 99% de cobertura de código (mínimo exigido no CI: 90%).
 
 ## O que a matriz mostra
 
 - **Sem teste automatizado próprio:** RF002 e parte do RF003. O cadastro usa o painel administrativo do Django, que já é testado pelo próprio framework.
 - **Sem evidência registrada:** RNF001. Falta a medição do tempo de resposta (#48).
-- **Aguardando implementação:** RF010 (#55) e RNF005 (#46).
+- **Aguardando implementação:** RNF005 (#46).
 - **História fora da sprint:** a US06 (#10, Could) melhora a apresentação das expressões, está ligada ao RF009 e continua no Product Backlog.
 - **Itens sem requisito:** as issues de processo e infraestrutura (planejamento, CI, documentação, diagramas e a pasta `frontend/`) não atendem a um requisito do produto. Elas estão descritas nos documentos das sprints.
