@@ -24,6 +24,7 @@ echo "==> Carregando os conteúdos da trilha"
 $compose exec web python manage.py loaddata conteudos regra_de_sinais
 
 echo "==> Pronto: http://localhost:8000"
+echo "    Monitoramento: http://localhost:3000 (Grafana, usuário admin) e http://localhost:9090 (Prometheus)"
 echo "    Criar o administrador: $compose exec web python manage.py createsuperuser"
 echo "    Ver os logs:           $compose logs --follow web"
 echo "    Parar:                 $compose down"

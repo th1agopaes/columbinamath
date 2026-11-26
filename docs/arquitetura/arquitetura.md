@@ -32,28 +32,34 @@ flowchart TB
 
 ## Nível 2: containers
 
-As partes que rodam separadamente. Na execução por containers ([ADR 0004](adr/0004-postgresql-e-containers.md)), são dois: a aplicação e o banco de dados.
+As partes que rodam separadamente. Na execução por containers ([ADR 0004](adr/0004-postgresql-e-containers.md)), são quatro: a aplicação, o banco de dados e o monitoramento, com o Prometheus e o Grafana ([ADR 0005](adr/0005-monitoramento-com-prometheus-e-grafana.md)).
 
 ```mermaid
 flowchart TB
     usuario["👤 Aluno, professor<br/>ou administrador"]
     cliente["🖥️ Cliente da API"]
+    equipe["👤 Equipe do projeto"]
 
     subgraph columbinamath["ColumbinaMath (docker-compose.yml)"]
         direction TB
         web["Aplicação web<br/>[Container: Python 3.14, Django 6.1, Gunicorn]<br/>Monta as páginas (templates de frontend/),<br/>aplica as regras de negócio e responde à API.<br/>O WhiteNoise serve o CSS."]
         db[("Banco de dados<br/>[Container: PostgreSQL 18]<br/>Usuários, conteúdos,<br/>tentativas e turmas")]
+        prometheus[("Prometheus<br/>[Container: Prometheus 3]<br/>Coleta e guarda as métricas")]
+        grafana["Grafana<br/>[Container: Grafana 13]<br/>Painel de monitoramento"]
     end
 
     usuario -- "Páginas HTML<br/>[HTTP, porta 8000]" --> web
     cliente -- "/api/<br/>[HTTP + JSON]" --> web
     web -- "Lê e grava<br/>[SQL, porta 5432]" --> db
+    prometheus -- "Lê as métricas a cada 15 s<br/>[HTTP, porta 9100]" --> web
+    grafana -- "Consulta<br/>[PromQL]" --> prometheus
+    equipe -- "Acompanha o painel<br/>[HTTP, porta 3000]" --> grafana
 
     classDef pessoa fill:#5b3fc4,stroke:#3d2a8a,color:#ffffff
     classDef container fill:#1f6feb,stroke:#0b4fb3,color:#ffffff
     classDef externo fill:#8b8b9e,stroke:#5b5870,color:#ffffff
-    class usuario pessoa
-    class web,db container
+    class usuario,equipe pessoa
+    class web,db,prometheus,grafana container
     class cliente externo
 ```
 
@@ -173,6 +179,7 @@ flowchart LR
 | Dependências | uv | Instalação rápida e reprodutível pelo `uv.lock` |
 | Qualidade | Ruff, pre-commit, pytest e pytest-cov | Lint, formatação e testes automáticos em cada commit e em cada Pull Request |
 | CI e manutenção | GitHub Actions, Dependabot e ruleset | Verificação automática e atualização segura das dependências |
+| Monitoramento | Prometheus e Grafana | Medem o tempo de resposta (RNF001) e o uso real do produto ([ADR 0005](adr/0005-monitoramento-com-prometheus-e-grafana.md)) |
 
 ## Decisões de arquitetura
 
@@ -182,3 +189,4 @@ flowchart LR
 | [0002](adr/0002-camada-de-apresentacao-na-pasta-frontend.md) | Separar a camada de apresentação na pasta `frontend/` |
 | [0003](adr/0003-perfis-de-usuario-em-tabela-unica.md) | Representar os perfis de usuário em uma tabela única, com modelos proxy |
 | [0004](adr/0004-postgresql-e-containers.md) | Executar em containers, com PostgreSQL, Gunicorn e WhiteNoise |
+| [0005](adr/0005-monitoramento-com-prometheus-e-grafana.md) | Monitorar a aplicação com Prometheus e Grafana |

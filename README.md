@@ -52,6 +52,7 @@ O código implementa os quatro casos de uso da modelagem feita em Programação 
 | Qualidade | Ruff e pre-commit (Conventional Commits e detecção de segredos com gitleaks) |
 | Banco de dados | SQLite no desenvolvimento e PostgreSQL 18 nos containers |
 | Execução | Gunicorn e WhiteNoise, em containers com Podman ou Docker |
+| Monitoramento | Prometheus e Grafana, com métricas de tempo de resposta e de uso |
 
 ## Como executar localmente
 
@@ -130,7 +131,17 @@ No `backend/.env`, troque a `SECRET_KEY` e a `POSTGRES_PASSWORD` por valores ger
 ./build.sh
 ```
 
-O script constrói a imagem, inicia a aplicação (Gunicorn) e o PostgreSQL, aplica as migrações e carrega os conteúdos. Acesse <http://localhost:8000>. Ao terminar, o script mostra como criar o administrador, ver os logs e parar os containers. A decisão está no [ADR 0004](docs/arquitetura/adr/0004-postgresql-e-containers.md).
+O script constrói a imagem, inicia a aplicação (Gunicorn), o PostgreSQL, o Prometheus e o Grafana, aplica as migrações e carrega os conteúdos. Acesse <http://localhost:8000>. Ao terminar, o script mostra como criar o administrador, ver os logs e parar os containers. A decisão está no [ADR 0004](docs/arquitetura/adr/0004-postgresql-e-containers.md).
+
+### Monitoramento
+
+Com os containers rodando, o painel do Grafana fica em <http://localhost:3000> (usuário `admin`, com a senha `GF_SECURITY_ADMIN_PASSWORD` do `backend/.env`). Ele mostra:
+
+- o percentual de respostas em até 2 s e o percentil 95 do tempo de resposta (RNF001);
+- as requisições por página e por código de status, e os erros do servidor;
+- os acertos e erros dos alunos ao longo do tempo.
+
+O Prometheus, que coleta as métricas a cada 15 s, fica em <http://localhost:9090>. A decisão está no [ADR 0005](docs/arquitetura/adr/0005-monitoramento-com-prometheus-e-grafana.md).
 
 ## Testes e qualidade
 
@@ -160,9 +171,11 @@ columbinamath/
 │   ├── usuarios/     # usuário, perfis (aluno e professor), cadastro e login
 │   ├── conftest.py   # dados de teste compartilhados
 │   ├── Dockerfile    # imagem da aplicação
+│   ├── gunicorn.conf.py  # servidor da aplicação e porta das métricas
 │   └── entrypoint.sh # aplica as migrações ao iniciar o container
 ├── frontend/         # camada de apresentação: templates HTML e CSS
-├── docker-compose.yml  # aplicação + PostgreSQL
+├── monitoring/       # configuração do Prometheus e painel do Grafana
+├── docker-compose.yml  # aplicação, PostgreSQL, Prometheus e Grafana
 ├── build.sh          # constrói e inicia os containers
 └── docs/             # produto, Scrum, requisitos, UML e arquitetura
 ```
@@ -194,6 +207,7 @@ O mapa completo está em [`docs/README.md`](docs/README.md). Os principais docum
 - [ADR 0002: camada de apresentação na pasta frontend](docs/arquitetura/adr/0002-camada-de-apresentacao-na-pasta-frontend.md)
 - [ADR 0003: perfis de usuário em tabela única com modelos proxy](docs/arquitetura/adr/0003-perfis-de-usuario-em-tabela-unica.md)
 - [ADR 0004: containers com PostgreSQL, Gunicorn e WhiteNoise](docs/arquitetura/adr/0004-postgresql-e-containers.md)
+- [ADR 0005: monitoramento com Prometheus e Grafana](docs/arquitetura/adr/0005-monitoramento-com-prometheus-e-grafana.md)
 
 ## Contexto acadêmico
 

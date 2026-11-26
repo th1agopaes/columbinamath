@@ -31,7 +31,8 @@ RUN useradd --create-home --uid 1000 columbina \
     && chown -R columbina /app/backend
 USER columbina
 
-EXPOSE 8000
+# 8000: site e API; 9100: métricas para o Prometheus (só na rede dos containers)
+EXPOSE 8000 9100
 
 ENTRYPOINT ["./entrypoint.sh"]
 # As opções do servidor ficam no gunicorn.conf.py, lido automaticamente

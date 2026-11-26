@@ -8,9 +8,14 @@ o Gunicorn espera até 30 s, mais que os 10 s que o Podman dá antes de forçar 
 parada. O gthread atende cada conexão numa thread e não fica preso (ADR 0004).
 """
 
+import os
+
+from prometheus_client import start_http_server
+
 bind = "0.0.0.0:8000"
 
 # Um processo com várias threads atende a escala do projeto com pouca memória.
+# Com um só processo, as métricas do Prometheus ficam num único lugar (ADR 0005).
 worker_class = "gthread"
 workers = 1
 threads = 8
@@ -23,3 +28,15 @@ graceful_timeout = 5
 
 # Log de acesso na saída padrão, para aparecer no "podman compose logs".
 accesslog = "-"
+
+
+def post_worker_init(worker):
+    """Abre a porta das métricas para o Prometheus quando METRICAS_PORTA existe.
+
+    A porta é interna da rede dos containers: o docker-compose.yml não a publica
+    no computador, então as métricas não ficam expostas como uma página do site.
+    """
+    porta = os.environ.get("METRICAS_PORTA")
+    if porta:
+        start_http_server(int(porta))
+        worker.log.info("Métricas do Prometheus na porta %s", porta)

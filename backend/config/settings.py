@@ -56,6 +56,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # Serve os arquivos estáticos quando o Gunicorn roda sem servidor web na frente
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Conta as requisições e mede o tempo de resposta para o Prometheus (ADR 0005)
+    "config.metricas.MetricasMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
