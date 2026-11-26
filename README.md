@@ -70,12 +70,11 @@ Os mesmos hooks e os testes com cobertura rodam no GitHub Actions a cada Pull Re
 
 ```text
 columbinamath/
-├── backend/          # projeto Django
+├── backend/          # projeto Django: regras de negócio e dados
 │   ├── config/       # configurações e rotas principais
 │   ├── conteudos/    # trilha, explicações, exercícios e correção
-│   ├── usuarios/     # modelo de usuário (aluno, professor e administrador)
-│   ├── templates/    # layout base das páginas
-│   └── static/       # estilos (CSS)
+│   └── usuarios/     # modelo de usuário (aluno, professor e administrador)
+├── frontend/         # camada de apresentação: templates HTML e CSS
 └── docs/             # produto, Scrum, requisitos, UML e arquitetura
 ```
 
@@ -97,6 +96,7 @@ columbinamath/
 - [Sprint 2](docs/scrum/sprints/sprint-02.md)
 - [Sprint 3](docs/scrum/sprints/sprint-03.md)
 - [ADR 0001: troca da stack para Django](docs/arquitetura/adr/0001-troca-de-stack-para-django.md)
+- [ADR 0002: camada de apresentação na pasta frontend](docs/arquitetura/adr/0002-camada-de-apresentacao-na-pasta-frontend.md)
 
 ## Contexto acadêmico
 
