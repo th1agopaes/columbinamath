@@ -42,6 +42,19 @@ class Conteudo(models.Model):
     def __str__(self):
         return self.nome
 
+    @classmethod
+    def listar(cls) -> models.QuerySet:
+        """Trilha na ordem de estudo, com o total de exercícios de cada conteúdo."""
+        # Consultas com contagem (GROUP BY) ignoram o Meta.ordering: ordenamos aqui.
+        return cls.objects.annotate(
+            total_exercicios=models.Count("exercicios")
+        ).order_by("ordem")
+
+    def proximo_exercicio(self, aluno) -> Exercicio | None:
+        """Primeiro exercício que o aluno ainda não acertou, ou None se concluiu."""
+        acertados = aluno.tentativas.filter(correta=True).values("exercicio")
+        return self.exercicios.exclude(pk__in=acertados).order_by("pk").first()
+
 
 class Secao(models.Model):
     """Parte da explicação de um conteúdo, com um exemplo resolvido (US02)."""

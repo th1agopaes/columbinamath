@@ -13,28 +13,6 @@ from .models import (
 )
 
 
-@pytest.fixture
-def exercicio(db):
-    """Exercício "247 + 185" salvo no banco, com um erro comum cadastrado."""
-    conteudo = Conteudo.objects.create(
-        nome="Operações básicas",
-        slug="operacoes-basicas",
-        descricao="As quatro operações.",
-        ordem=1,
-    )
-    exercicio = Exercicio.objects.create(
-        conteudo=conteudo,
-        enunciado="Quanto é 247 + 185?",
-        resposta_correta="432",
-    )
-    ErroComum.objects.create(
-        exercicio=exercicio,
-        resposta_errada="422",
-        explicacao="Você esqueceu o vai um das unidades.",
-    )
-    return exercicio
-
-
 class TestNormalizarResposta:
     def test_remove_espacos(self):
         assert normalizar_resposta(" 4 32 ") == "432"
@@ -101,16 +79,16 @@ class TestPaginas:
         resposta = client.get(reverse("conteudos:detalhe", args=["nao-existe"]))
         assert resposta.status_code == 404
 
-    def test_resposta_correta_mostra_acerto(self, client, url_exercicio):
-        resposta = client.post(url_exercicio, {"resposta": "432"})
+    def test_resposta_correta_mostra_acerto(self, cliente_aluno, url_exercicio):
+        resposta = cliente_aluno.post(url_exercicio, {"resposta": "432"})
         assertContains(resposta, "Resposta correta")
 
-    def test_erro_comum_mostra_a_explicacao(self, client, url_exercicio):
-        resposta = client.post(url_exercicio, {"resposta": "422"})
+    def test_erro_comum_mostra_a_explicacao(self, cliente_aluno, url_exercicio):
+        resposta = cliente_aluno.post(url_exercicio, {"resposta": "422"})
         assertContains(resposta, "Você esqueceu o vai um das unidades.")
 
-    def test_recusa_alternativa_que_nao_existe(self, client, url_exercicio):
-        resposta = client.post(url_exercicio, {"resposta": "999"})
+    def test_recusa_alternativa_que_nao_existe(self, cliente_aluno, url_exercicio):
+        resposta = cliente_aluno.post(url_exercicio, {"resposta": "999"})
         assertNotContains(resposta, "Resposta correta")
         assertNotContains(resposta, "Resposta incorreta")
 
@@ -135,10 +113,42 @@ class TestTeoriaEResolucao:
         assertContains(resposta, "<li>Dezenas: 5 + 7 + 1 = 13.</li>", html=True)
 
     def test_resultado_mostra_a_resolucao_mesmo_no_acerto(
-        self, client, exercicio, url_exercicio
+        self, cliente_aluno, exercicio, url_exercicio
     ):
         exercicio.resolucao = "Unidades: 7 + 5 = 12.\nResultado: 432."
         exercicio.save()
-        resposta = client.post(url_exercicio, {"resposta": "432"})
+        resposta = cliente_aluno.post(url_exercicio, {"resposta": "432"})
         assertContains(resposta, "Alternativa correta")
         assertContains(resposta, "<li>Resultado: 432.</li>", html=True)
+
+
+class TestTrilha:
+    def test_proximo_exercicio_pula_os_acertados(self, aluno, exercicio):
+        conteudo = exercicio.conteudo
+        segundo = Exercicio.objects.create(
+            conteudo=conteudo, enunciado="Quanto é 9 x 8?", resposta_correta="72"
+        )
+        assert conteudo.proximo_exercicio(aluno) == exercicio
+        aluno.tentativas.create(exercicio=exercicio, resposta_dada="432", correta=True)
+        assert conteudo.proximo_exercicio(aluno) == segundo
+
+    def test_proximo_exercicio_e_none_quando_concluiu(self, aluno, exercicio):
+        aluno.tentativas.create(exercicio=exercicio, resposta_dada="432", correta=True)
+        assert exercicio.conteudo.proximo_exercicio(aluno) is None
+
+    def test_detalhe_convida_visitante_a_entrar(self, client, exercicio):
+        url = reverse("conteudos:detalhe", args=[exercicio.conteudo.slug])
+        assertContains(client.get(url), "para resolver os exercícios")
+
+    def test_detalhe_marca_acertados_e_parabeniza(
+        self, cliente_aluno, aluno, exercicio
+    ):
+        aluno.tentativas.create(exercicio=exercicio, resposta_dada="432", correta=True)
+        url = reverse("conteudos:detalhe", args=[exercicio.conteudo.slug])
+        resposta = cliente_aluno.get(url)
+        assertContains(resposta, "Acertado")
+        assertContains(resposta, "Você acertou todos os exercícios")
+
+    def test_detalhe_oferece_continuar(self, cliente_aluno, exercicio):
+        url = reverse("conteudos:detalhe", args=[exercicio.conteudo.slug])
+        assertContains(cliente_aluno.get(url), "Continuar de onde parei")
