@@ -10,6 +10,18 @@
 <body>
   <header class="cabecalho">
     <a class="marca" href="{% url 'conteudos:lista' %}">ColumbinaMath</a>
+    <nav class="menu" aria-label="Conta">
+      {% if user.is_authenticated %}
+        <span class="saudacao">Olá, {{ user.first_name|default:user.email }}</span>
+        <form method="post" action="{% url 'usuarios:sair' %}">
+          {% csrf_token %}
+          <button class="link" type="submit">Sair</button>
+        </form>
+      {% else %}
+        <a href="{% url 'usuarios:entrar' %}">Entrar</a>
+        <a class="botao botao-pequeno" href="{% url 'usuarios:cadastro' %}">Criar conta</a>
+      {% endif %}
+    </nav>
   </header>
 
   <main class="pagina">

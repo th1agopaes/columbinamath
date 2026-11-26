@@ -138,3 +138,8 @@ MAILERS = {
 
 # Modelo de usuário personalizado (definido antes da primeira migração)
 AUTH_USER_MODEL = "usuarios.Usuario"
+
+# Login: para onde ir quando é preciso entrar, depois de entrar e depois de sair
+LOGIN_URL = "usuarios:entrar"
+LOGIN_REDIRECT_URL = "conteudos:lista"
+LOGOUT_REDIRECT_URL = "conteudos:lista"

@@ -30,7 +30,7 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 | - | US02 | Acessar uma explicação | EP01 | Must | 3 SP | Concluído |
 | - | US03 | Resolver exercícios e receber correção explicada | EP02 | Must | 5 SP | Concluído |
 | - | US04 | Estudar e praticar a regra de sinais | EP01, EP02 | Must | 5 SP | Concluído |
-| 1 | US07 | Criar conta e entrar | EP03 | Must | 5 SP | Não iniciado |
+| - | US07 | Criar conta e entrar | EP03 | Must | 5 SP | Concluído |
 | 2 | US08 | Registrar tentativas | EP03 | Must | 3 SP | Não iniciado |
 | 3 | US09 | Acompanhar o progresso | EP03 | Must | 3 SP | Não iniciado |
 | 4 | US05 | Estudar e praticar a ordem das operações | EP01, EP02 | Should | 5 SP | Não iniciado |
@@ -147,7 +147,7 @@ US07, US08 e US09 entraram no planejamento da [Sprint 3](sprints/sprint-03.md). 
 - **Requisitos:** RF001, RNF002 e RNF003
 - **MoSCoW:** Must
 - **Estimativa:** 5 SP
-- **Status:** Não iniciado
+- **Status:** Concluído
 
 **Critérios de aceitação:**
 
