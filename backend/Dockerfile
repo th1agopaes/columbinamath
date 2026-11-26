@@ -34,4 +34,5 @@ USER columbina
 EXPOSE 8000
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--access-logfile", "-"]
+# As opções do servidor ficam no gunicorn.conf.py, lido automaticamente
+CMD ["gunicorn", "config.wsgi:application"]
