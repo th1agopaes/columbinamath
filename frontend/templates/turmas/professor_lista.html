@@ -11,7 +11,7 @@
   <ol class="lista">
     {% for turma in turmas %}
       <li class="cartao">
-        <span class="titulo-cartao">{{ turma.nome }}</span>
+        <a class="titulo-cartao" href="{{ turma.get_absolute_url }}">{{ turma.nome }}</a>
         <span class="selo">Código {{ turma.codigo_acesso }}</span>
         <p>{{ turma.alunos.count }} aluno{{ turma.alunos.count|pluralize }}</p>
       </li>
