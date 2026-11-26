@@ -107,3 +107,9 @@ class TestUsuario:
 
     def test_texto_do_usuario_e_o_nome(self, aluno):
         assert str(aluno) == "Ana"
+
+    def test_superusuario_tem_perfil_de_administrador(self, db):
+        admin = Usuario.objects.create_superuser(
+            username="admin", email="admin@exemplo.com", password=SENHA
+        )
+        assert admin.tipo == TipoUsuario.ADMIN
