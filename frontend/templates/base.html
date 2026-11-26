@@ -14,6 +14,7 @@
       {% if user.is_authenticated %}
         <span class="saudacao">Olá, {{ user.first_name|default:user.email }}</span>
         {% if user.tipo == "aluno" %}<a href="{% url 'progresso:meu' %}">Meu progresso</a>{% endif %}
+        {% if user.tipo == "aluno" or user.tipo == "professor" %}<a href="{% url 'turmas:lista' %}">Turmas</a>{% endif %}
         <form method="post" action="{% url 'usuarios:sair' %}">
           {% csrf_token %}
           <button class="link" type="submit">Sair</button>
@@ -26,6 +27,13 @@
   </header>
 
   <main class="pagina">
+    {% if messages %}
+      <ul class="mensagens" aria-live="polite">
+        {% for mensagem in messages %}
+          <li class="resultado {% if mensagem.tags == 'error' %}erro{% else %}acerto{% endif %}">{{ mensagem }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     {% block conteudo %}{% endblock %}
   </main>
 

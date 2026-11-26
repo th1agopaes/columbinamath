@@ -309,3 +309,10 @@ fieldset label {
   height: 100%;
   background: var(--acerto);
 }
+
+/* Mensagens de confirmação e de erro (ex.: turma criada) */
+.mensagens {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}

@@ -23,4 +23,5 @@ urlpatterns = [
     path("", include("usuarios.urls")),
     path("", include("conteudos.urls")),
     path("", include("progresso.urls")),
+    path("", include("turmas.urls")),
 ]
