@@ -1,21 +1,10 @@
-import pytest
 from django.urls import reverse
 from pytest_django.asserts import assertContains, assertRedirects
 
+from conftest import SENHA
+
 from .forms import CadastroForm
 from .models import TipoUsuario, Usuario
-
-SENHA = "trilha-de-sinais-2026"
-
-
-@pytest.fixture
-def aluno(db):
-    return Usuario.objects.create_user(
-        username="ana@exemplo.com",
-        email="ana@exemplo.com",
-        password=SENHA,
-        first_name="Ana",
-    )
 
 
 def dados_cadastro(**extras):

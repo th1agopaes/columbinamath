@@ -51,7 +51,7 @@ A meta da sprint não muda. O que muda é o Sprint Backlog:
 | 2 | #7 | Verificar a aplicação no GitHub Actions (CI) | Must | 2 SP | Concluído |
 | 3 | #42 | Registrar requisitos, casos de uso e priorização | Must | 2 SP | Concluído |
 | 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | Concluído |
-| 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | |
+| 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | Concluído |
 | 6 | #45 | US09 - Acompanhar o progresso | Must | 3 SP | |
 | 7 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | |
 | 8 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
@@ -102,10 +102,10 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 
 ### #44 - US08 Registrar tentativas
 
-- [ ] Criar o modelo Tentativa, conforme o diagrama de classes.
-- [ ] Registrar uma tentativa a cada resposta enviada.
-- [ ] Exigir login para responder; a explicação continua aberta a todos.
-- [ ] Testar o registro da tentativa.
+- [x] Criar o modelo Tentativa, conforme o diagrama de classes.
+- [x] Registrar uma tentativa a cada resposta enviada.
+- [x] Exigir login para responder; a explicação continua aberta a todos.
+- [x] Testar o registro da tentativa.
 
 ### #45 - US09 Acompanhar o progresso
 

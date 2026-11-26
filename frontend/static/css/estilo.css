@@ -250,3 +250,15 @@ fieldset label {
 .formulario .botao {
   margin-top: 1rem;
 }
+
+.aviso {
+  padding: 0.75rem 1rem;
+  background: var(--superficie);
+  border: 1px dashed var(--borda);
+  border-radius: 0.5rem;
+}
+
+.selo-acerto {
+  border-color: var(--acerto);
+  color: var(--acerto);
+}
