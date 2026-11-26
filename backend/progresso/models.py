@@ -3,6 +3,8 @@ from django.db import models
 
 from conteudos.models import ErroComum, Exercicio
 
+from .metricas import TENTATIVAS
+
 
 class Tentativa(models.Model):
     """Registro de cada resposta do aluno (RF005); é a base do progresso (RF006)."""
@@ -45,13 +47,15 @@ class Tentativa(models.Model):
     def registrar(cls, aluno, exercicio: Exercicio, resposta: str) -> Tentativa:
         """Corrige a resposta e grava a tentativa, com o erro comum quando houver."""
         correta = exercicio.verificar_resposta(resposta)
-        return cls.objects.create(
+        tentativa = cls.objects.create(
             aluno=aluno,
             exercicio=exercicio,
             resposta_dada=resposta,
             correta=correta,
             erro_comum=None if correta else exercicio.identificar_erro(resposta),
         )
+        TENTATIVAS.labels("acerto" if correta else "erro").inc()
+        return tentativa
 
     @classmethod
     def filtrar(cls, aluno, conteudo=None) -> models.QuerySet:

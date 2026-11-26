@@ -1,6 +1,7 @@
 import pytest
 from django.contrib.admin.sites import site
 from django.urls import reverse, reverse_lazy
+from prometheus_client import REGISTRY
 from pytest_django.asserts import assertContains, assertRedirects
 
 from conftest import SENHA
@@ -147,3 +148,34 @@ class TestPaginaMeuProgresso:
 
     def test_menu_mostra_meu_progresso_para_aluno(self, cliente_aluno, db):
         assertContains(cliente_aluno.get(reverse("conteudos:lista")), "Meu progresso")
+
+
+class TestMetricaDeTentativas:
+    def test_conta_acertos_e_erros(self, aluno, exercicio):
+        acertos = (
+            REGISTRY.get_sample_value(
+                "columbinamath_tentativas_total", {"resultado": "acerto"}
+            )
+            or 0
+        )
+        erros = (
+            REGISTRY.get_sample_value(
+                "columbinamath_tentativas_total", {"resultado": "erro"}
+            )
+            or 0
+        )
+        Tentativa.registrar(aluno, exercicio, "432")
+        Tentativa.registrar(aluno, exercicio, "422")
+        Tentativa.registrar(aluno, exercicio, "422")
+        assert (
+            REGISTRY.get_sample_value(
+                "columbinamath_tentativas_total", {"resultado": "acerto"}
+            )
+            == acertos + 1
+        )
+        assert (
+            REGISTRY.get_sample_value(
+                "columbinamath_tentativas_total", {"resultado": "erro"}
+            )
+            == erros + 2
+        )
