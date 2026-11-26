@@ -1,0 +1,35 @@
+# Execução completa: aplicação Django (Gunicorn) + PostgreSQL. Uso: ./build.sh
+# Os segredos vêm do backend/.env (copiado do backend/.env.example).
+name: columbinamath
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: backend/.env
+    environment:
+      POSTGRES_HOST: db
+      DEBUG: "False"
+      ALLOWED_HOSTS: localhost,127.0.0.1
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: docker.io/library/postgres:18-alpine
+    env_file: backend/.env
+    volumes:
+      - dados-postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  dados-postgres:

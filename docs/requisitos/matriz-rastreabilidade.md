@@ -33,7 +33,7 @@ Documentos relacionados:
 | RNF002 - Segurança de senhas | - | US07 | #22, #43 | `TestCadastro::test_guarda_a_senha_so_com_hash` | Atendido |
 | RNF003 - Privacidade (LGPD) | - | US07, US10 | #43, #62 | `TestCadastro::test_pede_so_nome_email_e_senha` | Atendido |
 | RNF004 - Responsividade | UC1 | US01, US02, US03 | #6 | Teste manual em computador e celular (Definition of Done) | Atendido |
-| RNF005 - Portabilidade | - | - | #46 | Execução documentada no README, prevista na #46 | Planejado |
+| RNF005 - Portabilidade | - | - | #46 | `./build.sh` testado com Podman; testes passando no SQLite e no PostgreSQL | Atendido |
 
 ## Testes por app
 
@@ -53,6 +53,5 @@ Os testes ficam em `backend/<app>/tests.py`, e as fixtures compartilhadas, em `b
 
 - **Sem teste automatizado próprio:** RF002 e parte do RF003. O cadastro usa o painel administrativo do Django, que já é testado pelo próprio framework.
 - **Sem evidência registrada:** RNF001. Falta a medição do tempo de resposta (#48).
-- **Aguardando implementação:** RNF005 (#46).
 - **História fora da sprint:** a US06 (#10, Could) melhora a apresentação das expressões, está ligada ao RF009 e continua no Product Backlog.
 - **Itens sem requisito:** as issues de processo e infraestrutura (planejamento, CI, documentação, diagramas e a pasta `frontend/`) não atendem a um requisito do produto. Elas estão descritas nos documentos das sprints.

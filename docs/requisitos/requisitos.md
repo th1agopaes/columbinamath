@@ -72,7 +72,7 @@ Documentos relacionados:
 | RNF002 | Segurança de senhas | Senhas armazenadas apenas com hash (recurso nativo do Django), nunca em texto puro. | Must | Atendido |
 | RNF003 | Privacidade (LGPD) | Coletar apenas os dados necessários, já que parte dos usuários pode ser menor de idade. | Must | Atendido |
 | RNF004 | Responsividade | A interface deve funcionar em computadores e celulares. | Must | Atendido |
-| RNF005 | Portabilidade | A aplicação executa em containers, com PostgreSQL, a partir de um único comando. | Must | Planejado |
+| RNF005 | Portabilidade | A aplicação executa em containers, com PostgreSQL, a partir de um único comando. | Must | Atendido |
 
 ### Detalhes por requisito
 
@@ -80,12 +80,12 @@ Documentos relacionados:
 - **RNF002:** o modelo `Usuario` herda do `AbstractUser` do Django, que guarda a senha apenas com hash. Um teste automatizado da US07 confere que a senha gravada não é o texto digitado.
 - **RNF003:** o cadastro pede só nome, e-mail e senha, conferido por teste automatizado. O atributo `serie` do Aluno, previsto no diagrama de classes, não foi implementado pelo mesmo motivo.
 - **RNF004:** a interface usa CSS próprio com largura fluida. O teste manual em computador e celular faz parte da Definition of Done.
-- **RNF005:** acrescentado em 16/11/2026, no replanejamento da Sprint 3. Entra com a #46.
+- **RNF005:** acrescentado em 16/11/2026, no replanejamento da Sprint 3. Atendido pela #46: `./build.sh` inicia a aplicação e o PostgreSQL em containers ([ADR 0004](../arquitetura/adr/0004-postgresql-e-containers.md)).
 
 ## Restrições
 
 - Desenvolvido em Python com o framework Django (padrão MVT), conforme o [ADR 0001](../arquitetura/adr/0001-troca-de-stack-para-django.md).
-- Banco de dados relacional: SQLite no desenvolvimento e PostgreSQL na execução por container (#46).
+- Banco de dados relacional: SQLite no desenvolvimento e PostgreSQL na execução por container.
 - Projeto em dupla em Engenharia de Software e Extensão I, e individual em Programação Web, com prazos definidos pelo calendário acadêmico 2026-2.
 
 ## Fora do escopo do produto
