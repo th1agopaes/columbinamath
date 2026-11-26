@@ -3,7 +3,7 @@
 import pytest
 
 from conteudos.models import Conteudo, ErroComum, Exercicio
-from usuarios.models import Usuario
+from usuarios.models import TipoUsuario, Usuario
 
 SENHA = "trilha-de-sinais-2026"
 
@@ -16,6 +16,18 @@ def aluno(db):
         email="ana@exemplo.com",
         password=SENHA,
         first_name="Ana",
+    )
+
+
+@pytest.fixture
+def professor(db):
+    """Professor com conta criada pelo administrador."""
+    return Usuario.objects.create_user(
+        username="paulo@exemplo.com",
+        email="paulo@exemplo.com",
+        password=SENHA,
+        first_name="Paulo",
+        tipo=TipoUsuario.PROFESSOR,
     )
 
 

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block titulo %}Página não encontrada · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <h1>Página não encontrada</h1>
+  <p>O endereço pode estar errado ou o conteúdo pode ter saído da trilha.</p>
+  <p><a class="botao" href="{% url 'conteudos:lista' %}">Voltar à trilha</a></p>
+{% endblock %}

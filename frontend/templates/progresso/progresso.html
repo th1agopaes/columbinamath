@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }} · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  {% if voltar %}<a class="voltar" href="{{ voltar.url }}">← {{ voltar.texto }}</a>{% endif %}
+  <h1>{{ titulo }}</h1>
+
+  {% if not progresso.total %}
+    <p class="aviso">
+      {% if voltar %}
+        {{ aluno.first_name|default:aluno.email }} ainda não resolveu exercícios.
+      {% else %}
+        Você ainda não resolveu exercícios. <a href="{% url 'conteudos:lista' %}">Comece pela trilha</a> e o seu progresso aparece aqui.
+      {% endif %}
+    </p>
+  {% else %}
+    <section class="cartao resumo">
+      <p class="numero">{{ progresso.percentual }}%</p>
+      <p>de acerto em {{ progresso.total }} resposta{{ progresso.total|pluralize }}: {{ progresso.acertos }} acerto{{ progresso.acertos|pluralize }} e {{ progresso.erros }} erro{{ progresso.erros|pluralize }}.</p>
+    </section>
+
+    <h2>Por conteúdo</h2>
+    <div class="tabela-rolavel">
+      <table class="tabela">
+        <thead>
+          <tr><th scope="col">Conteúdo</th><th scope="col">Acertos</th><th scope="col">Erros</th><th scope="col">Acerto</th></tr>
+        </thead>
+        <tbody>
+          {% for conteudo in progresso.conteudos %}
+            <tr>
+              <th scope="row"><a href="{% url 'conteudos:detalhe' conteudo.slug %}">{{ conteudo.nome }}</a></th>
+              <td>{{ conteudo.acertos }}</td>
+              <td>{{ conteudo.erros }}</td>
+              <td>
+                <span class="barra" role="img" aria-label="{{ conteudo.percentual }}% de acerto"><span style="width: {{ conteudo.percentual }}%"></span></span>
+                {{ conteudo.percentual }}%
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Erros mais frequentes</h2>
+    {% if progresso.erros_frequentes %}
+      <ol class="lista">
+        {% for erro in progresso.erros_frequentes %}
+          <li class="cartao">
+            <p class="titulo-cartao">{{ erro.exercicio__enunciado }} → respondeu {{ erro.erro_comum__resposta_errada }} <span class="selo">{{ erro.vezes }} vez{{ erro.vezes|pluralize:"es" }}</span></p>
+            <p>{{ erro.erro_comum__explicacao }}</p>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>Nenhum erro comum registrado. Continue assim!</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

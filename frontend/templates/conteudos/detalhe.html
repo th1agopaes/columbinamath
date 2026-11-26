@@ -40,7 +40,7 @@
   {% elif exercicios and proximo %}
     <p><a class="botao" href="{% url 'conteudos:exercicio' conteudo.slug proximo.pk %}">Continuar de onde parei →</a></p>
   {% elif exercicios %}
-    <p class="aviso">Você acertou todos os exercícios deste conteúdo. 🎉</p>
+    <p class="aviso">Você acertou todos os exercícios deste conteúdo. 🎉 <a href="{% url 'progresso:meu' %}">Veja o seu progresso</a>.</p>
   {% endif %}
 
   <ol class="lista">
