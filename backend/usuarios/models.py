@@ -17,6 +17,11 @@ class UsuarioManager(UserManager):
         # O Django chama este método no login, passando o valor do USERNAME_FIELD.
         return self.get(**{f"{self.model.USERNAME_FIELD}__iexact": username})
 
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
+        # Quem administra o sistema pelo terminal recebe o perfil de administrador.
+        extra_fields.setdefault("tipo", TipoUsuario.ADMIN)
+        return super().create_superuser(username, email, password, **extra_fields)
+
 
 class AlunoManager(UsuarioManager):
     """Só os usuários do tipo aluno."""
