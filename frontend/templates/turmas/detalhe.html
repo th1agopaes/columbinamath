@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ turma.nome }} · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <a class="voltar" href="{% url 'turmas:lista' %}">← Minhas turmas</a>
+  <h1>{{ turma.nome }}</h1>
+  <p class="subtitulo">Código de acesso: <strong class="codigo">{{ turma.codigo_acesso }}</strong></p>
+
+  {% if not desempenho.alunos %}
+    <p class="aviso">Nenhum aluno entrou na turma ainda. Passe o código <strong>{{ turma.codigo_acesso }}</strong> aos alunos: eles entram pela página Turmas.</p>
+  {% else %}
+    <h2>Alunos</h2>
+    <div class="tabela-rolavel">
+      <table class="tabela">
+        <thead>
+          <tr><th scope="col">Aluno</th><th scope="col">Respostas</th><th scope="col">Acertos</th><th scope="col">Erros</th><th scope="col">Acerto</th></tr>
+        </thead>
+        <tbody>
+          {% for linha in desempenho.alunos %}
+            <tr>
+              <th scope="row"><a href="{% url 'turmas:aluno' turma.pk linha.aluno.pk %}">{{ linha.aluno }}</a></th>
+              <td>{{ linha.total }}</td>
+              <td>{{ linha.acertos }}</td>
+              <td>{{ linha.erros }}</td>
+              <td>
+                {% if linha.total %}
+                  <span class="barra" role="img" aria-label="{{ linha.percentual }}% de acerto"><span style="width: {{ linha.percentual }}%"></span></span>
+                  {{ linha.percentual }}%
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Conteúdos com mais erros</h2>
+    {% if desempenho.conteudos_com_mais_erros %}
+      <ol>
+        {% for conteudo in desempenho.conteudos_com_mais_erros %}
+          <li>{{ conteudo.exercicio__conteudo__nome }}: {{ conteudo.erros }} erro{{ conteudo.erros|pluralize }}</li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>Nenhum erro registrado na turma até agora.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

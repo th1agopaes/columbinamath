@@ -3,6 +3,7 @@ from django.urls import reverse
 from pytest_django.asserts import assertContains, assertRedirects
 
 from conftest import SENHA
+from progresso.models import Tentativa
 from usuarios.models import Aluno, Professor, Usuario
 
 from .models import ALFABETO_DO_CODIGO, TAMANHO_DO_CODIGO, Turma
@@ -107,3 +108,90 @@ class TestPaginasDoAluno:
 
     def test_menu_mostra_turmas(self, cliente_aluno):
         assertContains(cliente_aluno.get(reverse("conteudos:lista")), "Turmas")
+
+
+@pytest.fixture
+def turma_com_alunos(turma, aluno, exercicio):
+    """Turma com Ana (1 acerto e 1 erro) e Caio (sem respostas)."""
+    caio = Aluno.objects.create_user(
+        username="caio@exemplo.com",
+        email="caio@exemplo.com",
+        password=SENHA,
+        first_name="Caio",
+    )
+    turma.adicionar_aluno(aluno)
+    turma.adicionar_aluno(caio)
+    Tentativa.registrar(aluno, exercicio, "422")
+    Tentativa.registrar(aluno, exercicio, "432")
+    return turma
+
+
+class TestDesempenho:
+    def test_resume_cada_aluno_e_os_conteudos_com_mais_erros(self, turma_com_alunos):
+        desempenho = turma_com_alunos.calcular_desempenho()
+        ana, caio = desempenho["alunos"]
+        assert (ana["aluno"].first_name, ana["acertos"], ana["erros"]) == ("Ana", 1, 1)
+        assert ana["percentual"] == 50
+        assert (caio["total"], caio["percentual"]) == (0, 0)
+        assert desempenho["conteudos_com_mais_erros"] == [
+            {"exercicio__conteudo__nome": "Operações básicas", "erros": 1}
+        ]
+
+    def test_ignora_tentativas_de_quem_nao_esta_na_turma(self, turma, aluno, exercicio):
+        Tentativa.registrar(aluno, exercicio, "422")
+        desempenho = turma.calcular_desempenho()
+        assert desempenho["alunos"] == []
+        assert desempenho["conteudos_com_mais_erros"] == []
+
+
+class TestPaginaDaTurma:
+    def test_mostra_alunos_e_conteudos_com_mais_erros(
+        self, client, professor, turma_com_alunos
+    ):
+        client.force_login(professor)
+        resposta = client.get(turma_com_alunos.get_absolute_url())
+        assertContains(resposta, "Ana")
+        assertContains(resposta, "Caio")
+        assertContains(resposta, "Operações básicas: 1 erro")
+
+    def test_turma_vazia_mostra_o_codigo(self, client, professor, turma):
+        client.force_login(professor)
+        resposta = client.get(turma.get_absolute_url())
+        assertContains(resposta, "Nenhum aluno entrou na turma ainda")
+        assertContains(resposta, turma.codigo_acesso)
+
+    def test_professor_nao_ve_turma_de_outro(self, client, turma):
+        outro = Professor.objects.create_user(
+            username="rita@exemplo.com", email="rita@exemplo.com", password=SENHA
+        )
+        client.force_login(outro)
+        assert client.get(turma.get_absolute_url()).status_code == 404
+
+    def test_aluno_nao_ve_desempenho_da_turma(self, cliente_aluno, turma):
+        assert cliente_aluno.get(turma.get_absolute_url()).status_code == 403
+
+    def test_professor_ve_o_progresso_de_um_aluno(
+        self, client, professor, aluno, turma_com_alunos
+    ):
+        client.force_login(professor)
+        url = reverse("turmas:aluno", args=[turma_com_alunos.pk, aluno.pk])
+        resposta = client.get(url)
+        assertContains(resposta, "Progresso de Ana")
+        assertContains(resposta, "Você esqueceu o vai um das unidades.")
+
+    def test_aluno_sem_respostas_tem_aviso_proprio(
+        self, client, professor, turma_com_alunos
+    ):
+        client.force_login(professor)
+        caio = Aluno.objects.get(first_name="Caio")
+        url = reverse("turmas:aluno", args=[turma_com_alunos.pk, caio.pk])
+        assertContains(client.get(url), "Caio ainda não resolveu exercícios.")
+
+    def test_nega_aluno_de_outra_turma(self, client, professor, turma):
+        """Extensão 6a do UC4."""
+        de_fora = Aluno.objects.create_user(
+            username="davi@exemplo.com", email="davi@exemplo.com", password=SENHA
+        )
+        client.force_login(professor)
+        url = reverse("turmas:aluno", args=[turma.pk, de_fora.pk])
+        assert client.get(url).status_code == 403
