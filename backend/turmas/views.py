@@ -8,6 +8,7 @@ from usuarios.models import Aluno, Professor, TipoUsuario
 from usuarios.permissoes import perfil_obrigatorio
 
 from .forms import CriarTurmaForm, EntrarTurmaForm
+from .models import Turma
 
 
 @require_GET
@@ -49,3 +50,30 @@ def entrar_turma(request):
     else:
         messages.error(request, "Código não encontrado. Confira com o seu professor.")
     return redirect("turmas:lista")
+
+
+@require_GET
+@perfil_obrigatorio(TipoUsuario.PROFESSOR)
+def detalhe_turma(request, pk):
+    """Desempenho da turma (UC4): resumo por aluno e conteúdos com mais erros."""
+    turma = get_object_or_404(Turma, pk=pk, professor=request.user)
+    contexto = {"turma": turma, "desempenho": turma.calcular_desempenho()}
+    return render(request, "turmas/detalhe.html", contexto)
+
+
+@require_GET
+@perfil_obrigatorio(TipoUsuario.PROFESSOR)
+def progresso_do_aluno(request, pk, aluno_pk):
+    """Progresso individual de um aluno da turma (UC4 passo 7, reaproveita o UC2)."""
+    turma = get_object_or_404(Turma, pk=pk, professor=request.user)
+    aluno = get_object_or_404(Aluno, pk=aluno_pk)
+    # Extensão 6a do UC4: só alunos vinculados à turma do professor.
+    if not turma.possui_aluno(aluno):
+        raise PermissionDenied
+    contexto = {
+        "aluno": aluno,
+        "progresso": aluno.calcular_progresso(),
+        "titulo": f"Progresso de {aluno}",
+        "voltar": {"url": turma.get_absolute_url(), "texto": turma.nome},
+    }
+    return render(request, "progresso/progresso.html", contexto)

@@ -2,7 +2,11 @@ import secrets
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Count, Q
+from django.urls import reverse
 
+from progresso import calculos
+from progresso.models import Tentativa
 from usuarios.models import TipoUsuario
 
 # Sem letras e números que se confundem (O e 0, I e 1), para o código ser ditado em sala.
@@ -49,6 +53,9 @@ class Turma(models.Model):
             self.codigo_acesso = self.gerar_codigo_acesso()
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("turmas:detalhe", args=[self.pk])
+
     @staticmethod
     def gerar_codigo_acesso() -> str:
         """Gera um código aleatório que ainda não pertence a nenhuma turma."""
@@ -64,3 +71,34 @@ class Turma(models.Model):
 
     def possui_aluno(self, aluno) -> bool:
         return self.alunos.filter(pk=aluno.pk).exists()
+
+    def calcular_desempenho(self) -> dict:
+        """Resumo de cada aluno e os conteúdos com mais erros da turma (RF008).
+
+        Reaproveita o cálculo de progresso (RF006), em uma consulta para a turma
+        inteira em vez de uma por aluno.
+        """
+        alunos = self.alunos.order_by("first_name", "email")
+        tentativas = Tentativa.objects.filter(aluno__in=alunos)
+        por_aluno = {
+            linha["aluno"]: linha
+            for linha in tentativas.values("aluno").annotate(
+                total=Count("pk"), acertos=Count("pk", filter=Q(correta=True))
+            )
+        }
+        resumo = []
+        for aluno in alunos:
+            linha = por_aluno.get(aluno.pk, {"total": 0, "acertos": 0})
+            resumo.append(
+                {
+                    "aluno": aluno,
+                    "acertos": linha["acertos"],
+                    "erros": linha["total"] - linha["acertos"],
+                    "total": linha["total"],
+                    "percentual": calculos.percentual(linha["acertos"], linha["total"]),
+                }
+            )
+        return {
+            "alunos": resumo,
+            "conteudos_com_mais_erros": calculos.conteudos_com_mais_erros(tentativas),
+        }

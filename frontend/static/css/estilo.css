@@ -316,3 +316,8 @@ fieldset label {
   padding: 0;
   list-style: none;
 }
+
+.codigo {
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.15em;
+}
