@@ -124,6 +124,15 @@ class Exercicio(models.Model):
     def passos_da_resolucao(self) -> list[str]:
         return separar_linhas(self.resolucao)
 
+    def alternativas(self) -> list[str]:
+        """Resposta correta e erros comuns, em ordem alfabética.
+
+        A ordem fixa e alfabética não entrega qual alternativa é a correta.
+        """
+        respostas = [self.resposta_correta]
+        respostas += [erro.resposta_errada for erro in self.erros_comuns.all()]
+        return sorted(respostas)
+
 
 class ErroComum(models.Model):
     """Resposta errada esperada e a explicação mostrada como feedback."""

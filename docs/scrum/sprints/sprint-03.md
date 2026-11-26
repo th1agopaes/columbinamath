@@ -74,10 +74,10 @@ A entrega de Programação Web avalia o código contra a modelagem do sistema (P
 | 11 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
 | 12 | #48 | Métricas do projeto e ADRs pendentes | Must | 2 SP | |
 | 13 | #49 | Apresentação final: slides, vídeo e versão 1.0 | Must | 5 SP | |
-| 14 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | |
+| 14 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | Concluído |
 | 15 | #9 | US05 - Ordem das operações | Should | 5 SP | |
 
-**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos em 25/11: 24 SP.
+**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 27 SP.
 
 ## Marcos
 
@@ -178,12 +178,12 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 
 ### #55 - API REST
 
-Prevista para 30/11 (replanejamento de 25/11), antes da tag `v1.0.0`.
+Antecipada para 26/11, para entrar na entrega de Programação Web.
 
-- [ ] Adicionar o Django REST Framework ao projeto.
-- [ ] Expor conteúdos e exercícios em JSON, somente para leitura e sem a resposta correta.
-- [ ] Testar os endpoints.
-- [ ] Documentar a API no README.
+- [x] Adicionar o Django REST Framework ao projeto.
+- [x] Expor conteúdos e exercícios em JSON, somente para leitura e sem a resposta correta.
+- [x] Testar os endpoints.
+- [x] Documentar a API no README.
 
 ### #9 - US05 Ordem das operações
 
