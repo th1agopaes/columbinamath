@@ -29,7 +29,7 @@ Documentos relacionados:
 
 | Requisito | Caso de uso | Histórias | Issues | Evidência | Situação |
 |---|---|---|---|---|---|
-| RNF001 - Tempo de resposta | UC1 | US03 | #6, #48 | Correção no servidor em uma requisição; medição prevista na #48 | Parcial |
+| RNF001 - Tempo de resposta | UC1 | US03 | #6, #74 | Histograma `columbinamath_tempo_resposta_segundos` e painel do Grafana; `TestMetricasHttp` | Atendido |
 | RNF002 - Segurança de senhas | - | US07 | #22, #43 | `TestCadastro::test_guarda_a_senha_so_com_hash` | Atendido |
 | RNF003 - Privacidade (LGPD) | - | US07, US10 | #43, #62 | `TestCadastro::test_pede_so_nome_email_e_senha` | Atendido |
 | RNF004 - Responsividade | UC1 | US01, US02, US03 | #6 | Teste manual em computador e celular (Definition of Done) | Atendido |
@@ -37,21 +37,21 @@ Documentos relacionados:
 
 ## Testes por app
 
-Os testes ficam em `backend/<app>/tests.py`, e as fixtures compartilhadas, em `backend/conftest.py`.
+Os testes ficam em `backend/<app>/tests.py` (e em `backend/config/tests.py`, para o servidor e as métricas), e as fixtures compartilhadas, em `backend/conftest.py`.
 
 | App | Classes de teste | Requisitos | Testes |
 |---|---|---|---|
 | `conteudos` | `TestNormalizarResposta`, `TestVerificarResposta`, `TestIdentificarErro`, `TestValidacaoDoErroComum`, `TestPaginas`, `TestTeoriaEResolucao`, `TestTrilha`, `TestPainelDoExercicio` | RF003, RF004, RF005 e RF009 | 25 |
 | `usuarios` | `TestCadastro`, `TestEntrarESair`, `TestUsuario` | RF001, RNF002 e RNF003 | 15 |
-| `progresso` | `TestRegistroDaTentativa`, `TestPainel`, `TestCalculoDoProgresso`, `TestPaginaMeuProgresso` | RF005 e RF006 | 17 |
+| `progresso` | `TestRegistroDaTentativa`, `TestPainel`, `TestCalculoDoProgresso`, `TestPaginaMeuProgresso`, `TestMetricaDeTentativas` | RF005 e RF006 | 18 |
 | `turmas` | `TestTurma`, `TestPaginasDoProfessor`, `TestPaginasDoAluno`, `TestDesempenho`, `TestPaginaDaTurma` | RF007 e RF008 | 25 |
 | `api` | `TestConteudos`, `TestExercicios` | RF010 | 8 |
+| `config` | `TestConfiguracaoDoGunicorn`, `TestMetricasHttp` | RNF001 e RNF005 | 6 |
 
-**Total:** 90 testes, com 99% de cobertura de código (mínimo exigido no CI: 90%).
+**Total:** 97 testes, com 99% de cobertura de código (mínimo exigido no CI: 90%).
 
 ## O que a matriz mostra
 
 - **Sem teste automatizado próprio:** RF002 e parte do RF003. O cadastro usa o painel administrativo do Django, que já é testado pelo próprio framework.
-- **Sem evidência registrada:** RNF001. Falta a medição do tempo de resposta (#48).
 - **História fora da sprint:** a US06 (#10, Could) melhora a apresentação das expressões, está ligada ao RF009 e continua no Product Backlog.
 - **Itens sem requisito:** as issues de processo e infraestrutura (planejamento, CI, documentação, diagramas e a pasta `frontend/`) não atendem a um requisito do produto. Elas estão descritas nos documentos das sprints.

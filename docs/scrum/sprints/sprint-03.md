@@ -76,8 +76,9 @@ A entrega de Programação Web avalia o código contra a modelagem do sistema (P
 | 13 | #49 | Apresentação final: slides, vídeo e versão 1.0 | Must | 5 SP | |
 | 14 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | Concluído |
 | 15 | #9 | US05 - Ordem das operações | Should | 5 SP | |
+| 16 | #74 | Monitorar a aplicação com Prometheus e Grafana | Could | 3 SP | Concluído |
 
-**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 35 SP.
+**Total:** 50 SP (42 SP Must, 5 SP Should e 3 SP Could). Concluídos até 26/11: 38 SP.
 
 ## Marcos
 
@@ -185,6 +186,15 @@ Antecipada para 26/11, para entrar na entrega de Programação Web.
 - [x] Testar os endpoints.
 - [x] Documentar a API no README.
 
+### #74 - Monitoramento
+
+Item Could, adicionado em 26/11, depois da modelagem inteira implementada. Dá a evidência do RNF001 ([ADR 0005](../../arquitetura/adr/0005-monitoramento-com-prometheus-e-grafana.md)).
+
+- [x] Medir as requisições, o tempo de resposta e as respostas dos alunos com o `prometheus-client`.
+- [x] Coletar as métricas com o Prometheus, numa porta que não fica exposta no site.
+- [x] Criar o painel do Grafana, carregado automaticamente.
+- [x] Testar as métricas e documentar o monitoramento no README.
+
 ### #9 - US05 Ordem das operações
 
 Último item da ordem: só começa depois da entrega de Programação Web.
@@ -198,7 +208,7 @@ Antecipada para 26/11, para entrar na entrega de Programação Web.
 
 - US06 - Notação matemática (#10): continua no Product Backlog.
 - Publicação online da aplicação: a demonstração usa a execução local ou por container.
-- Monitoramento com Prometheus e Grafana, microsserviços e servidor de front-end separado: não são exigidos; a decisão será registrada em ADR e em trabalhos futuros.
+- Microsserviços e servidor de front-end separado: não são exigidos; o monólito e a pasta `frontend/` estão registrados nos ADRs.
 
 ## Definition of Done
 

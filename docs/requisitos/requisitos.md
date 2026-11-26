@@ -68,7 +68,7 @@ Documentos relacionados:
 
 | ID | Requisito | Descrição | MoSCoW | Situação |
 |---|---|---|---|---|
-| RNF001 | Tempo de resposta | O feedback de um exercício não pode exceder 2 segundos. | Must | Parcial |
+| RNF001 | Tempo de resposta | O feedback de um exercício não pode exceder 2 segundos. | Must | Atendido |
 | RNF002 | Segurança de senhas | Senhas armazenadas apenas com hash (recurso nativo do Django), nunca em texto puro. | Must | Atendido |
 | RNF003 | Privacidade (LGPD) | Coletar apenas os dados necessários, já que parte dos usuários pode ser menor de idade. | Must | Atendido |
 | RNF004 | Responsividade | A interface deve funcionar em computadores e celulares. | Must | Atendido |
@@ -76,7 +76,7 @@ Documentos relacionados:
 
 ### Detalhes por requisito
 
-- **RNF001:** a correção acontece no servidor, em uma única requisição. Falta registrar uma medição do tempo de resposta, prevista nas métricas do projeto (#48).
+- **RNF001:** a correção acontece no servidor, em uma única requisição. O tempo de resposta é medido por um histograma do Prometheus e acompanhado no painel do Grafana, que mostra o percentual de respostas em até 2 s ([ADR 0005](../arquitetura/adr/0005-monitoramento-com-prometheus-e-grafana.md)).
 - **RNF002:** o modelo `Usuario` herda do `AbstractUser` do Django, que guarda a senha apenas com hash. Um teste automatizado da US07 confere que a senha gravada não é o texto digitado.
 - **RNF003:** o cadastro pede só nome, e-mail e senha, conferido por teste automatizado. O atributo `serie` do Aluno, previsto no diagrama de classes, não foi implementado pelo mesmo motivo.
 - **RNF004:** a interface usa CSS próprio com largura fluida. O teste manual em computador e celular faz parte da Definition of Done.
