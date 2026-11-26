@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}Criar conta · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <h1>Criar conta</h1>
+  <p class="subtitulo">Pedimos só o necessário: nome, e-mail e senha.</p>
+
+  <form method="post" class="cartao formulario">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="botao" type="submit">Criar conta</button>
+  </form>
+
+  <p>Já tem conta? <a href="{% url 'usuarios:entrar' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Entre</a>.</p>
+{% endblock %}
