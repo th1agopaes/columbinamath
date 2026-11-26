@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from pytest_django.asserts import assertContains, assertNotContains
 
+from .admin import ErroComumInline
 from .models import (
     Conteudo,
     ErroComum,
@@ -152,3 +153,10 @@ class TestTrilha:
     def test_detalhe_oferece_continuar(self, cliente_aluno, exercicio):
         url = reverse("conteudos:detalhe", args=[exercicio.conteudo.slug])
         assertContains(cliente_aluno.get(url), "Continuar de onde parei")
+
+
+class TestPainelDoExercicio:
+    def test_exige_ao_menos_um_erro_comum(self):
+        """Sem erro comum, o exercício teria uma única alternativa: a correta."""
+        assert ErroComumInline.min_num == 1
+        assert ErroComumInline.validate_min is True

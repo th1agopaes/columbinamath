@@ -19,10 +19,16 @@ class ConteudoAdmin(admin.ModelAdmin):
 
 
 class ErroComumInline(admin.TabularInline):
-    """Erros comuns editados dentro do exercício (composição)."""
+    """Erros comuns editados dentro do exercício (composição).
+
+    Pelo menos um é obrigatório: as alternativas do exercício são a resposta
+    correta e os erros comuns, então sem eles haveria uma única alternativa.
+    """
 
     model = ErroComum
     extra = 1
+    min_num = 1
+    validate_min = True
 
 
 @admin.register(Exercicio)
