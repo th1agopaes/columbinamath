@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block titulo %}Criar turma · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <a class="voltar" href="{% url 'turmas:lista' %}">← Minhas turmas</a>
+  <h1>Criar turma</h1>
+
+  <form method="post" class="cartao formulario">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button class="botao" type="submit">Criar turma</button>
+  </form>
+{% endblock %}

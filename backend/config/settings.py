@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "usuarios",
     "conteudos",
     "progresso",
+    "turmas",
 ]
 
 MIDDLEWARE = [

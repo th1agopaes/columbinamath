@@ -30,6 +30,13 @@ class AlunoManager(UsuarioManager):
         return super().get_queryset().filter(tipo=TipoUsuario.ALUNO)
 
 
+class ProfessorManager(UsuarioManager):
+    """Só os usuários do tipo professor."""
+
+    def get_queryset(self):
+        return super().get_queryset().filter(tipo=TipoUsuario.PROFESSOR)
+
+
 class Usuario(AbstractUser):
     """Usuário do ColumbinaMath.
 
@@ -90,3 +97,33 @@ class Aluno(Usuario):
         progresso = calculos.resumir(self.tentativas.all())
         progresso["erros_frequentes"] = calculos.erros_frequentes(self.tentativas.all())
         return progresso
+
+    def entrar_turma(self, codigo_acesso: str) -> bool:
+        """Entra na turma do código informado; devolve False se o código não existe."""
+        from turmas.models import Turma  # import local: turmas depende de usuarios
+
+        codigo = codigo_acesso.strip().upper()
+        turma = Turma.objects.filter(codigo_acesso=codigo).first()
+        if turma is None:
+            return False
+        turma.adicionar_aluno(self)
+        return True
+
+
+class Professor(Usuario):
+    """Perfil de professor (subclasse do diagrama de classes), também proxy."""
+
+    objects = ProfessorManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = "professor"
+        verbose_name_plural = "professores"
+
+    def save(self, *args, **kwargs):
+        self.tipo = TipoUsuario.PROFESSOR
+        super().save(*args, **kwargs)
+
+    def criar_turma(self, nome: str):
+        """Cria uma turma com código de acesso gerado automaticamente (RF007)."""
+        return self.turmas_criadas.create(nome=nome)
