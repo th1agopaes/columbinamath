@@ -8,10 +8,10 @@ Documento relacionado: [Requisitos](requisitos.md).
 
 | Caso de uso | Ator principal | Requisitos | Prioridade | Situação |
 |---|---|---|---|---|
-| UC1 - Resolver Exercício | Aluno | RF005 | Alta | Parcial |
-| UC2 - Acompanhar Progresso | Aluno | RF006 | Média | Planejado |
+| UC1 - Resolver Exercício | Aluno | RF005 | Alta | Atendido |
+| UC2 - Acompanhar Progresso | Aluno | RF006 | Média | Atendido |
 | UC3 - Cadastrar Exercício | Administrador | RF003 e RF004 | Alta | Atendido |
-| UC4 - Acompanhar Desempenho da Turma | Professor | RF007 e RF008 | Baixa | Fora da entrega |
+| UC4 - Acompanhar Desempenho da Turma | Professor | RF007 e RF008 | Baixa | Atendido |
 
 ## UC1 - Resolver Exercício
 
@@ -45,11 +45,11 @@ Documento relacionado: [Requisitos](requisitos.md).
 - **5b. A resposta enviada não é uma alternativa do exercício:** o sistema recusa a resposta e retorna ao passo 5. Nenhuma tentativa é registrada.
 - **7a. Resposta incorreta:** o sistema exibe a explicação do erro comum correspondente, a alternativa correta e a resolução passo a passo. O erro comum fica associado à tentativa, e o fluxo segue para o passo 8.
 - **9a. O aluno escolhe tentar novamente:** o sistema retorna ao passo 4, com o mesmo exercício. A nova resposta gera outra tentativa.
-- **9b. Não há mais exercícios no conteúdo:** o sistema oferece a volta à trilha.
+- **9b. Não há mais exercícios no conteúdo:** o sistema informa que o conteúdo foi concluído e sugere acompanhar o progresso (UC2).
 
 **Informação do projeto:** prioridade alta; tempo de resposta de até 2 segundos (RNF001); canal web, em computadores e celulares (RNF004).
 
-**Situação:** os passos 1 a 7 e 9 a 10 foram entregues na US03. A exigência de login e o registro da tentativa (passo 8) entram com a US08 (#44).
+**Situação:** atendido. Os passos 1 a 7 e 9 a 10 foram entregues na US03; a exigência de login e o registro da tentativa (passo 8), na US08 (#44). Na página do conteúdo, o aluno conectado vê os exercícios que já acertou e o botão "Continuar de onde parei", que abre o primeiro exercício ainda não acertado (`Conteudo.proximo_exercicio()`).
 
 **Diferenças em relação à Modelagem - Parte I:**
 
@@ -85,7 +85,7 @@ Documento relacionado: [Requisitos](requisitos.md).
 
 **Informação do projeto:** prioridade média; caso de uso relacionado: Resolver Exercício (UC1). O progresso é calculado a partir das tentativas e não é armazenado. Cada aluno vê apenas o próprio progresso.
 
-**Situação:** planejado para a US09 (#45).
+**Situação:** atendido pela US09 (#45), na página "Meu progresso". Um aluno de outro perfil recebe acesso negado.
 
 **Diferenças em relação à Modelagem - Parte I:**
 
@@ -118,7 +118,7 @@ Documento relacionado: [Requisitos](requisitos.md).
 **Extensões:**
 
 - **4a. Campos obrigatórios não preenchidos:** o sistema destaca os campos e retorna ao passo 3.
-- **5a. O administrador não informa erros comuns:** o exercício é gravado sem erros comuns.
+- **5a. O administrador não informa erros comuns:** o sistema exige ao menos um erro comum e retorna ao passo 5.
 - **6a. Resposta errada do erro comum igual à resposta correta:** o sistema informa a inconsistência e retorna ao passo 5.
 - **6b. Dois erros comuns com a mesma resposta errada:** o sistema informa a repetição e retorna ao passo 5.
 
@@ -130,11 +130,9 @@ Documento relacionado: [Requisitos](requisitos.md).
 
 - A resolução passo a passo foi acrescentada ao cadastro.
 - A extensão 6b foi acrescentada.
-- Como os exercícios são de múltipla escolha, um exercício sem erros comuns (extensão 5a) teria só a alternativa correta. Todo exercício publicado tem erros comuns.
+- A extensão 5a mudou: na modelagem, o exercício era gravado sem erros comuns. Como os exercícios são de múltipla escolha, ele teria só a alternativa correta, então o cadastro passou a exigir ao menos um erro comum.
 
 ## UC4 - Acompanhar Desempenho da Turma
-
-Fora desta entrega (Won't have this time). O caso de uso fica registrado como referência para uma versão futura, sem alterações em relação à Modelagem - Parte I.
 
 | Campo | Descrição |
 |---|---|
@@ -145,15 +143,15 @@ Fora desta entrega (Won't have this time). O caso de uso fica registrado como re
 | Condição final com sucesso | O desempenho da turma é exibido. |
 | Condição final com falha | O desempenho não é exibido. |
 | Ator principal | Professor |
-| Gatilho | O professor acessa "Minhas turmas". |
+| Gatilho | O professor acessa "Turmas", no menu. |
 
 **Cenário principal de sucesso:**
 
-1. O professor acessa "Minhas turmas".
+1. O professor acessa "Turmas", no menu.
 2. O sistema lista as turmas do professor.
 3. O professor seleciona uma turma.
-4. O sistema calcula o desempenho por conteúdo de cada aluno da turma.
-5. O sistema exibe o resumo da turma e os conteúdos com mais erros.
+4. O sistema calcula o desempenho de cada aluno da turma a partir das tentativas.
+5. O sistema exibe, para cada aluno, as respostas, os acertos, os erros e o percentual de acerto, e os conteúdos com mais erros da turma.
 6. O professor seleciona um aluno.
 7. O sistema exibe o progresso individual do aluno (UC2).
 
@@ -163,4 +161,14 @@ Fora desta entrega (Won't have this time). O caso de uso fica registrado como re
 - **4a. A turma não possui alunos:** o sistema informa que não há alunos e exibe o código de acesso da turma.
 - **6a. O professor tenta ver um aluno de outra turma:** o sistema nega o acesso (somente alunos vinculados).
 
+- **6b. O professor tenta abrir a turma de outro professor:** o sistema responde que a página não existe.
+
 **Informação do projeto:** prioridade baixa (funcionalidade opcional); caso de uso subordinado: Acompanhar Progresso (UC2).
+
+**Situação:** atendido pela US10 (#62), que cria a turma e o código de acesso, e pela US11 (#63), que mostra o desempenho. O aluno entra na turma pela mesma página "Turmas", informando o código.
+
+**Diferenças em relação à Modelagem - Parte I:**
+
+- O passo 5 mostra o resumo de cada aluno; o detalhamento por conteúdo fica no progresso individual (passo 7).
+- As contas de professor são criadas pelo administrador; o cadastro aberto cria só contas de aluno (RNF003).
+- A extensão 6b foi acrescentada.

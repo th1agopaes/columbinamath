@@ -8,19 +8,46 @@ Aplicação web para estudantes do Ensino Médio revisarem matemática básica, 
 
 ## Funcionalidades
 
+Por perfil de usuário:
+
+| Perfil | O que faz |
+|---|---|
+| Visitante | Consulta a trilha e as explicações com exemplos resolvidos. |
+| Aluno | Cria conta, resolve exercícios com feedback por erro comum, continua de onde parou, acompanha o próprio progresso e entra em turmas com o código de acesso. |
+| Professor | Cria turmas, passa o código aos alunos e acompanha o desempenho da turma e de cada aluno. |
+| Administrador | Cadastra conteúdos, exercícios e erros comuns e cria as contas de professor, pelo painel do Django. |
+
+Também:
+
 - Trilha de conteúdos na ordem de pré-requisitos, começando por Operações básicas e Regra de sinais.
-- Explicação de cada conteúdo com exemplos resolvidos passo a passo.
-- Exercícios de múltipla escolha corrigidos no servidor, com feedback por erro comum e resolução explicada.
-- Painel administrativo para cadastrar conteúdos, exercícios e erros comuns.
+- Exercícios de múltipla escolha corrigidos no servidor, com a resolução passo a passo.
+- Cada resposta vira uma tentativa registrada, base do progresso e do desempenho da turma.
 - Modo claro e escuro, no computador e no celular.
+
+## Modelagem do sistema
+
+O código implementa os quatro casos de uso da modelagem feita em Programação Web:
+
+| Caso de uso | Onde está no sistema |
+|---|---|
+| UC1 - Resolver Exercício | Página do exercício (app `conteudos`), com a tentativa registrada no app `progresso` |
+| UC2 - Acompanhar Progresso | Página "Meu progresso" (app `progresso`) |
+| UC3 - Cadastrar Exercício | Painel administrativo, em `/admin` |
+| UC4 - Acompanhar Desempenho da Turma | Página "Turmas" (app `turmas`) |
+
+- [Modelagem - Parte I](docs/requisitos/modelagem/modelagem-parte-1.pdf): cenário, documento de visão, modelo conceitual e casos de uso descritivos.
+- [Modelagem - Parte II](docs/requisitos/modelagem/modelagem-parte-2.pdf): diagramas de sequência e diagrama de classes.
+- [Casos de uso atualizados](docs/requisitos/especificacao-casos-de-uso.md), com as diferenças em relação à modelagem.
+- [Matriz de rastreabilidade](docs/requisitos/matriz-rastreabilidade.md): requisito, caso de uso, história, issue e teste.
 
 ## Tecnologias
 
 | Área | Ferramenta |
 |---|---|
-| Linguagem e framework | Python 3.14 e Django 6.1 |
+| Linguagem e framework | Python 3.14 e Django 6.1 (padrão MVT) |
+| Interface | Templates do Django e CSS próprio, renderizados no servidor (pasta [`frontend/`](frontend/)) |
 | Dependências | uv |
-| Testes | pytest e pytest-django |
+| Testes | pytest, pytest-django e pytest-cov (cobertura mínima de 90% no CI) |
 | Qualidade | Ruff e pre-commit (Conventional Commits e detecção de segredos com gitleaks) |
 | Banco de dados (desenvolvimento) | SQLite |
 
@@ -49,7 +76,17 @@ uv run python manage.py loaddata conteudos regra_de_sinais
 uv run python manage.py runserver
 ```
 
-Acesse <http://127.0.0.1:8000>. Para usar o painel administrativo em `/admin`, crie um usuário com `uv run python manage.py createsuperuser`.
+Acesse <http://127.0.0.1:8000> e crie uma conta de aluno em "Criar conta".
+
+### Contas de administrador e de professor
+
+Crie o administrador (o terminal pede e-mail, nome de usuário e senha):
+
+```bash
+uv run python manage.py createsuperuser
+```
+
+Para criar um professor, entre no painel em <http://127.0.0.1:8000/admin>, abra **Usuários → Adicionar usuário**, preencha os dados e escolha o tipo **Professor**. Depois, entre no site com o e-mail e a senha do professor e use a página "Turmas".
 
 ## Testes e qualidade
 
@@ -72,8 +109,11 @@ Os mesmos hooks e os testes com cobertura rodam no GitHub Actions a cada Pull Re
 columbinamath/
 ├── backend/          # projeto Django: regras de negócio e dados
 │   ├── config/       # configurações e rotas principais
-│   ├── conteudos/    # trilha, explicações, exercícios e correção
-│   └── usuarios/     # modelo de usuário (aluno, professor e administrador)
+│   ├── conteudos/    # trilha, explicações, exercícios e correção (UC1 e UC3)
+│   ├── progresso/    # tentativas e progresso do aluno (UC1 e UC2)
+│   ├── turmas/       # turmas e desempenho da turma (UC4)
+│   ├── usuarios/     # usuário, perfis (aluno e professor), cadastro e login
+│   └── conftest.py   # dados de teste compartilhados
 ├── frontend/         # camada de apresentação: templates HTML e CSS
 └── docs/             # produto, Scrum, requisitos, UML e arquitetura
 ```
@@ -97,13 +137,18 @@ columbinamath/
 - [Sprint 3](docs/scrum/sprints/sprint-03.md)
 - [ADR 0001: troca da stack para Django](docs/arquitetura/adr/0001-troca-de-stack-para-django.md)
 - [ADR 0002: camada de apresentação na pasta frontend](docs/arquitetura/adr/0002-camada-de-apresentacao-na-pasta-frontend.md)
+- [ADR 0003: perfis de usuário em tabela única com modelos proxy](docs/arquitetura/adr/0003-perfis-de-usuario-em-tabela-unica.md)
 
 ## Contexto acadêmico
 
-Projeto individual do 5º semestre de Engenharia da Computação do IFMT, Campus Cuiabá, usado nas disciplinas de Engenharia de Software, Programação Web e Extensão I.
+Projeto do 5º semestre de Engenharia da Computação do IFMT, Campus Cuiabá, usado em três disciplinas:
+
+- **Programação Web:** projeto individual.
+- **Engenharia de Software** e **Extensão I:** projeto em dupla.
 
 A primeira versão (Sprint 1, em React) está no repositório [columbinamath-v1](https://github.com/th1agopaes/columbinamath-v1).
 
-## Autor
+## Autores
 
-Thiago Paes ([github.com/th1agopaes](https://github.com/th1agopaes))
+- **Thiago Paes de Barros Costa** ([github.com/th1agopaes](https://github.com/th1agopaes)): gestão do projeto, requisitos, modelagem, arquitetura e desenvolvimento.
+- **Mônica Diglianne Paes de Barros Costa:** validação do produto, demonstração de uso e elaboração das questões e respostas (Engenharia de Software e Extensão I).
