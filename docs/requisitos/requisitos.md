@@ -51,7 +51,7 @@ Documentos relacionados:
 | RF007 | Vincular aluno a professor | O professor cria uma turma e gera um código de acesso, que o aluno usa para entrar nela. | Must | Atendido |
 | RF008 | Acompanhar desempenho da turma | O professor visualiza o progresso (RF006) dos alunos da sua turma. | Must | Atendido |
 | RF009 | Consultar conteúdos e explicações | O estudante visualiza a trilha de conteúdos e consulta a explicação de cada um, com exemplos resolvidos. | Must | Atendido |
-| RF010 | Disponibilizar conteúdos por API REST | Um cliente HTTP consulta conteúdos e exercícios em JSON, somente para leitura e sem a resposta correta. | Must | Planejado |
+| RF010 | Disponibilizar conteúdos por API REST | Um cliente HTTP consulta conteúdos e exercícios em JSON, somente para leitura e sem a resposta correta. | Must | Atendido |
 
 ### Detalhes por requisito
 
@@ -62,7 +62,7 @@ Documentos relacionados:
 - **RF007:** o professor cria a turma e recebe um código de 6 caracteres; o aluno entra com o código (US10, #62). Eram Won't até o [replanejamento de 25/11](../scrum/sprints/sprint-03.md#replanejamento-de-2511).
 - **RF008:** a página da turma mostra o desempenho de cada aluno e os conteúdos com mais erros, e o professor abre o progresso individual de cada aluno da turma (US11, #63).
 - **RF009:** acrescentado em 16/11/2026. O comportamento existe desde a Sprint 1 (US01 e US02) e foi ampliado na US04, mas não tinha requisito próprio no Documento de Visão.
-- **RF010:** acrescentado em 16/11/2026, no replanejamento da Sprint 3. Entra com a #55.
+- **RF010:** acrescentado em 16/11/2026, no replanejamento da Sprint 3. Atendido pela #55: API REST somente leitura em `/api/`, com o Django REST Framework.
 
 ## Requisitos não funcionais
 

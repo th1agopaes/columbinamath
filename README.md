@@ -46,6 +46,7 @@ O código implementa os quatro casos de uso da modelagem feita em Programação 
 |---|---|
 | Linguagem e framework | Python 3.14 e Django 6.1 (padrão MVT) |
 | Interface | Templates do Django e CSS próprio, renderizados no servidor (pasta [`frontend/`](frontend/)) |
+| API REST | Django REST Framework (somente leitura, em JSON) |
 | Dependências | uv |
 | Testes | pytest, pytest-django e pytest-cov (cobertura mínima de 90% no CI) |
 | Qualidade | Ruff e pre-commit (Conventional Commits e detecção de segredos com gitleaks) |
@@ -88,6 +89,30 @@ uv run python manage.py createsuperuser
 
 Para criar um professor, entre no painel em <http://127.0.0.1:8000/admin>, abra **Usuários → Adicionar usuário**, preencha os dados e escolha o tipo **Professor**. Depois, entre no site com o e-mail e a senha do professor e use a página "Turmas".
 
+## API REST
+
+A API é somente leitura e responde em JSON. No navegador, o Django REST Framework mostra uma interface navegável.
+
+| Método e endereço | O que devolve |
+|---|---|
+| `GET /api/` | Os recursos disponíveis |
+| `GET /api/conteudos/` | A trilha, na ordem de estudo, com o total de exercícios |
+| `GET /api/conteudos/<slug>/` | Um conteúdo, com a introdução e a lista de exercícios |
+| `GET /api/exercicios/` | Os exercícios; aceita o filtro `?conteudo=<slug>` |
+| `GET /api/exercicios/<id>/` | Um exercício com as alternativas, **sem** dizer qual é a correta |
+
+Exemplo, com o servidor rodando:
+
+```bash
+curl http://127.0.0.1:8000/api/exercicios/1/
+```
+
+```json
+{"id": 1, "conteudo": "operacoes-basicas", "enunciado": "Quanto é 247 + 185?", "nivel": "facil", "alternativas": ["322", "332", "422", "432"]}
+```
+
+A correção continua no servidor, pela página do exercício, para a resposta correta não chegar ao navegador antes da resposta do aluno.
+
 ## Testes e qualidade
 
 ```bash
@@ -109,6 +134,7 @@ Os mesmos hooks e os testes com cobertura rodam no GitHub Actions a cada Pull Re
 columbinamath/
 ├── backend/          # projeto Django: regras de negócio e dados
 │   ├── config/       # configurações e rotas principais
+│   ├── api/          # API REST somente leitura (RF010)
 │   ├── conteudos/    # trilha, explicações, exercícios e correção (UC1 e UC3)
 │   ├── progresso/    # tentativas e progresso do aluno (UC1 e UC2)
 │   ├── turmas/       # turmas e desempenho da turma (UC4)
