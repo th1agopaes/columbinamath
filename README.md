@@ -177,10 +177,16 @@ columbinamath/
 
 ## Documentação
 
+O mapa completo está em [`docs/README.md`](docs/README.md). Os principais documentos:
+
 - [Visão do produto](docs/produto/visao.md)
 - [Requisitos](docs/requisitos/requisitos.md)
 - [Casos de uso](docs/requisitos/especificacao-casos-de-uso.md)
 - [Matriz de rastreabilidade](docs/requisitos/matriz-rastreabilidade.md)
+- [Diagrama de casos de uso](docs/uml/diagrama-casos-de-uso.md)
+- [Processos de negócio (BPD)](docs/processos/bpd.md)
+- [Arquitetura (C4)](docs/arquitetura/arquitetura.md)
+- [Diagrama de classes e DER](docs/uml/diagrama-classes.md)
 - [Product Backlog](docs/scrum/product-backlog.md)
 - [Sprint 2](docs/scrum/sprints/sprint-02.md)
 - [Sprint 3](docs/scrum/sprints/sprint-03.md)
