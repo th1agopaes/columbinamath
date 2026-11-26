@@ -50,7 +50,8 @@ O código implementa os quatro casos de uso da modelagem feita em Programação 
 | Dependências | uv |
 | Testes | pytest, pytest-django e pytest-cov (cobertura mínima de 90% no CI) |
 | Qualidade | Ruff e pre-commit (Conventional Commits e detecção de segredos com gitleaks) |
-| Banco de dados (desenvolvimento) | SQLite |
+| Banco de dados | SQLite no desenvolvimento e PostgreSQL 18 nos containers |
+| Execução | Gunicorn e WhiteNoise, em containers com Podman ou Docker |
 
 ## Como executar localmente
 
@@ -113,6 +114,24 @@ curl http://127.0.0.1:8000/api/exercicios/1/
 
 A correção continua no servidor, pela página do exercício, para a resposta correta não chegar ao navegador antes da resposta do aluno.
 
+## Como executar com containers
+
+Pré-requisitos: [Podman](https://podman.io/) com o `podman compose`, ou [Docker](https://www.docker.com/) com o Docker Compose. Não é preciso instalar Python nem PostgreSQL.
+
+```bash
+git clone https://github.com/th1agopaes/columbinamath.git
+cd columbinamath
+cp backend/.env.example backend/.env
+```
+
+No `backend/.env`, troque a `SECRET_KEY` e a `POSTGRES_PASSWORD` por valores gerados. Depois, na raiz do repositório:
+
+```bash
+./build.sh
+```
+
+O script constrói a imagem, inicia a aplicação (Gunicorn) e o PostgreSQL, aplica as migrações e carrega os conteúdos. Acesse <http://localhost:8000>. Ao terminar, o script mostra como criar o administrador, ver os logs e parar os containers. A decisão está no [ADR 0004](docs/arquitetura/adr/0004-postgresql-e-containers.md).
+
 ## Testes e qualidade
 
 ```bash
@@ -139,8 +158,12 @@ columbinamath/
 │   ├── progresso/    # tentativas e progresso do aluno (UC1 e UC2)
 │   ├── turmas/       # turmas e desempenho da turma (UC4)
 │   ├── usuarios/     # usuário, perfis (aluno e professor), cadastro e login
-│   └── conftest.py   # dados de teste compartilhados
+│   ├── conftest.py   # dados de teste compartilhados
+│   ├── Dockerfile    # imagem da aplicação
+│   └── entrypoint.sh # aplica as migrações ao iniciar o container
 ├── frontend/         # camada de apresentação: templates HTML e CSS
+├── docker-compose.yml  # aplicação + PostgreSQL
+├── build.sh          # constrói e inicia os containers
 └── docs/             # produto, Scrum, requisitos, UML e arquitetura
 ```
 
@@ -164,6 +187,7 @@ columbinamath/
 - [ADR 0001: troca da stack para Django](docs/arquitetura/adr/0001-troca-de-stack-para-django.md)
 - [ADR 0002: camada de apresentação na pasta frontend](docs/arquitetura/adr/0002-camada-de-apresentacao-na-pasta-frontend.md)
 - [ADR 0003: perfis de usuário em tabela única com modelos proxy](docs/arquitetura/adr/0003-perfis-de-usuario-em-tabela-unica.md)
+- [ADR 0004: containers com PostgreSQL, Gunicorn e WhiteNoise](docs/arquitetura/adr/0004-postgresql-e-containers.md)
 
 ## Contexto acadêmico
 
