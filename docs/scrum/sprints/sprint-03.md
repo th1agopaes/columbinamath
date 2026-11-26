@@ -71,13 +71,13 @@ A entrega de Programação Web avalia o código contra a modelagem do sistema (P
 | 8 | #62 | US10 - Criar turma e entrar com código | Must | 3 SP | Concluído |
 | 9 | #63 | US11 - Acompanhar o desempenho da turma | Must | 3 SP | Concluído |
 | 10 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | Concluído |
-| 11 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
+| 11 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | Concluído |
 | 12 | #48 | Métricas do projeto e ADRs pendentes | Must | 2 SP | |
 | 13 | #49 | Apresentação final: slides, vídeo e versão 1.0 | Must | 5 SP | |
 | 14 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | Concluído |
 | 15 | #9 | US05 - Ordem das operações | Should | 5 SP | |
 
-**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 32 SP.
+**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 35 SP.
 
 ## Marcos
 
@@ -157,10 +157,10 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 
 ### #47 - Diagramas
 
-- [ ] Diagrama de casos de uso.
-- [ ] Diagrama de classes atualizado com o que foi implementado.
-- [ ] Diagrama de arquitetura (modelo C4: contexto e containers).
-- [ ] BPD do processo de resolver um exercício.
+- [x] Diagrama de casos de uso.
+- [x] Diagrama de classes atualizado com o que foi implementado.
+- [x] Diagrama de arquitetura (modelo C4: contexto e containers).
+- [x] BPD do processo de resolver um exercício.
 
 ### #48 - Métricas e ADRs
 
