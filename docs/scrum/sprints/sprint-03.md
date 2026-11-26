@@ -70,14 +70,14 @@ A entrega de Programação Web avalia o código contra a modelagem do sistema (P
 | 7 | #61 | Separar a camada de apresentação na pasta `frontend/` | Must | 1 SP | Concluído |
 | 8 | #62 | US10 - Criar turma e entrar com código | Must | 3 SP | Concluído |
 | 9 | #63 | US11 - Acompanhar o desempenho da turma | Must | 3 SP | Concluído |
-| 10 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | |
+| 10 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | Concluído |
 | 11 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
 | 12 | #48 | Métricas do projeto e ADRs pendentes | Must | 2 SP | |
 | 13 | #49 | Apresentação final: slides, vídeo e versão 1.0 | Must | 5 SP | |
 | 14 | #55 | Expor conteúdos e exercícios por API REST | Must | 3 SP | Concluído |
 | 15 | #9 | US05 - Ordem das operações | Should | 5 SP | |
 
-**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 27 SP.
+**Total:** 47 SP (42 SP Must e 5 SP Should). Concluídos até 26/11: 32 SP.
 
 ## Marcos
 
@@ -150,10 +150,10 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 
 ### #46 - Containers com PostgreSQL
 
-- [ ] Escrever o `backend/Dockerfile` com Gunicorn.
-- [ ] Escrever o `docker-compose.yml` com a aplicação e o PostgreSQL.
-- [ ] Escrever o `build.sh` para construir e iniciar os containers.
-- [ ] Documentar a execução no README e registrar o ADR do banco de dados.
+- [x] Escrever o `backend/Dockerfile` com Gunicorn.
+- [x] Escrever o `docker-compose.yml` com a aplicação e o PostgreSQL.
+- [x] Escrever o `build.sh` para construir e iniciar os containers.
+- [x] Documentar a execução no README e registrar o ADR do banco de dados.
 
 ### #47 - Diagramas
 
