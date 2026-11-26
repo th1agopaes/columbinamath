@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     # Apps do ColumbinaMath
     "usuarios",
     "conteudos",
     "progresso",
     "turmas",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,12 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 LOGIN_URL = "usuarios:entrar"
 LOGIN_REDIRECT_URL = "conteudos:lista"
 LOGOUT_REDIRECT_URL = "conteudos:lista"
+
+# API REST (Django REST Framework): somente leitura, em JSON e na interface navegável
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+}
