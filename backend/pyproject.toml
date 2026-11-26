@@ -58,6 +58,7 @@ omit = [
   "manage.py",      # pontos de entrada, sem lógica nossa
   "config/asgi.py",
   "config/wsgi.py",
+  "gunicorn.conf.py", # lido pelo Gunicorn, não pelos testes
 ]
 
 [tool.coverage.report]
