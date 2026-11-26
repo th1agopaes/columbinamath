@@ -12,5 +12,7 @@ class UsuarioAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("ColumbinaMath", {"fields": ("email", "tipo")}),
     )
-    list_display = ("username", "email", "first_name", "tipo", "is_staff")
+    list_display = ("email", "first_name", "tipo", "is_active", "is_staff")
     list_filter = UserAdmin.list_filter + ("tipo",)
+    search_fields = ("email", "first_name", "last_name")
+    ordering = ("email",)
