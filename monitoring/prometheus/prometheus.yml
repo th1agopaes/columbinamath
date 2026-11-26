@@ -1,0 +1,16 @@
+# Coleta das métricas do ColumbinaMath (ADR 0005).
+# O Prometheus lê as métricas a cada 15 s e guarda o histórico.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Aplicação: porta interna de métricas aberta pelo gunicorn.conf.py
+  - job_name: columbinamath
+    static_configs:
+      - targets: ["web:9100"]
+
+  # O próprio Prometheus, para conferir se a coleta está funcionando
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

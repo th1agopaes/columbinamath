@@ -1,4 +1,5 @@
-# Execução completa: aplicação Django (Gunicorn) + PostgreSQL. Uso: ./build.sh
+# Execução completa: aplicação Django (Gunicorn), PostgreSQL e monitoramento
+# com Prometheus e Grafana. Uso: ./build.sh
 # Os segredos vêm do backend/.env (copiado do backend/.env.example).
 name: columbinamath
 
@@ -12,6 +13,8 @@ services:
       POSTGRES_HOST: db
       DEBUG: "False"
       ALLOWED_HOSTS: localhost,127.0.0.1
+      # Porta interna das métricas, lida pelo Prometheus; não é publicada no PC
+      METRICAS_PORTA: "9100"
     ports:
       - "8000:8000"
     depends_on:
@@ -31,5 +34,36 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Monitoramento (ADR 0005): o Prometheus coleta as métricas e o Grafana mostra
+  prometheus:
+    image: docker.io/prom/prometheus:v3.16.0
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - dados-prometheus:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      - web
+    restart: unless-stopped
+
+  grafana:
+    image: docker.io/grafana/grafana:13.3.1
+    env_file: backend/.env
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /etc/grafana/dashboards/columbinamath.json
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards:ro
+      - dados-grafana:/var/lib/grafana
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
 volumes:
   dados-postgres:
+  dados-prometheus:
+  dados-grafana:

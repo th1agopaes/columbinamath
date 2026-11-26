@@ -1,0 +1,11 @@
+# Carrega os painéis da pasta /etc/grafana/dashboards ao iniciar o container
+apiVersion: 1
+
+providers:
+  - name: ColumbinaMath
+    folder: ColumbinaMath
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    options:
+      path: /etc/grafana/dashboards
