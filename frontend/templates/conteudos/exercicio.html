@@ -9,22 +9,22 @@
 
   <form method="post" class="cartao">
     {% csrf_token %}
-    <fieldset {% if resultado %}disabled{% endif %}>
+    <fieldset {% if tentativa %}disabled{% endif %}>
       {{ form.as_div }}
     </fieldset>
-    {% if not resultado %}
+    {% if not tentativa %}
       <button class="botao" type="submit">Enviar resposta</button>
     {% endif %}
   </form>
 
-  {% if resultado %}
-    <section class="resultado {% if resultado.acertou %}acerto{% else %}erro{% endif %}" aria-live="polite">
-      {% if resultado.acertou %}
+  {% if tentativa %}
+    <section class="resultado {% if tentativa.correta %}acerto{% else %}erro{% endif %}" aria-live="polite">
+      {% if tentativa.correta %}
         <h2>Resposta correta! 🎉</h2>
       {% else %}
         <h2>Resposta incorreta.</h2>
-        {% if resultado.erro %}
-          <p>{{ resultado.erro.explicacao }}</p>
+        {% if tentativa.erro_comum %}
+          <p>{{ tentativa.erro_comum.explicacao }}</p>
         {% endif %}
       {% endif %}
       <p>Alternativa correta: <strong>{{ exercicio.resposta_correta }}</strong></p>
@@ -40,7 +40,7 @@
   {% endif %}
 
   <nav class="navegacao">
-    {% if resultado %}
+    {% if tentativa %}
       <a href="{{ request.path }}">Tentar novamente</a>
     {% endif %}
     {% if proximo %}
