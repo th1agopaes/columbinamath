@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Minhas turmas · ColumbinaMath{% endblock %}
+
+{% block conteudo %}
+  <h1>Minhas turmas</h1>
+  <p class="subtitulo">Entre na turma com o código que o seu professor passou. Ele vai acompanhar o seu progresso.</p>
+
+  <form method="post" action="{% url 'turmas:entrar' %}" class="cartao formulario">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button class="botao" type="submit">Entrar na turma</button>
+  </form>
+
+  <ol class="lista">
+    {% for turma in turmas %}
+      <li class="cartao">
+        <span class="titulo-cartao">{{ turma.nome }}</span>
+        <p>Professor: {{ turma.professor }}</p>
+      </li>
+    {% empty %}
+      <li class="aviso">Você ainda não está em nenhuma turma.</li>
+    {% endfor %}
+  </ol>
+{% endblock %}
