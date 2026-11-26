@@ -36,3 +36,11 @@ Até a Sprint 3, o ColumbinaMath rodava só com o servidor de desenvolvimento do
 
 - O container do banco recebe o mesmo `backend/.env` da aplicação, inclusive variáveis que não usa.
 - O build depende do acesso ao Docker Hub e ao GitHub Container Registry para baixar as imagens base.
+
+## Atualização em 26/11/2026: worker do Gunicorn
+
+No primeiro teste com o Podman, o container da aplicação levou mais de 10 s para parar, e o Podman forçou a parada. O log mostrou que um dos três workers não encerrou.
+
+- **Causa:** o worker padrão do Gunicorn (sync) atende uma conexão por vez. O navegador abre conexões antecipadas sem enviar nada (pré-conexão), e o worker fica preso nelas até o timeout de 30 s. Isso também pode deixar páginas lentas.
+- **Evidência:** com uma conexão ociosa aberta, o Gunicorn com workers sync levou 30,1 s para parar; com o worker gthread, 4,3 s.
+- **Mudança:** o Gunicorn passa a usar o worker gthread (1 processo com 8 threads) e espera no máximo 5 s pelas requisições em andamento ao receber o sinal de parada (`graceful_timeout`). As opções ficam no `backend/gunicorn.conf.py`, e um teste confere que o tempo de parada fica abaixo dos 10 s do Podman e do Docker.
