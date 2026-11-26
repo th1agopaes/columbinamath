@@ -21,6 +21,7 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 | EP01 | Revisão dos fundamentos | Permitir que o estudante encontre os conteúdos e consulte explicações e exemplos. |
 | EP02 | Prática com correção explicada | Permitir que o estudante aplique seus conhecimentos e consulte a resolução após responder. |
 | EP03 | Acompanhamento do aprendizado | Permitir que o estudante tenha uma conta, registre suas respostas e acompanhe o próprio progresso. |
+| EP04 | Acompanhamento pelo professor | Permitir que o professor reúna os alunos em turmas e acompanhe o desempenho deles. |
 
 ## Visão geral das histórias
 
@@ -33,12 +34,16 @@ A classificação MoSCoW considera como referência a primeira versão que permi
 | - | US07 | Criar conta e entrar | EP03 | Must | 5 SP | Concluído |
 | - | US08 | Registrar tentativas | EP03 | Must | 3 SP | Concluído |
 | - | US09 | Acompanhar o progresso | EP03 | Must | 3 SP | Concluído |
-| 4 | US05 | Estudar e praticar a ordem das operações | EP01, EP02 | Should | 5 SP | Não iniciado |
-| 5 | US06 | Visualizar expressões em notação matemática | EP01 | Could | 3 SP | Não iniciado |
+| - | US10 | Criar turma e entrar com código | EP04 | Must | 3 SP | Concluído |
+| - | US11 | Acompanhar o desempenho da turma | EP04 | Must | 3 SP | Concluído |
+| 1 | US05 | Estudar e praticar a ordem das operações | EP01, EP02 | Should | 5 SP | Não iniciado |
+| 2 | US06 | Visualizar expressões em notação matemática | EP01 | Could | 3 SP | Não iniciado |
 
 US01, US02 e US03 foram concluídas na Sprint 1 e reimplementadas em Django na Sprint 2 ([ADR 0001](../arquitetura/adr/0001-troca-de-stack-para-django.md)). A US04 foi concluída na Sprint 2.
 
 US07, US08 e US09 entraram no planejamento da [Sprint 3](sprints/sprint-03.md). Elas vêm dos requisitos RF001, RF005 e RF006 da modelagem do sistema e, por isso, passaram à frente da US05 na ordem.
+
+US10 e US11 entraram no replanejamento de 25/11 da Sprint 3, para que o produto cubra a modelagem inteira, incluindo o caso de uso 4 (RF007 e RF008), na entrega de Programação Web.
 
 ## Itens do Product Backlog
 
@@ -193,3 +198,40 @@ US07, US08 e US09 entraram no planejamento da [Sprint 3](sprints/sprint-03.md). 
 - O progresso é calculado a partir das tentativas, sem ser armazenado.
 - Quem ainda não tem tentativas recebe a orientação de resolver exercícios.
 - Cada estudante vê apenas o próprio progresso.
+
+### US10 - Criar turma e entrar com código
+
+**User Story:** Como professor, quero criar uma turma com código de acesso para que meus alunos entrem nela.
+
+- **Épico:** EP04 - Acompanhamento pelo professor
+- **Requisitos:** RF007
+- **MoSCoW:** Must
+- **Estimativa:** 3 SP
+- **Status:** Concluído
+
+**Critérios de aceitação:**
+
+- O professor cria uma turma informando só o nome; o sistema gera um código de acesso único.
+- O código tem 6 caracteres, sem letras e números que se confundem (O e 0, I e 1).
+- O aluno entra na turma informando o código, sem diferenciar maiúsculas de minúsculas.
+- Com um código inexistente, o aluno recebe um aviso e não entra em nenhuma turma.
+- O professor vê só as turmas que criou; o aluno vê só as turmas de que participa.
+- As contas de professor são criadas pelo administrador.
+
+### US11 - Acompanhar o desempenho da turma
+
+**User Story:** Como professor, quero ver o desempenho dos alunos da minha turma para saber quem precisa de ajuda e em quais conteúdos.
+
+- **Épico:** EP04 - Acompanhamento pelo professor
+- **Requisitos:** RF008
+- **MoSCoW:** Must
+- **Estimativa:** 3 SP
+- **Status:** Concluído
+
+**Critérios de aceitação:**
+
+- A página da turma mostra, para cada aluno, as respostas, os acertos, os erros e o percentual de acerto.
+- A página mostra os conteúdos com mais erros na turma.
+- Uma turma sem alunos mostra o código de acesso para ser passado aos alunos.
+- O professor abre o progresso individual de um aluno da turma, com o mesmo conteúdo da página "Meu progresso".
+- O professor não vê turmas de outros professores nem alunos que não estão na sua turma.
