@@ -52,7 +52,7 @@ A meta da sprint não muda. O que muda é o Sprint Backlog:
 | 3 | #42 | Registrar requisitos, casos de uso e priorização | Must | 2 SP | Concluído |
 | 4 | #43 | US07 - Criar conta e entrar | Must | 5 SP | Concluído |
 | 5 | #44 | US08 - Registrar tentativas | Must | 3 SP | Concluído |
-| 6 | #45 | US09 - Acompanhar o progresso | Must | 3 SP | |
+| 6 | #45 | US09 - Acompanhar o progresso | Must | 3 SP | Concluído |
 | 7 | #46 | Executar a aplicação em containers com PostgreSQL | Must | 5 SP | |
 | 8 | #47 | Diagramas de casos de uso, classes, arquitetura e BPD | Must | 3 SP | |
 | 9 | #48 | Métricas do projeto e ADRs pendentes | Must | 2 SP | |
@@ -109,10 +109,10 @@ A issue foi reescrita: fica só a verificação automática. A publicação onli
 
 ### #45 - US09 Acompanhar o progresso
 
-- [ ] Calcular acertos, erros e percentual por conteúdo a partir das tentativas.
-- [ ] Criar a página "Meu progresso", com o resumo por conteúdo e os erros comuns mais frequentes.
-- [ ] Orientar o estudante que ainda não tem tentativas.
-- [ ] Testar o cálculo do progresso.
+- [x] Calcular acertos, erros e percentual por conteúdo a partir das tentativas.
+- [x] Criar a página "Meu progresso", com o resumo por conteúdo e os erros comuns mais frequentes.
+- [x] Orientar o estudante que ainda não tem tentativas.
+- [x] Testar o cálculo do progresso.
 
 ### #46 - Containers com PostgreSQL
 

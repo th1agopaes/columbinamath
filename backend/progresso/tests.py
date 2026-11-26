@@ -1,9 +1,11 @@
 import pytest
 from django.contrib.admin.sites import site
-from django.urls import reverse
-from pytest_django.asserts import assertRedirects
+from django.urls import reverse, reverse_lazy
+from pytest_django.asserts import assertContains, assertRedirects
 
-from conteudos.models import Exercicio
+from conftest import SENHA
+from conteudos.models import Conteudo, ErroComum, Exercicio
+from usuarios.models import Aluno
 
 from .models import Tentativa
 
@@ -64,3 +66,84 @@ class TestPainel:
         requisicao = rf.get("/")
         assert admin_tentativa.has_add_permission(requisicao) is False
         assert admin_tentativa.has_change_permission(requisicao) is False
+
+
+@pytest.fixture
+def segundo_conteudo(exercicio):
+    """Conteúdo "Regra de sinais", depois de Operações básicas na trilha."""
+    conteudo = Conteudo.objects.create(
+        nome="Regra de sinais", slug="regra-de-sinais", descricao="-", ordem=2
+    )
+    outro = Exercicio.objects.create(
+        conteudo=conteudo, enunciado="Quanto é (-3) x (-4)?", resposta_correta="12"
+    )
+    ErroComum.objects.create(
+        exercicio=outro, resposta_errada="-12", explicacao="Menos com menos dá mais."
+    )
+    return outro
+
+
+class TestCalculoDoProgresso:
+    def test_resume_por_conteudo_na_ordem_da_trilha(
+        self, aluno, exercicio, segundo_conteudo
+    ):
+        Tentativa.registrar(aluno, segundo_conteudo, "-12")
+        Tentativa.registrar(aluno, exercicio, "422")
+        Tentativa.registrar(aluno, exercicio, "432")
+        progresso = Aluno.objects.get(pk=aluno.pk).calcular_progresso()
+
+        operacoes, sinais = progresso["conteudos"]
+        assert operacoes["nome"] == "Operações básicas"
+        assert (operacoes["acertos"], operacoes["erros"]) == (1, 1)
+        assert operacoes["percentual"] == 50
+        assert (sinais["acertos"], sinais["erros"], sinais["percentual"]) == (0, 1, 0)
+        assert (progresso["acertos"], progresso["total"]) == (1, 3)
+        assert progresso["percentual"] == 33
+
+    def test_erros_mais_frequentes_primeiro(self, aluno, exercicio, segundo_conteudo):
+        Tentativa.registrar(aluno, exercicio, "422")
+        Tentativa.registrar(aluno, segundo_conteudo, "-12")
+        Tentativa.registrar(aluno, segundo_conteudo, "-12")
+        erros = Aluno.objects.get(pk=aluno.pk).calcular_progresso()["erros_frequentes"]
+        assert [e["erro_comum__resposta_errada"] for e in erros] == ["-12", "422"]
+        assert erros[0]["vezes"] == 2
+
+    def test_sem_tentativas_tudo_zerado(self, aluno):
+        progresso = Aluno.objects.get(pk=aluno.pk).calcular_progresso()
+        assert progresso["total"] == 0
+        assert progresso["percentual"] == 0
+        assert progresso["conteudos"] == []
+
+    def test_cada_aluno_conta_so_as_proprias_tentativas(self, aluno, exercicio):
+        colega = Aluno.objects.create_user(
+            username="caio@exemplo.com", email="caio@exemplo.com", password=SENHA
+        )
+        Tentativa.registrar(colega, exercicio, "422")
+        assert Aluno.objects.get(pk=aluno.pk).calcular_progresso()["total"] == 0
+
+
+class TestPaginaMeuProgresso:
+    url = reverse_lazy("progresso:meu")
+
+    def test_exige_login(self, client, db):
+        resposta = client.get(self.url)
+        assertRedirects(resposta, f"{reverse('usuarios:entrar')}?next={self.url}")
+
+    def test_orienta_quem_ainda_nao_respondeu(self, cliente_aluno):
+        assertContains(cliente_aluno.get(self.url), "Comece pela trilha")
+
+    def test_mostra_o_resumo_e_os_erros(self, cliente_aluno, aluno, exercicio):
+        Tentativa.registrar(aluno, exercicio, "422")
+        resposta = cliente_aluno.get(self.url)
+        assertContains(resposta, "Operações básicas")
+        assertContains(resposta, "0%")
+        assertContains(resposta, "Você esqueceu o vai um das unidades.")
+
+    def test_outro_perfil_recebe_acesso_negado(self, client, professor):
+        client.force_login(professor)
+        resposta = client.get(self.url)
+        assert resposta.status_code == 403
+        assertContains(resposta, "Acesso negado", status_code=403)
+
+    def test_menu_mostra_meu_progresso_para_aluno(self, cliente_aluno, db):
+        assertContains(cliente_aluno.get(reverse("conteudos:lista")), "Meu progresso")

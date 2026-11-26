@@ -13,6 +13,7 @@
     <nav class="menu" aria-label="Conta">
       {% if user.is_authenticated %}
         <span class="saudacao">Olá, {{ user.first_name|default:user.email }}</span>
+        {% if user.tipo == "aluno" %}<a href="{% url 'progresso:meu' %}">Meu progresso</a>{% endif %}
         <form method="post" action="{% url 'usuarios:sair' %}">
           {% csrf_token %}
           <button class="link" type="submit">Sair</button>

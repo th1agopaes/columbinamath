@@ -262,3 +262,50 @@ fieldset label {
   border-color: var(--acerto);
   color: var(--acerto);
 }
+
+/* Progresso */
+.resumo .numero {
+  margin: 0;
+  color: var(--destaque);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.tabela-rolavel {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--borda);
+  text-align: left;
+}
+
+.tabela thead th {
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+.barra {
+  display: inline-block;
+  width: 4rem;
+  height: 0.5rem;
+  margin-right: 0.25rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--borda);
+  vertical-align: middle;
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  background: var(--acerto);
+}

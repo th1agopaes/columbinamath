@@ -17,6 +17,18 @@ class UsuarioManager(UserManager):
         # O Django chama este método no login, passando o valor do USERNAME_FIELD.
         return self.get(**{f"{self.model.USERNAME_FIELD}__iexact": username})
 
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
+        # Quem administra o sistema pelo terminal recebe o perfil de administrador.
+        extra_fields.setdefault("tipo", TipoUsuario.ADMIN)
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
+class AlunoManager(UsuarioManager):
+    """Só os usuários do tipo aluno."""
+
+    def get_queryset(self):
+        return super().get_queryset().filter(tipo=TipoUsuario.ALUNO)
+
 
 class Usuario(AbstractUser):
     """Usuário do ColumbinaMath.
@@ -51,3 +63,30 @@ class Usuario(AbstractUser):
         """Desativa a conta sem apagar o histórico (RF001)."""
         self.is_active = False
         self.save(update_fields=["is_active"])
+
+
+class Aluno(Usuario):
+    """Perfil de aluno (subclasse do diagrama de classes).
+
+    Modelo proxy: usa a mesma tabela do Usuario, filtrada pelo campo tipo, e
+    acrescenta o comportamento do aluno. A decisão está no ADR 0003.
+    """
+
+    objects = AlunoManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = "aluno"
+        verbose_name_plural = "alunos"
+
+    def save(self, *args, **kwargs):
+        self.tipo = TipoUsuario.ALUNO
+        super().save(*args, **kwargs)
+
+    def calcular_progresso(self) -> dict:
+        """Acertos, erros e percentual por conteúdo e os erros mais frequentes (RF006)."""
+        from progresso import calculos  # import local: progresso depende de usuarios
+
+        progresso = calculos.resumir(self.tentativas.all())
+        progresso["erros_frequentes"] = calculos.erros_frequentes(self.tentativas.all())
+        return progresso

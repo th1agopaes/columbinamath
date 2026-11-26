@@ -46,7 +46,7 @@
     {% if proximo %}
       <a class="botao" href="{% url 'conteudos:exercicio' conteudo.slug proximo.pk %}">Próximo exercício →</a>
     {% else %}
-      <a class="botao" href="{% url 'conteudos:lista' %}">Voltar à trilha</a>
+      <a class="botao" href="{% url 'progresso:meu' %}">Conteúdo concluído: ver meu progresso</a>
     {% endif %}
   </nav>
 {% endblock %}
